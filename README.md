@@ -17,6 +17,12 @@ curl -s localhost:8000/v1/query -H 'content-type: application/json' \
   -d '{"query": "How has the number of trials for this drug changed over time?", "drug_name": "Pembrolizumab"}'
 ```
 
+Then open **http://localhost:8000** for the web UI. Ask a question, or pick a saved run from
+`examples/` (renders instantly, no LLM call). Click any bar, point, node, or connection to see
+the trials behind it with links to ClinicalTrials.gov. The UI is a single file
+(`src/trialviz/web/index.html`, Chart.js + vis-network from a CDN, no build step) that renders
+purely from the response's `encoding`. It's a working check that the schema is frontend-ready.
+
 | Command | What it does |
 |---|---|
 | `pytest` | Offline suite (schemas, query building, extraction, aggregation, full graph against a mocked API) |
@@ -49,7 +55,8 @@ src/trialviz/
   ctgov/        API client, Filters→params, dimension registry (the only code that knows the payload shape)
   agent/        LangGraph wiring, nodes, prompt, LLM wrapper
   analysis/     counting, co-occurrence networks, histograms, citations, chart builders
-  api/          FastAPI app
+  api/          FastAPI app (query endpoint, saved examples, serves the UI)
+  web/          single-file web UI
 ```
 
 ### Query coverage

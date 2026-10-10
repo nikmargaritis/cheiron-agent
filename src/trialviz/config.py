@@ -1,6 +1,7 @@
 """Runtime configuration, loaded from environment variables / .env."""
 
 from functools import lru_cache
+from pathlib import Path
 
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -21,6 +22,9 @@ class Settings(BaseSettings):
     ctgov_max_retries: int = 3
 
     max_citations_per_datum: int = Field(5, ge=0, le=50)
+
+    # Saved {request, response} files the web UI can show without calling the LLM.
+    examples_dir: Path = Path("examples")
 
 
 @lru_cache

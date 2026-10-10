@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clinical Trials Explorer</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
+<style>
+  :root {
+    --bg: #f6f7fb; --card: #fff; --ink: #1d2433; --muted: #6b7385; --line: #e4e7ee;
+    --accent: #3056d3; --accent-soft: #e9eefc; --ok: #1f8a4c; --warn: #b26a00; --bad: #c0392b;
+    --radius: 12px; --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+         background: var(--bg); color: var(--ink); }
+  header { padding: 22px 32px 0; max-width: 1400px; margin: 0 auto; }
+  header h1 { margin: 0; font-size: 22px; }
+  header p { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
+  main { max-width: 1400px; margin: 0 auto; padding: 18px 32px 48px; display: grid; gap: 18px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
+
+  /* search */
+  .ask { display: flex; gap: 10px; }
+  .ask input { flex: 1; font: inherit; font-size: 16px; padding: 12px 14px; border: 1px solid var(--line);
+               border-radius: 10px; outline: none; }
+  .ask input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  button { font: inherit; cursor: pointer; border-radius: 10px; border: 1px solid var(--line);
+           background: #fff; padding: 8px 14px; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; padding: 12px 22px;
+                   font-weight: 600; }
+  button.primary:disabled { opacity: .6; cursor: wait; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 12px; }
+  .label { color: var(--muted); font-size: 13px; margin-right: 2px; }
+  .chip { font-size: 13px; padding: 5px 11px; border-radius: 999px; background: var(--accent-soft);
+          border: 1px solid transparent; color: var(--accent); }
+  .chip:hover { border-color: var(--accent); }
+  select { font: inherit; font-size: 13px; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line);
+           background: #fff; max-width: 420px; }
+  details.filters summary { cursor: pointer; color: var(--muted); font-size: 13px; margin-top: 12px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; margin-top: 10px; }
+  .grid label { display: grid; gap: 3px; font-size: 12px; color: var(--muted); }
+  .grid input { font: inherit; font-size: 14px; padding: 7px 9px; border: 1px solid var(--line); border-radius: 8px; }
+  .checks { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 13px; margin-top: 8px; }
+  .checks span { color: var(--muted); font-size: 12px; width: 100%; }
+
+  /* status */
+  .status { display: none; align-items: center; gap: 10px; color: var(--muted); }
+  .spinner { width: 18px; height: 18px; border: 3px solid var(--accent-soft); border-top-color: var(--accent);
+             border-radius: 50%; animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .callout { display: none; border-radius: var(--radius); padding: 14px 18px; border: 1px solid; }
+  .callout.info { background: #fff8eb; border-color: #f2d7a6; color: #6b4a00; }
+  .callout.error { background: #fdf0ee; border-color: #f0c2bb; color: var(--bad); }
+  .callout b { display: block; margin-bottom: 2px; }
+
+  /* result */
+  #result { display: none; gap: 18px; grid-template-columns: minmax(0, 1fr) 360px; }
+  @media (max-width: 1000px) { #result { grid-template-columns: 1fr; } }
+  .viz-head h2 { margin: 0; font-size: 19px; }
+  .viz-head .sub { color: var(--muted); font-size: 13px; margin-top: 2px; }
+  .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .badge { font-size: 12px; padding: 3px 9px; border-radius: 999px; background: #f0f2f7; color: var(--muted); }
+  .badge.ok { background: #e6f4ec; color: var(--ok); }
+  .badge.warn { background: #fdf1df; color: var(--warn); }
+  .canvas-wrap { position: relative; height: 520px; margin-top: 14px; }
+  #network { height: 600px; margin-top: 14px; border: 1px solid var(--line); border-radius: 10px; display: none; }
+  .legend { display: flex; gap: 14px; font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px;
+              vertical-align: -1px; }
+  .hint { color: var(--muted); font-size: 12px; margin-top: 8px; }
+
+  /* details */
+  #details { position: sticky; top: 16px; align-self: start; max-height: calc(100vh - 32px); overflow: auto; }
+  #details h3 { margin: 0 0 2px; font-size: 15px; }
+  #details .count { color: var(--muted); font-size: 13px; margin-bottom: 12px; }
+  .empty { color: var(--muted); font-size: 14px; }
+  .cite { border-top: 1px solid var(--line); padding: 10px 0; }
+  .cite a { font-weight: 600; color: var(--accent); text-decoration: none; font-family: var(--mono); font-size: 13px; }
+  .cite .title { font-size: 13px; margin: 2px 0 4px; }
+  .cite code { display: block; font-family: var(--mono); font-size: 11.5px; background: #f6f7fb; border-radius: 6px;
+               padding: 4px 7px; margin-top: 3px; color: #3d4659; word-break: break-word; }
+  .cite code small { color: var(--muted); display: block; }
+  .more { color: var(--muted); font-size: 12px; margin-top: 6px; }
+
+  /* meta tabs */
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin: -4px 0 12px; }
+  .tabs button { border: none; border-bottom: 2px solid transparent; border-radius: 0; color: var(--muted);
+                 padding: 8px 12px; background: none; }
+  .tabs button.active { color: var(--ink); border-bottom-color: var(--accent); }
+  .tab { display: none; }
+  .tab.active { display: block; }
+  .tab ul { margin: 0; padding-left: 20px; }
+  .tab li { margin: 3px 0; }
+  pre { background: #0f1525; color: #d8def0; padding: 14px; border-radius: 10px; overflow: auto; max-height: 460px;
+        font: 12px/1.45 var(--mono); margin: 0; }
+  .urls { font: 12px var(--mono); max-height: 360px; overflow: auto; }
+  .urls a { display: block; color: var(--accent); text-decoration: none; padding: 3px 0; word-break: break-all; }
+  .kv { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; font-size: 14px; }
+  .kv dt { color: var(--muted); }
+  .kv dd { margin: 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Clinical Trials Explorer</h1>
+  <p>Ask a question in plain English. Every number is computed from live ClinicalTrials.gov data, and every data point links to the trials behind it.</p>
+</header>
+
+<main>
+  <section class="card">
+    <form class="ask" id="ask-form">
+      <input id="q" autocomplete="off" placeholder="e.g. Show a network of sponsors and drugs for glioblastoma trials" required minlength="3">
+      <button class="primary" id="ask-btn" type="submit">Ask</button>
+    </form>
+
+    <div class="row" id="suggestions"><span class="label">Try:</span></div>
+
+    <div class="row">
+      <span class="label">Or open a saved run (instant, no AI call):</span>
+      <select id="examples"><option value="">Choose an example…</option></select>
+      <button type="button" id="open-file">Open JSON file…</button>
+      <input type="file" id="file" accept="application/json,.json" hidden>
+    </div>
+
+    <details class="filters">
+      <summary>Optional filters (these override anything in the question)</summary>
+      <div class="grid">
+        <label>Drug <input data-field="drug_name" placeholder="Pembrolizumab"></label>
+        <label>Condition <input data-field="condition" placeholder="Breast cancer"></label>
+        <label>Sponsor <input data-field="sponsor" placeholder="Merck"></label>
+        <label>Country <input data-field="country" placeholder="Germany"></label>
+        <label>Start year (from) <input data-field="start_year" type="number" min="1900" max="2100"></label>
+        <label>Start year (to) <input data-field="end_year" type="number" min="1900" max="2100"></label>
+      </div>
+      <div class="checks" id="phase-checks"><span>Phase</span></div>
+      <div class="checks" id="status-checks"><span>Status</span></div>
+    </details>
+  </section>
+
+  <div class="status card" id="status"><div class="spinner"></div><span id="status-text">Working…</span></div>
+  <div class="callout" id="callout"></div>
+
+  <section id="result">
+    <div class="card">
+      <div class="viz-head">
+        <h2 id="viz-title"></h2>
+        <div class="sub" id="viz-subtitle"></div>
+        <div class="badges" id="badges"></div>
+      </div>
+      <div class="canvas-wrap" id="canvas-wrap"><canvas id="chart"></canvas></div>
+      <div id="network"></div>
+      <div class="legend" id="legend"></div>
+      <div class="hint" id="hint"></div>
+    </div>
+
+    <aside class="card" id="details">
+      <div class="empty">Click a bar, point, node, or connection to see the trials behind it.</div>
+    </aside>
+
+    <div class="card" style="grid-column: 1 / -1">
+      <div class="tabs" id="tabs">
+        <button class="active" data-tab="tab-notes">Notes &amp; assumptions</button>
+        <button data-tab="tab-plan">How it was interpreted</button>
+        <button data-tab="tab-api">API calls</button>
+        <button data-tab="tab-json">Raw JSON</button>
+      </div>
+      <div class="tab active" id="tab-notes"></div>
+      <div class="tab" id="tab-plan"></div>
+      <div class="tab" id="tab-api"></div>
+      <div class="tab" id="tab-json">
+        <div class="row" style="margin: 0 0 10px"><button type="button" id="copy-json">Copy</button>
+          <button type="button" id="download-json">Download</button></div>
+        <pre id="raw"></pre>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+const SUGGESTIONS = [
+  ["Network: sponsors ↔ drugs", "Show a network of sponsors and drugs for glioblastoma trials"],
+  ["Network: drug combinations", "Which drugs are combined together in pancreatic cancer trials?"],
+  ["Trend", "How many trials started each year for breast cancer since 2010?"],
+  ["Phases", "How are melanoma trials distributed across phases?"],
+  ["Countries", "Which countries have the most recruiting trials for type 2 diabetes?"],
+  ["Compare", "Compare phases for trials involving nivolumab vs ipilimumab"],
+  ["Histogram", "What is the distribution of enrollment sizes for lung cancer trials?"],
+];
+const PHASES = [["EARLY_PHASE1", "Early 1"], ["PHASE1", "1"], ["PHASE2", "2"], ["PHASE3", "3"], ["PHASE4", "4"], ["NA", "N/A"]];
+const STATUSES = [["RECRUITING", "Recruiting"], ["NOT_YET_RECRUITING", "Not yet recruiting"],
+  ["ACTIVE_NOT_RECRUITING", "Active, not recruiting"], ["COMPLETED", "Completed"], ["TERMINATED", "Terminated"]];
+const PALETTE = ["#3056d3", "#e8743b", "#19a979", "#945ecf", "#ed4a7b", "#13a4b4", "#f2b134", "#6c8893"];
+const GROUP_COLORS = { sponsor: "#e8743b", drug: "#3056d3", intervention: "#3056d3", condition: "#19a979",
+  country: "#945ecf", phase: "#ed4a7b", status: "#13a4b4", sponsor_class: "#f2b134", intervention_type: "#6c8893" };
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const fmt = (n) => Number(n).toLocaleString();
+let chart = null, network = null, current = null;
+
+// ------------------------------------------------------------------ setup
+for (const [label, q] of SUGGESTIONS) {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "chip"; b.textContent = label; b.title = q;
+  b.onclick = () => { $("q").value = q; ask(); };
+  $("suggestions").append(b);
+}
+for (const [box, items, name] of [[$("phase-checks"), PHASES, "trial_phase"], [$("status-checks"), STATUSES, "status"]]) {
+  for (const [value, label] of items) {
+    box.insertAdjacentHTML("beforeend",
+      `<label><input type="checkbox" data-list="${name}" value="${value}"> ${esc(label)}</label>`);
+  }
+}
+document.querySelectorAll("#tabs button").forEach((b) => b.onclick = () => {
+  document.querySelectorAll("#tabs button, .tab").forEach((el) => el.classList.remove("active"));
+  b.classList.add("active"); $(b.dataset.tab).classList.add("active");
+});
+$("ask-form").onsubmit = (e) => { e.preventDefault(); ask(); };
+$("open-file").onclick = () => $("file").click();
+$("file").onchange = async (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  try { show(JSON.parse(await f.text())); } catch (err) { callout("error", "Couldn't read that file", err.message); }
+  e.target.value = "";
+};
+$("copy-json").onclick = () => navigator.clipboard.writeText($("raw").textContent);
+$("download-json").onclick = () => {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([$("raw").textContent], { type: "application/json" }));
+  a.download = "trialviz-response.json"; a.click();
+};
+fetch("/v1/examples").then((r) => r.ok ? r.json() : []).then((list) => {
+  for (const ex of list) $("examples").insertAdjacentHTML("beforeend",
+    `<option value="${esc(ex.name)}">${esc(ex.query)}</option>`);
+}).catch(() => {});
+$("examples").onchange = async (e) => {
+  if (!e.target.value) return;
+  const res = await fetch(`/v1/examples/${encodeURIComponent(e.target.value)}`);
+  show(await res.json());
+  e.target.value = "";
+};
+
+// ------------------------------------------------------------------ requests
+function buildRequest() {
+  const body = { query: $("q").value.trim() };
+  document.querySelectorAll("[data-field]").forEach((el) => {
+    const v = el.value.trim();
+    if (v) body[el.dataset.field] = el.type === "number" ? Number(v) : v;
+  });
+  document.querySelectorAll("[data-list]:checked").forEach((el) => {
+    (body[el.dataset.list] ??= []).push(el.value);
+  });
+  return body;
+}
+
+async function ask() {
+  const body = buildRequest();
+  if (body.query.length < 3) { $("q").focus(); return; }
+  reset();
+  $("ask-btn").disabled = true;
+  $("status").style.display = "flex";
+  const t0 = performance.now();
+  const tick = setInterval(() => {
+    $("status-text").textContent =
+      `Interpreting the question, then counting trials on ClinicalTrials.gov… ${((performance.now() - t0) / 1000).toFixed(1)}s`;
+  }, 100);
+  try {
+    const res = await fetch("/v1/query", {
+      method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (res.status === 422) {
+      const msgs = (data.detail || []).map((d) => `${d.loc.slice(1).join(".")}: ${d.msg}`);
+      callout("error", "Please check your input", msgs.join("<br>") || "Invalid request.");
+    } else if (!res.ok) {
+      callout("error", "Something went wrong upstream", esc(data.detail || res.statusText));
+    } else {
+      show({ request: body, response: data });
+    }
+  } catch (err) {
+    callout("error", "Couldn't reach the server", esc(err.message));
+  } finally {
+    clearInterval(tick);
+    $("status").style.display = "none";
+    $("ask-btn").disabled = false;
+  }
+}
+
+// ------------------------------------------------------------------ rendering
+function reset() {
+  $("callout").style.display = "none";
+  $("result").style.display = "none";
+  if (chart) { chart.destroy(); chart = null; }
+  if (network) { network.destroy(); network = null; }
+}
+
+function callout(kind, title, html) {
+  const el = $("callout");
+  el.className = `callout ${kind}`;
+  el.innerHTML = `<b>${esc(title)}</b>${html}`;
+  el.style.display = "block";
+}
+
+function show(payload) {
+  // Accept a saved {request, response} file or a bare response.
+  const resp = payload.response ?? payload;
+  if (payload.request?.query) $("q").value = payload.request.query;
+  reset();
+  current = resp;
+  if (resp.status !== "ok") {
+    const titles = { needs_clarification: "Can you clarify?", unsupported: "That isn't something the trial registry can answer",
+      no_results: "No matching trials" };
+    const tip = resp.status === "needs_clarification"
+      ? `<div class="hint">Add the missing detail to your question, or use the optional filters, then ask again.</div>` : "";
+    callout("info", titles[resp.status] || resp.status, esc(resp.message || "") + tip);
+    if (resp.status === "needs_clarification") $("q").focus();
+    return;
+  }
+  const viz = resp.visualization, meta = resp.meta;
+  $("result").style.display = "grid";
+  $("viz-title").textContent = viz.title;
+  $("viz-subtitle").textContent = viz.subtitle || "";
+  renderBadges(viz, meta);
+  renderMeta(resp);
+  $("details").innerHTML = `<div class="empty">Click a ${viz.type === "network_graph" ? "node or connection" : "bar or point"} to see the trials behind it.</div>`;
+  $("legend").innerHTML = "";
+  if (viz.type === "network_graph") renderNetwork(viz); else renderChart(viz);
+}
+
+function renderBadges(viz, meta) {
+  const b = [`<span class="badge">${viz.type.replace(/_/g, " ")}</span>`];
+  if (meta.total_matching_trials != null) b.push(`<span class="badge">${fmt(meta.total_matching_trials)} matching trials</span>`);
+  if (meta.count_method === "exact") b.push(`<span class="badge ok">exact counts</span>`);
+  if (meta.count_method === "sample") b.push(`<span class="badge warn">sample of ${fmt(meta.trials_analyzed)} trials</span>`);
+  const total = Object.values(meta.timings_ms || {}).reduce((a, x) => a + x, 0);
+  if (total) b.push(`<span class="badge">${(total / 1000).toFixed(1)}s</span>`);
+  $("badges").innerHTML = b.join("");
+}
+
+function renderMeta(resp) {
+  const m = resp.meta, plan = m.plan || {};
+  const list = (items) => items?.length ? `<ul>${items.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : `<p class="empty">None.</p>`;
+  $("tab-notes").innerHTML = `<h4 style="margin:0 0 4px">Data notes</h4>${list(m.notes)}
+    <h4 style="margin:14px 0 4px">How the question was interpreted</h4>${list(m.assumptions)}`;
+  const filters = Object.entries(m.filters || {}).map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(", ") : v}`);
+  $("tab-plan").innerHTML = `<dl class="kv">
+      <dt>Analysis</dt><dd>${esc(plan.analysis)}</dd>
+      <dt>Grouped by</dt><dd>${esc(plan.group_by ?? (plan.network ? `${plan.network.source} ↔ ${plan.network.target}` : plan.x_numeric ?? "—"))}</dd>
+      <dt>Filters</dt><dd>${esc(filters.join(" · ") || "none")}</dd>
+      ${plan.series?.length ? `<dt>Series</dt><dd>${esc(plan.series.map((s) => s.label).join(" vs. "))}</dd>` : ""}
+      <dt>Reasoning</dt><dd>${esc(plan.rationale)}</dd>
+      <dt>Timings</dt><dd>${esc(Object.entries(m.timings_ms || {}).map(([k, v]) => `${k} ${Math.round(v)} ms`).join(" · "))}</dd>
+    </dl>`;
+  $("tab-api").innerHTML = `<p class="hint" style="margin-top:0">${(m.api_requests || []).length} requests. Open any of them to check a number yourself.</p>
+    <div class="urls">${(m.api_requests || []).map((u) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(decodeURIComponent(u))}</a>`).join("")}</div>`;
+  $("raw").textContent = JSON.stringify(resp, null, 2);
+}
+
+function showDetails(title, trialCount, citations) {
+  // Group citations by trial: network edges cite each trial twice (one per endpoint).
+  const byTrial = new Map();
+  for (const c of citations || []) {
+    if (!byTrial.has(c.nct_id)) byTrial.set(c.nct_id, { ...c, excerpts: [] });
+    byTrial.get(c.nct_id).excerpts.push(c);
+  }
+  const shown = byTrial.size;
+  $("details").innerHTML = `<h3>${esc(title)}</h3>
+    <div class="count">${fmt(trialCount)} trial${trialCount === 1 ? "" : "s"}${shown ? ` · showing ${shown}` : ""}</div>
+    ${shown ? [...byTrial.values()].map((t) => `<div class="cite">
+        <a href="${esc(t.url)}" target="_blank" rel="noopener">${esc(t.nct_id)} ↗</a>
+        <div class="title">${esc(t.title || "")}</div>
+        ${t.excerpts.map((e) => `<code><small>${esc(e.field)}</small>${esc(e.excerpt)}</code>`).join("")}
+      </div>`).join("") : `<div class="empty">No sample records were downloaded for this item.</div>`}
+    ${trialCount > shown && shown ? `<div class="more">${shown} of the ${fmt(trialCount)} trials are shown as evidence. Open one to check it on ClinicalTrials.gov.</div>` : ""}`;
+}
+
+function axisTitle(ch) { return ch ? ch.title + (ch.unit && ch.unit !== "trials" ? ` (${ch.unit})` : "") : ""; }
+
+function renderChart(viz) {
+  $("canvas-wrap").style.display = "block";
+  $("network").style.display = "none";
+  const enc = viz.encoding, rows = viz.data;
+  const horizontal = viz.orientation === "horizontal";
+  let type = "bar", labels, datasets, rowAt;
+
+  if (viz.type === "histogram") {
+    labels = rows.map((r) => r.bin_label ?? `${r[enc.bin_start.field]}–${r[enc.bin_end.field]}`);
+    datasets = [{ label: enc.y.title, data: rows.map((r) => r[enc.y.field]), backgroundColor: PALETTE[0],
+                  barPercentage: 1, categoryPercentage: 0.98 }];
+    rowAt = (d, i) => rows[i];
+  } else if (viz.type === "scatter_plot") {
+    type = "scatter";
+    datasets = [{ label: viz.title, data: rows.map((r) => ({ x: r[enc.x.field], y: r[enc.y.field] })),
+                  backgroundColor: PALETTE[0] + "99", pointRadius: 4 }];
+    rowAt = (d, i) => rows[i];
+  } else {
+    // bar_chart, grouped_bar_chart, time_series: categories on x, optional series on color.
+    const xField = enc.x.field, yField = enc.y.field, cField = enc.color?.field;
+    labels = Array.isArray(enc.x.sort) ? enc.x.sort : [...new Set(rows.map((r) => r[xField]))];
+    const seriesNames = cField ? (Array.isArray(enc.color.sort) ? enc.color.sort : [...new Set(rows.map((r) => r[cField]))]) : [null];
+    const lookup = new Map(rows.map((r) => [`${r[xField]}|${cField ? r[cField] : ""}`, r]));
+    if (viz.type === "time_series") type = "line";
+    datasets = seriesNames.map((s, k) => ({
+      label: s ?? enc.y.title,
+      data: labels.map((x) => lookup.get(`${x}|${s ?? ""}`)?.[yField] ?? 0),
+      backgroundColor: PALETTE[k % PALETTE.length] + (type === "line" ? "22" : ""),
+      borderColor: PALETTE[k % PALETTE.length],
+      fill: type === "line" && seriesNames.length === 1, tension: 0.25, pointRadius: 3,
+    }));
+    rowAt = (d, i) => lookup.get(`${labels[i]}|${seriesNames[d] ?? ""}`);
+  }
+
+  const catAxis = viz.type === "scatter_plot" ? enc.x : (viz.type === "histogram" ? enc.bin_start : enc.x);
+  const scales = {
+    x: { title: { display: true, text: axisTitle(horizontal ? enc.y : catAxis) }, beginAtZero: horizontal },
+    y: { title: { display: true, text: axisTitle(horizontal ? catAxis : enc.y) }, beginAtZero: !horizontal || type === "scatter" ? true : undefined,
+         ticks: { autoSkip: false } },
+  };
+  if (type === "scatter") { scales.x.beginAtZero = false; scales.y.ticks = {}; }
+
+  chart = new Chart($("chart"), {
+    type, data: { labels, datasets },
+    options: {
+      indexAxis: horizontal ? "y" : "x", maintainAspectRatio: false, animation: { duration: 250 },
+      plugins: {
+        legend: { display: datasets.length > 1 },
+        tooltip: { callbacks: type === "scatter" ? {
+          label: (ctx) => { const r = rows[ctx.dataIndex]; return `${r.nct_id}: ${enc.x.title} ${r[enc.x.field]}, ${enc.y.title} ${fmt(r[enc.y.field])}`; },
+        } : {} },
+      },
+      scales,
+      onClick: (evt, els) => {
+        if (!els.length) return;
+        const { datasetIndex, index } = els[0];
+        const r = rowAt(datasetIndex, index);
+        if (!r) return;
+        const name = type === "scatter" ? `${r.nct_id}` : `${labels?.[index] ?? ""}${datasets.length > 1 ? ` · ${datasets[datasetIndex].label}` : ""}`;
+        showDetails(name, r.trial_count, r.citations);
+      },
+      onHover: (evt, els) => { evt.native.target.style.cursor = els.length ? "pointer" : "default"; },
+    },
+  });
+  $("hint").textContent = "Click any bar or point to see the trials behind it.";
+}
+
+function renderNetwork(viz) {
+  $("canvas-wrap").style.display = "none";
+  const box = $("network");
+  box.style.display = "block";
+  const enc = viz.encoding;
+  const short = (s) => s.length > 30 ? s.slice(0, 29) + "…" : s;
+  const nodeById = new Map(viz.nodes.map((n) => [n[enc.node_id], n]));
+  const groups = [...new Set(viz.nodes.map((n) => n[enc.node_group]))];
+
+  const nodes = new vis.DataSet(viz.nodes.map((n) => {
+    const color = GROUP_COLORS[n[enc.node_group]] || PALETTE[groups.indexOf(n[enc.node_group]) % PALETTE.length];
+    return {
+      id: n[enc.node_id], label: short(n[enc.node_label]), value: n[enc.node_size],
+      title: `${n[enc.node_label]} — ${fmt(n[enc.node_size])} trials`,
+      color: { background: color, border: color, highlight: { background: color, border: "#1d2433" } },
+    };
+  }));
+  const edges = new vis.DataSet(viz.edges.map((e, i) => ({
+    id: i, from: e[enc.edge_source], to: e[enc.edge_target], value: e[enc.edge_weight],
+    title: `${fmt(e[enc.edge_weight])} shared trials`,
+  })));
+
+  network = new vis.Network(box, { nodes, edges }, {
+    nodes: { shape: "dot", scaling: { min: 8, max: 38, label: { enabled: true, min: 11, max: 20 } },
+             font: { size: 13, color: "#1d2433", strokeWidth: 3, strokeColor: "#fff" } },
+    edges: { color: { color: "#9aa3b5", opacity: 0.55, highlight: "#1d2433" }, scaling: { min: 1, max: 9 },
+             smooth: false },
+    physics: { solver: "forceAtlas2Based", forceAtlas2Based: { gravitationalConstant: -60, springLength: 120 },
+               stabilization: { iterations: 300 } },
+    interaction: { hover: true, tooltipDelay: 120, navigationButtons: false },
+    layout: { randomSeed: 7 },  // same layout on every load
+  });
+  network.once("stabilizationIterationsDone", () => network.setOptions({ physics: false }));
+  network.on("click", (p) => {
+    if (p.nodes.length) {
+      const n = nodeById.get(p.nodes[0]);
+      showDetails(`${n[enc.node_label]} (${n[enc.node_group]})`, n[enc.node_size], n.citations);
+    } else if (p.edges.length) {
+      const e = viz.edges[p.edges[0]];
+      const a = nodeById.get(e[enc.edge_source]), b = nodeById.get(e[enc.edge_target]);
+      showDetails(`${a[enc.node_label]} ↔ ${b[enc.node_label]}`, e[enc.edge_weight], e.citations);
+    }
+  });
+
+  $("legend").innerHTML = groups.map((g) =>
+    `<span><i style="background:${GROUP_COLORS[g] || PALETTE[groups.indexOf(g) % PALETTE.length]}"></i>${esc(g.replace(/_/g, " "))}</span>`).join("")
+    + `<span>Bigger dot = more trials · thicker line = more shared trials</span>`;
+  $("hint").textContent = "Drag nodes to rearrange, scroll to zoom. Click a node or connection to see its trials.";
+}
+</script>
+</body>
+</html>

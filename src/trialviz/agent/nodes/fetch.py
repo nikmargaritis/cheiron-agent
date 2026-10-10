@@ -159,8 +159,9 @@ async def fetch_node(state: AgentState, deps: Deps) -> AgentState:
         result = FetchResult(list(series))
         for s in series:
             if len(s.studies) < s.total_count:
+                verb = "aggregated" if s.label else "Aggregated"
                 notes.append(
-                    f"{_who(s.label)}aggregated the first {len(s.studies):,} of "
+                    f"{_who(s.label)}{verb} the first {len(s.studies):,} of "
                     f"{s.total_count:,} matching trials (API default order); counts are a sample."
                 )
 
