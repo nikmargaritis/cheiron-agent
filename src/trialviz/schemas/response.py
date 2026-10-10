@@ -29,9 +29,6 @@ class _Strict(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
 
-# --------------------------------------------------------------------------- citations
-
-
 class Citation(_Strict):
     nct_id: str = Field(pattern=r"^NCT\d{8}$")
     field: str = Field(description="API field path, e.g. protocolSection.designModule.phases")
@@ -47,9 +44,6 @@ class Provenance(BaseModel):
 
     trial_count: int = Field(ge=0, description="Distinct trials contributing to this datum.")
     citations: list[Citation] = Field(default_factory=list)
-
-
-# --------------------------------------------------------------------------- encodings
 
 
 class Channel(_Strict):
@@ -82,9 +76,6 @@ class NetworkEncoding(_Strict):
     edge_source: str = "source"
     edge_target: str = "target"
     edge_weight: str = "trial_count"
-
-
-# --------------------------------------------------------------------------- visualizations
 
 
 class _VizBase(_Strict):
@@ -180,9 +171,6 @@ Visualization = Annotated[
     BarChart | GroupedBarChart | TimeSeries | ScatterPlot | Histogram | NetworkGraph,
     Field(discriminator="type"),
 ]
-
-
-# --------------------------------------------------------------------------- envelope
 
 
 class ResponseStatus(StrEnum):

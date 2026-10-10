@@ -100,7 +100,7 @@ def build_node(state: AgentState, deps: Deps) -> AgentState:
                 notes.append(f"{missing:,} trials without a value were excluded.")
             if not points:
                 return _empty(state, deps, notes, "No matching trials report this value.")
-            bins = histogram_bins(points)  # both numeric fields are integer-valued
+            bins = histogram_bins(points)
             if bins[-1].overflow:
                 notes.append(
                     f"The last bin groups the top ~5% of values (≥ {bins[-1].start:,.0f})."

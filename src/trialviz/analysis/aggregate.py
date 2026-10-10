@@ -28,7 +28,7 @@ class Bucket:
     """One category (optionally within one series) and the trials behind it."""
 
     key: str  # normalized bucket value, e.g. "PHASE3", "2019", "united states"
-    label: str  # display label
+    label: str
     count: int  # exact server count when available, else number of trials in evidence
     series: str | None = None
     evidence: Evidence = field(default_factory=list)  # the citation pool for this bucket
@@ -55,7 +55,6 @@ class NumericPoint:
 @dataclass
 class GraphNode:
     id: str  # namespaced: "<dimension>:<key>"
-    key: str
     label: str
     group: Dimension
     evidence: Evidence
@@ -73,9 +72,6 @@ class Graph:
     nodes: list[GraphNode]
     edges: list[GraphEdge]
     candidate_nodes: int  # before pruning, for notes
-
-
-# --------------------------------------------------------------------------- categories
 
 
 def _label_for(dim: Dimension, key: str, excerpts: Counter[str]) -> str:
@@ -142,9 +138,6 @@ def top_keys(buckets: list[Bucket], n: int) -> list[str]:
     return ranked[:n]
 
 
-# --------------------------------------------------------------------------- numeric
-
-
 def numeric_values(
     studies: list[Study], x: NumericField, y: NumericField | None = None
 ) -> tuple[list[NumericPoint], int]:
@@ -173,11 +166,10 @@ def _nice_step(span: float, target_bins: int) -> float:
 
 
 def histogram_bins(
-    points: list[NumericPoint], max_bins: int = 20, integer: bool = True,
-    overflow_quantile: float = 0.95,
+    points: list[NumericPoint], max_bins: int = 20, overflow_quantile: float = 0.95
 ) -> list[Bin]:
-    """Equal-width bins with "nice" edges over [min, p95]; values above p95 go into one
-    overflow bin so heavy right tails (enrollment) don't squash the chart.
+    """Equal-width integer bins with "nice" edges over [min, p95]; values above p95 go into
+    one overflow bin so heavy right tails (enrollment) don't squash the chart.
     """
     if not points:
         return []
@@ -188,8 +180,7 @@ def histogram_bins(
     top = cap if use_overflow else hi
 
     step = _nice_step(top - lo, max_bins - (1 if use_overflow else 0))
-    if integer:
-        step = max(1.0, math.ceil(step))
+    step = max(1.0, math.ceil(step))  # every numeric field is integer-valued
     start = math.floor(lo / step) * step
     n_bins = int((top - start) // step) + 1  # bins are [start, end); the last one holds `top`
     bins = [Bin(start + i * step, start + (i + 1) * step, 0) for i in range(n_bins)]
@@ -203,9 +194,6 @@ def histogram_bins(
         b.count += 1
         b.evidence.append((p.study, p.x_fv))
     return bins + ([overflow] if overflow else [])
-
-
-# --------------------------------------------------------------------------- network
 
 
 def cooccurrence_graph(
@@ -260,7 +248,7 @@ def cooccurrence_graph(
     ]
     used = {e.source for e in kept_edges} | {e.target for e in kept_edges}
     nodes = [
-        GraphNode(node_id(n), n[1], _label_for(n[0], n[1], spellings[n]), n[0], node_ev[n])
+        GraphNode(node_id(n), _label_for(n[0], n[1], spellings[n]), n[0], node_ev[n])
         for n in sorted(keep, key=lambda n: (-degree[n], n[0].value, n[1]))
         if node_id(n) in used
     ]

@@ -36,9 +36,6 @@ LONG_LABEL_DIMS = {
 _COUNT = Channel(field=COUNT_FIELD, type="quantitative", title="Number of trials", unit="trials")
 
 
-# --------------------------------------------------------------------------- titles
-
-
 def describe_filters(f: Filters) -> str | None:
     """Human-readable filter summary for chart subtitles."""
     parts: list[str] = []
@@ -80,9 +77,6 @@ def default_title(plan: QueryPlan) -> str:
     if plan.series:
         title += ": " + " vs. ".join(s.label for s in plan.series)
     return title
-
-
-# --------------------------------------------------------------------------- categories
 
 
 def build_category_chart(
@@ -132,9 +126,6 @@ def build_category_chart(
     if plan.series:
         return GroupedBarChart(**common, orientation=orientation)
     return BarChart(**common, orientation=orientation)
-
-
-# --------------------------------------------------------------------------- numeric
 
 
 def _fmt(v: float) -> str:
@@ -196,9 +187,6 @@ def build_scatter(plan: QueryPlan, points: list[NumericPoint]) -> ScatterPlot:
         ),
         data=rows,
     )
-
-
-# --------------------------------------------------------------------------- network
 
 
 def build_network(plan: QueryPlan, graph: Graph, max_citations: int) -> NetworkGraph:

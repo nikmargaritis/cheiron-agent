@@ -27,11 +27,7 @@ def make_citation(study: dict[str, Any], fv: FieldValue) -> Citation:
 def citations_for(
     evidence: list[tuple[dict[str, Any], FieldValue]], limit: int
 ) -> list[Citation]:
-    """First ``limit`` citations, de-duplicated by NCT ID.
-
-    TODO (nice-to-have): pick citations deterministically but representatively, e.g.
-    most recent start date first, rather than API order.
-    """
+    """First ``limit`` citations, de-duplicated by NCT ID."""
     out: list[Citation] = []
     seen: set[str] = set()
     for study, fv in evidence:

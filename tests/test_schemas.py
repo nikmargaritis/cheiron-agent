@@ -59,8 +59,7 @@ class TestPlanSchema:
 
 class TestVisualization:
     def test_bar_chart_ok(self):
-        chart = _bar([{"phase": "Phase 1", "trial_count": 3, "trial_count_unused": 1,
-                       "citations": []}])
+        chart = _bar([{"phase": "Phase 1", "trial_count": 3, "citations": []}])
         assert chart.data[0].trial_count == 3
 
     def test_bar_chart_missing_encoded_field(self):

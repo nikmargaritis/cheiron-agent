@@ -40,8 +40,6 @@ class FetchResult:
     """Raw material for aggregation, produced by the fetch node."""
 
     series: list[SeriesData]
-    strategy: Literal["bucket_counts", "download"]
-    years: list[int] = field(default_factory=list)  # bucket years for start_year group-bys
 
     @property
     def total_count(self) -> int:

@@ -68,9 +68,6 @@ MULTI_VALUED = {
 }
 
 
-# --------------------------------------------------------------------------- helpers
-
-
 def _get(d: Any, *path: str) -> Any:
     for p in path:
         if not isinstance(d, dict):
@@ -193,8 +190,6 @@ def _titled(values: Iterable[str]) -> dict[str, str]:
     return {v: v.replace("_", " ").capitalize() for v in values}
 
 
-# --------------------------------------------------------------------------- registry
-
 _PHASE_LABELS = {
     "EARLY_PHASE1": "Early Phase 1", "PHASE1": "Phase 1", "PHASE2": "Phase 2",
     "PHASE3": "Phase 3", "PHASE4": "Phase 4", "NA": "Not applicable",
@@ -301,9 +296,6 @@ _NETWORK_NOISE = re.compile(
 
 def is_network_noise(dim: Dimension, key: str) -> bool:
     return dim in (Dimension.INTERVENTION, Dimension.DRUG) and bool(_NETWORK_NOISE.search(key))
-
-
-# --------------------------------------------------------------------------- numeric fields
 
 
 @dataclass(frozen=True, slots=True)

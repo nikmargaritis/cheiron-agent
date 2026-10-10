@@ -31,7 +31,7 @@ async def test_fetch_paginates_and_caps(settings):
     async with CTGovClient(settings) as c:
         page = await c.fetch_studies({}, ["NCTId"], max_records=3)
     assert len(page.studies) == 3
-    assert page.total_count == 10 and page.truncated
+    assert page.total_count == 10
 
 
 @respx.mock

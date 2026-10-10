@@ -35,7 +35,6 @@ class CTGovError(RuntimeError):
 class StudyPage:
     studies: list[dict[str, Any]]
     total_count: int
-    truncated: bool  # True if more records matched than were downloaded
 
 
 @dataclass
@@ -63,8 +62,6 @@ class CTGovClient:
     async def __aexit__(self, *exc: object) -> None:
         await self.aclose()
 
-    # ----------------------------------------------------------------------- low level
-
     async def _get(self, path: str, params: dict[str, Any]) -> dict[str, Any]:
         assert self.http is not None
         attempt = 0
@@ -81,19 +78,11 @@ class CTGovClient:
             # 400s carry a useful plain-text message (e.g. bad field name / Essie syntax).
             raise CTGovError(f"{resp.status_code} from {resp.request.url}: {resp.text[:300]}")
 
-    # ----------------------------------------------------------------------- public
-
     async def count(self, params: dict[str, str]) -> int:
         data = await self._get(
             "/studies", {**params, "countTotal": "true", "pageSize": 1, "fields": "NCTId"}
         )
         return int(data.get("totalCount", 0))
-
-    async def count_many(self, param_sets: dict[str, dict[str, str]]) -> dict[str, int]:
-        """Concurrent ``count`` for each labelled param set (bounded by the semaphore)."""
-        keys = list(param_sets)
-        results = await asyncio.gather(*(self.count(param_sets[k]) for k in keys))
-        return dict(zip(keys, results, strict=True))
 
     async def fetch_studies(
         self,
@@ -122,4 +111,4 @@ class CTGovClient:
             if not token or len(studies) >= cap:
                 break
 
-        return StudyPage(studies=studies[:cap], total_count=total, truncated=total > cap)
+        return StudyPage(studies=studies[:cap], total_count=total)

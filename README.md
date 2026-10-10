@@ -87,7 +87,6 @@ extracts from `query`.
 
 ## Response schema
 
-
 ```jsonc
 {
   "status": "ok",                        // ok | needs_clarification | unsupported | no_results

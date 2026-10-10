@@ -52,9 +52,6 @@ def year_filter(lo: int | str, hi: int | str) -> str:
     return f"AREA[StartDate]RANGE[{lo_s},{hi_s}]"
 
 
-# --------------------------------------------------------------------------- strategies
-
-
 async def _bucket_counts(
     client: CTGovClient, label: str | None, filters: Filters, buckets: dict[str, str],
     pieces: list[str], per_bucket: int,
@@ -123,9 +120,6 @@ def _who(label: str | None) -> str:
     return f"{label}: " if label else ""
 
 
-# --------------------------------------------------------------------------- node
-
-
 async def fetch_node(state: AgentState, deps: Deps) -> AgentState:
     plan, client, settings = state["plan"], deps.ctgov, deps.settings
     notes = list(state.get("notes", []))
@@ -134,7 +128,6 @@ async def fetch_node(state: AgentState, deps: Deps) -> AgentState:
     if uses_bucket_counts(plan):
         dim = plan.group_by
         assert dim is not None
-        years: list[int] = []
         if dim == Dimension.START_YEAR:
             years = await _plan_years(client, targets, notes)
             buckets = {str(y): year_filter(y, y) for y in years}
@@ -153,7 +146,7 @@ async def fetch_node(state: AgentState, deps: Deps) -> AgentState:
         series = await asyncio.gather(
             *(_bucket_counts(client, lbl, f, buckets, pieces, per_bucket) for lbl, f in targets)
         )
-        result = FetchResult(list(series), "bucket_counts", years)
+        result = FetchResult(list(series))
     else:
         net = plan.network
         pieces = pieces_for(
@@ -163,7 +156,7 @@ async def fetch_node(state: AgentState, deps: Deps) -> AgentState:
         series = await asyncio.gather(
             *(_download(client, lbl, f, pieces, settings.ctgov_max_records) for lbl, f in targets)
         )
-        result = FetchResult(list(series), "download")
+        result = FetchResult(list(series))
         for s in series:
             if len(s.studies) < s.total_count:
                 notes.append(
