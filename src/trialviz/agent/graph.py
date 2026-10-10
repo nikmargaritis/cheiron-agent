@@ -72,4 +72,8 @@ def build_graph(deps: Deps):
 
 async def run_query(request: QueryRequest, deps: Deps) -> QueryResponse:
     final = await build_graph(deps).ainvoke({"request": request})
-    return final["response"]
+    response: QueryResponse = final["response"]
+    # The terminal node builds the response before its own timing is recorded, so the
+    # complete per-node timings are only available here.
+    response.meta.timings_ms = final["timings_ms"]
+    return response

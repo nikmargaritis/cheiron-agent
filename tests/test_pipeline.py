@@ -112,6 +112,7 @@ async def test_phase_distribution_uses_exact_bucket_counts(settings, api):
     assert resp.meta.count_method == "exact"
     assert resp.meta.total_matching_trials == 4
     assert any("counted under each" in n for n in resp.meta.notes)
+    assert set(resp.meta.timings_ms) == {"plan", "validate", "fetch", "build"}
     assert_citations_verify(resp)
 
 

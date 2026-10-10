@@ -25,7 +25,6 @@ def build_meta(state: AgentState, deps: Deps, **overrides: Any) -> ResponseMeta:
         assumptions=plan.assumptions if plan else [],
         notes=state.get("notes", []),
         api_requests=list(deps.ctgov.request_log),
-        timings_ms=state.get("timings_ms", {}),
         generated_at=datetime.now(UTC),
     )
     return ResponseMeta(**{**fields, **overrides})

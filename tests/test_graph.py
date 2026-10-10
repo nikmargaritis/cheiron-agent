@@ -32,6 +32,7 @@ async def test_clarification_short_circuits(settings):
     assert resp.status == ResponseStatus.NEEDS_CLARIFICATION
     assert resp.message == "Which drug?"
     assert resp.meta.api_requests == []  # never touched the API
+    assert set(resp.meta.timings_ms) == {"plan", "validate", "respond"}
 
 
 async def test_unsupported(settings):
