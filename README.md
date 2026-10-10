@@ -11,24 +11,42 @@ python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 cp .env.example .env            # set OPENAI_API_KEY
 uvicorn trialviz.api.app:app --reload
-# → http://localhost:8000/docs  (interactive OpenAPI docs)
+```
 
+Open **http://localhost:8000** for the web UI, or call the API directly:
+
+```bash
 curl -s localhost:8000/v1/query -H 'content-type: application/json' \
   -d '{"query": "How has the number of trials for this drug changed over time?", "drug_name": "Pembrolizumab"}'
 ```
 
-Then open **http://localhost:8000** for the web UI. Ask a question, or pick a saved run from
-`examples/` (renders instantly, no LLM call). Click any bar, point, node, or connection to see
-the trials behind it with links to ClinicalTrials.gov. The UI is a single file
-(`src/trialviz/web/index.html`, Chart.js + vis-network from a CDN, no build step) that renders
-purely from the response's `encoding`. It's a working check that the schema is frontend-ready.
-
 | Command | What it does |
 |---|---|
-| `pytest` | Offline suite (schemas, query building, extraction, aggregation, full graph against a mocked API) |
+| `pytest` | Offline suite (schemas, query building, extraction, aggregation, HTTP routes, full graph against a mocked API) |
 | `pytest -m live` | Checks against the real API: citations re-verified against independently fetched records, bucket-sum invariants, enum drift |
 | `python scripts/smoke_live.py [out_dir]` | Runs every chart type end to end on live data with scripted plans (no LLM tokens) |
 | `python scripts/run_examples.py` | Runs the example queries with the real planner and writes `examples/*.json` |
+
+## Web UI
+
+A single page served by the API at `/`. It's one file (`src/trialviz/web/index.html`) with
+Chart.js and vis-network loaded from a CDN, and no build step.
+
+- **Ask** in plain English, or click a suggestion. Optional filters (drug, condition, sponsor,
+  country, years, phase, status) override anything in the question.
+- **Saved runs:** pick any file from `examples/` to render it instantly without an LLM call, or
+  open any saved response JSON.
+- **Network graphs** are interactive: drag nodes and scroll to zoom. Dot size is trial count and
+  line thickness is shared trials.
+- **Click any bar, point, node, or connection** to list the trials behind it. Each entry shows the
+  NCT ID linked to ClinicalTrials.gov, the trial title, and the exact field/value quoted from the
+  record.
+- **Badges** show matching trials, exact vs. sampled counts, and response time. Tabs show data
+  notes, how the question was interpreted, every API call (clickable), and the raw JSON.
+- Clarification and unsupported answers appear as a message instead of a chart.
+
+The UI renders purely from the response's `encoding` and contains no per-question logic. It's a
+working check that the response schema is enough to build a frontend from.
 
 ## Architecture
 
@@ -76,6 +94,19 @@ doesn't need a new handler:
 Dimensions: `phase, status, start_year, country, sponsor, sponsor_class, drug, intervention,
 intervention_type, condition, study_type`. Numeric fields: `enrollment, start_year`.
 
+## Endpoints
+
+| Method | Path | Purpose |
+|---|---|---|
+| `POST` | `/v1/query` | Question → visualization spec (schemas below) |
+| `GET` | `/v1/examples` | Saved example runs: `[{name, query}]` |
+| `GET` | `/v1/examples/{name}` | One saved run: `{request, response}` |
+| `GET` | `/` | Web UI |
+| `GET` | `/docs` | Interactive OpenAPI docs |
+| `GET` | `/health` | Liveness + version |
+
+Errors: `422` for invalid requests (field-level messages); `502` if ClinicalTrials.gov or the LLM fails.
+
 ## Request schema — `POST /v1/query`
 
 | Field | Type | Required | Validation / mapping |
@@ -94,6 +125,9 @@ extracts from `query`.
 
 ## Response schema
 
+Abridged from a real response (`examples/02_…json`: "How are breast cancer trials distributed
+across phases?"):
+
 ```jsonc
 {
   "status": "ok",                        // ok | needs_clarification | unsupported | no_results
@@ -101,35 +135,45 @@ extracts from `query`.
     "type": "bar_chart",                 // bar_chart | grouped_bar_chart | time_series |
                                          // histogram | scatter_plot | network_graph
     "title": "Trials by phase",
-    "subtitle": "Intervention: Pembrolizumab",
+    "subtitle": "Condition: breast cancer",
     "orientation": "vertical",
     "encoding": {
-      "x": {"field": "phase", "type": "ordinal", "title": "Phase", "sort": ["Early Phase 1", "Phase 1", "..."]},
+      "x": {"field": "phase", "type": "ordinal", "title": "Phase",
+            "sort": ["Early Phase 1", "Phase 1", "Phase 2", "Phase 3", "Phase 4", "Not applicable"]},
       "y": {"field": "trial_count", "type": "quantitative", "title": "Number of trials", "unit": "trials"}
     },
     "data": [
-      {"phase": "Phase 3", "trial_count": 41,
-       "citations": [{"nct_id": "NCT…", "field": "protocolSection.designModule.phases",
-                      "excerpt": "PHASE3", "title": "…", "url": "https://clinicaltrials.gov/study/NCT…"}]}
+      {"phase": "Phase 3", "trial_count": 1559,
+       "citations": [{"nct_id": "NCT03538171",
+                      "field": "protocolSection.designModule.phases",
+                      "excerpt": "PHASE3",
+                      "title": "Ph3 Study of Exemestane With or Without Entinostat in Chinese Patients With …",
+                      "url": "https://clinicaltrials.gov/study/NCT03538171"}, "… up to 5"]},
+      "… one row per phase"
     ]
   },
-  "message": null,                       // clarification question / reason when status != ok
   "meta": {
     "source": "clinicaltrials.gov",
-    "query": "…",
-    "filters": {"intervention": "Pembrolizumab"},
+    "query": "How are breast cancer trials distributed across phases?",
+    "filters": {"condition": "breast cancer"},
     "plan": { /* the validated QueryPlan */ },
-    "total_matching_trials": 1834,
-    "trials_analyzed": 1834,
+    "total_matching_trials": 16899,
+    "trials_analyzed": 16899,
     "count_method": "exact",             // exact | sample
     "time_granularity": null,            // "year" for start-year axes
     "assumptions": [],                   // planner's interpretation choices
-    "notes": [],                         // data caveats: sampling, multi-valued fields, pruning
-    "api_requests": ["https://clinicaltrials.gov/api/v2/studies?…"],
-    "timings_ms": {"plan": 812.4, "validate": 0.1, "fetch": 640.1, "build": 3.2},
-    "generated_at": "2026-10-10T18:00:00Z"
+    "notes": ["A trial can list several phase values and is counted under each, so bars can sum to more than the number of trials."],
+    "api_requests": ["https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&filter.advanced=AREA%5BPhase%5DPHASE3&…", "…"],
+    "timings_ms": {"plan": 2736.6, "validate": 0.1, "fetch": 233.7, "build": "…"},
+    "generated_at": "2026-10-10T20:06:34Z"
   }
 }
+```
+
+When there's no chart, `visualization` is absent and `message` explains why:
+
+```json
+{"status": "needs_clarification", "message": "Which drug do you want the time trend for?", "meta": {"…": "…"}}
 ```
 
 Renderer contract:
@@ -141,6 +185,22 @@ Renderer contract:
 - `scatter_plot` has one row per trial, with tooltip fields `nct_id` and `brief_title`.
 - `network_graph` uses `nodes` / `edges` instead of `data`. Node ids are namespaced (`drug:gemcitabine`), `group` is the dimension, and edges always reference existing node ids.
 - Every datum carries `trial_count` (all trials behind it) and up to `MAX_CITATIONS_PER_DATUM` citations. Edge citations come in pairs (one per endpoint) for each supporting trial.
+
+## Example runs
+
+Actual outputs from `python scripts/run_examples.py` (real planner, live API), in [`examples/`](examples/).
+They can also be opened in the web UI from the "saved run" dropdown.
+
+| # | Request | Plan → chart | Result | API calls |
+|---|---|---|---|---|
+| 1 | "How has the number of trials for this drug changed over time?" + `drug_name: Pembrolizumab` | `time_trend` → `time_series` | 2,974 trials, exact. 1 trial in 2008, rising to 299 in 2022; 5 undated trials noted | 24 |
+| 2 | "How are breast cancer trials distributed across phases?" | `distribution` → `bar_chart` | 16,899 trials, exact. Phase 2 = 4,590, Phase 3 = 1,559 | 7 |
+| 3 | "Which countries have the most recruiting trials for type 2 diabetes?" | `distribution` → horizontal `bar_chart` | 870 recruiting trials, exact. US 312, China 122, Canada 69 (top 15 shown) | 1 |
+| 4 | "Compare phases for trials involving nivolumab vs ipilimumab." | `comparison` → `grouped_bar_chart` | Phase 2: nivolumab 1,164 vs ipilimumab 542 | 14 |
+| 5 | "Show a network of sponsors and drugs for glioblastoma trials." | `network` (sponsor ↔ drug) → `network_graph` | 36 nodes, 56 edges. Strongest link: NCI ↔ temozolomide (30 trials) | 3 |
+
+In #1 the planner resolved "this drug" from the structured field and recorded that in `assumptions`.
+In #5 it chose the `drug` dimension over `intervention`, as the prompt directs.
 
 ## Key design decisions
 
@@ -165,7 +225,7 @@ Renderer contract:
 7. **Reproducibility:** every API URL called is returned in `meta.api_requests`.
 8. **Custom schema instead of Vega-Lite:** Vega-Lite has no network graph and a very large spec surface.
    The encoding borrows its vocabulary (`field` + `nominal|ordinal|quantitative|temporal`), so mapping to
-   Vega-Lite/Recharts is mechanical.
+   Vega-Lite/Recharts is mechanical. The web UI does exactly that mapping for Chart.js and vis-network.
 9. **`drug` vs `intervention`:** the registry's `intervention` field includes devices, imaging, biospecimen
    collection, etc. These dominated the first drug networks ("laboratory biomarker analysis" was a top node).
    `drug` keeps only `DRUG`/`BIOLOGICAL` types, and networks drop placebo / standard-of-care arms.
@@ -182,18 +242,59 @@ Renderer contract:
   "Folinic acid". Next step: an RxNorm lookup, cached.
 - `query.intr` / `query.cond` are full-text searches, so they match synonyms and loosely related trials
   (a `pembrolizumab` search returned a fecal-transplant trial that mentions it).
-- Open-ended dimensions are sampled above `CTGOV_MAX_RECORDS`, in API default order.
+- Open-ended dimensions are sampled above `CTGOV_MAX_RECORDS`, in API default order, so rankings like
+  "top sponsors for cancer" are approximate. The response marks these as `sample`.
+- One chart per question. Only enrollment and start year are numeric fields, so trial duration and outcome
+  data aren't modeled.
 - Comparisons count a trial in every series it matches. Series totals are reported in `meta.notes`.
 - Start-year axes show at most 30 years unless `start_year` is given. Earlier and undated trials are
   counted in a note.
-- No caching: identical queries re-hit the API.
+- The planner has only been checked on the example questions above. Typos, non-English questions, and
+  brand vs. generic drug names haven't been evaluated systematically.
+- No caching: identical queries re-hit the API. The web UI loads its chart libraries from a CDN.
 
 ## Validation
 
-- Offline: 87 tests, including the full graph against a mocked API that interprets the same
-  filter syntax the code emits.
-- Live (`pytest -m live`): citations re-verified against records fetched separately. Single-valued
-  bucket counts must sum to `totalCount` (this caught 5 missing expanded-access status values that were
-  silently dropping 18 glioblastoma trials). Registry enums are compared against `/stats/field/values`
-  to catch API drift.
+- **Offline (`pytest`, 91 tests):** schema contracts, OpenAI strict-mode compatibility of the plan schema,
+  filter → query-param mapping, field extraction on real API records, aggregation and network pruning,
+  HTTP routes, and the full graph against a mocked API that interprets the same filter syntax the code emits.
+- **Live (`pytest -m live`, 7 tests):** citations re-verified against records fetched separately.
+  Single-valued bucket counts must sum to `totalCount`. Registry enums are compared against
+  `/stats/field/values` to catch API drift.
+- **End to end:** `scripts/smoke_live.py` runs all six chart types on live data. The web UI was tested
+  in a browser on the saved network, comparison, and country examples, and on live histogram,
+  drug-network, and clarification questions.
 
+Bugs found during development and fixed:
+- The status enum was missing 5 expanded-access values, which silently dropped 18 glioblastoma trials
+  from exact counts. Caught by the bucket-sum invariant.
+- Drug networks were dominated by non-drug interventions (imaging, biospecimen collection). This led to the `drug` dimension.
+- Salt stripping turned "Sodium bicarbonate" into "bicarbonate". Now only trailing salt names are stripped.
+- Year bounds relied on where the API sorts undated trials. Now they're excluded explicitly.
+- `build` time was missing from `timings_ms`, because the response was assembled before the step finished.
+
+## How this was built (AI tool usage)
+
+**Planning.** Before writing any code, I planned the stack (Python, LangGraph, Pydantic, FastAPI),
+the pipeline shape, and which bonuses to go after: deep citations, network graphs, and a frontend.
+
+**Building.** I used Claude Code to review my plan and implement it, including the tests and the web UI.
+The most important change came out of that review: my original plan had GPT turn the aggregated data
+into the final chart, which left room for invented numbers. I switched to having GPT only produce a
+constrained query plan, with every number computed in code. That became the core of the design. I
+also went with exact per-bucket counting (the API's stats endpoint can't be filtered), a custom schema
+instead of Vega-Lite (Vega-Lite has no network graphs), a separate `drug` dimension, and syntactic
+name cleanup instead of MeSH mapping.
+
+**Checking it.** I ran the system end to end with the real planner, generated the example outputs, and
+went through each pipeline step on a real query to make sure I understood what it was doing and why.
+Every API assumption (filter syntax, page limits, sort order, enum values) was tested against the
+live API before the code relied on it. Beyond the offline and live test suites, I checked results by
+hand, for example that the pancreatic-cancer drug network recovers known regimens like gemcitabine +
+nab-paclitaxel. Several of the fixes listed above came from looking at real output rather than from
+tests.
+
+**Iterating.** I committed in reviewable steps, did a cleanup pass to remove dead code and noise, and
+used the web UI to try questions interactively, including ones the system should refuse or ask about.
+
+GPT (`gpt-5.4`) is used at runtime only as the query planner.
