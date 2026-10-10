@@ -1,0 +1,266 @@
+{
+    "totalCount": 768,
+    "studies": [
+        {
+            "protocolSection": {
+                "identificationModule": {
+                    "nctId": "NCT06558799",
+                    "briefTitle": "LUNAR-4: Effect of Tumor Treating Fields (TTFields) (150 kHz) Concurrent With Pembrolizumab for Treatment of Metastatic Non-small Cell Lung Cancer (NSCLC)"
+                },
+                "statusModule": {
+                    "overallStatus": "TERMINATED",
+                    "startDateStruct": {
+                        "date": "2024-10-14"
+                    }
+                },
+                "sponsorCollaboratorsModule": {
+                    "leadSponsor": {
+                        "name": "NovoCure GmbH",
+                        "class": "INDUSTRY"
+                    }
+                },
+                "conditionsModule": {
+                    "conditions": [
+                        "Non-Small Cell Lung Cancer (NSCLC)"
+                    ]
+                },
+                "designModule": {
+                    "studyType": "INTERVENTIONAL",
+                    "phases": [
+                        "PHASE2"
+                    ],
+                    "enrollmentInfo": {
+                        "count": 31
+                    }
+                },
+                "armsInterventionsModule": {
+                    "interventions": [
+                        {
+                            "type": "DEVICE",
+                            "name": "NovoTTF-200T"
+                        },
+                        {
+                            "type": "DRUG",
+                            "name": "Pembrolizumab"
+                        }
+                    ]
+                },
+                "contactsLocationsModule": {
+                    "locations": [
+                        {
+                            "country": "Austria"
+                        },
+                        {
+                            "country": "Czechia"
+                        },
+                        {
+                            "country": "Czechia"
+                        },
+                        {
+                            "country": "Czechia"
+                        },
+                        {
+                            "country": "France"
+                        },
+                        {
+                            "country": "France"
+                        },
+                        {
+                            "country": "France"
+                        },
+                        {
+                            "country": "France"
+                        },
+                        {
+                            "country": "France"
+                        },
+                        {
+                            "country": "France"
+                        },
+                        {
+                            "country": "France"
+                        },
+                        {
+                            "country": "Italy"
+                        },
+                        {
+                            "country": "Italy"
+                        },
+                        {
+                            "country": "Italy"
+                        },
+                        {
+                            "country": "Italy"
+                        },
+                        {
+                            "country": "Netherlands"
+                        },
+                        {
+                            "country": "Poland"
+                        },
+                        {
+                            "country": "Poland"
+                        },
+                        {
+                            "country": "Spain"
+                        },
+                        {
+                            "country": "Spain"
+                        },
+                        {
+                            "country": "Spain"
+                        },
+                        {
+                            "country": "Spain"
+                        },
+                        {
+                            "country": "Spain"
+                        },
+                        {
+                            "country": "Spain"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "protocolSection": {
+                "identificationModule": {
+                    "nctId": "NCT04344795",
+                    "briefTitle": "Phase 1a/1b Study of TPST-1495 as a Single Agent and in Combination With Pembrolizumab in Subjects With Solid Tumors"
+                },
+                "statusModule": {
+                    "overallStatus": "COMPLETED",
+                    "startDateStruct": {
+                        "date": "2020-05-06"
+                    }
+                },
+                "sponsorCollaboratorsModule": {
+                    "leadSponsor": {
+                        "name": "Tempest Therapeutics",
+                        "class": "INDUSTRY"
+                    }
+                },
+                "conditionsModule": {
+                    "conditions": [
+                        "Solid Tumor",
+                        "Colorectal Cancer",
+                        "Non Small Cell Lung Cancer",
+                        "Squamous Cell Carcinoma of Head and Neck",
+                        "Urothelial Carcinoma",
+                        "Endometrial Cancer",
+                        "Gastroesophageal Junction Adenocarcinoma",
+                        "Gastric Adenocarcinoma",
+                        "Solid Tumors With PIK3Ca Mutation"
+                    ]
+                },
+                "designModule": {
+                    "studyType": "INTERVENTIONAL",
+                    "phases": [
+                        "PHASE1"
+                    ],
+                    "enrollmentInfo": {
+                        "count": 89
+                    }
+                },
+                "armsInterventionsModule": {
+                    "interventions": [
+                        {
+                            "type": "DRUG",
+                            "name": "TPST-1495 twice daily"
+                        },
+                        {
+                            "type": "DRUG",
+                            "name": "TPST-1495 once daily or on intermittent schedule"
+                        },
+                        {
+                            "type": "DRUG",
+                            "name": "Pembrolizumab"
+                        }
+                    ]
+                },
+                "contactsLocationsModule": {
+                    "locations": [
+                        {
+                            "country": "United States"
+                        },
+                        {
+                            "country": "United States"
+                        },
+                        {
+                            "country": "United States"
+                        },
+                        {
+                            "country": "United States"
+                        },
+                        {
+                            "country": "United States"
+                        },
+                        {
+                            "country": "United States"
+                        },
+                        {
+                            "country": "United States"
+                        },
+                        {
+                            "country": "United States"
+                        },
+                        {
+                            "country": "United States"
+                        },
+                        {
+                            "country": "United States"
+                        },
+                        {
+                            "country": "United States"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "protocolSection": {
+                "identificationModule": {
+                    "nctId": "NCT06045767",
+                    "briefTitle": "T-Cell Repertoire Sequencing: Assessing Pembrolizumab Efficacy in Advanced Non-small Lung Cancer"
+                },
+                "statusModule": {
+                    "overallStatus": "NOT_YET_RECRUITING",
+                    "startDateStruct": {
+                        "date": "2024-06"
+                    }
+                },
+                "sponsorCollaboratorsModule": {
+                    "leadSponsor": {
+                        "name": "Ari Raphael",
+                        "class": "OTHER"
+                    }
+                },
+                "conditionsModule": {
+                    "conditions": [
+                        "Non-small Cell Lung Cancer Metastatic"
+                    ]
+                },
+                "designModule": {
+                    "studyType": "INTERVENTIONAL",
+                    "phases": [
+                        "PHASE2"
+                    ],
+                    "enrollmentInfo": {
+                        "count": 30
+                    }
+                },
+                "armsInterventionsModule": {
+                    "interventions": [
+                        {
+                            "type": "DRUG",
+                            "name": "Pembrolizumab 50 MG Injection [Keytruda]"
+                        }
+                    ]
+                },
+                "contactsLocationsModule": {}
+            }
+        }
+    ],
+    "nextPageToken": "ZVNj7o2Elu8o3lpzDMiio-numpOQJJxtZfeh1fg"
+}
