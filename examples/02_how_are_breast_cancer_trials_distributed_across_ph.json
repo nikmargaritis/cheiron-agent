@@ -1,0 +1,324 @@
+{
+  "request": {
+    "query": "How are breast cancer trials distributed across phases?"
+  },
+  "response": {
+    "status": "ok",
+    "visualization": {
+      "title": "Trials by phase",
+      "subtitle": "Condition: breast cancer",
+      "data": [
+        {
+          "trial_count": 232,
+          "citations": [
+            {
+              "nct_id": "NCT03295916",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "EARLY_PHASE1",
+              "title": "Stereotactic Body Radiotherapy for Patients With Breast Cancer Oligometastasis",
+              "url": "https://clinicaltrials.gov/study/NCT03295916"
+            },
+            {
+              "nct_id": "NCT05341492",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "EARLY_PHASE1",
+              "title": "EGFR/B7H3 CAR-T on Lung Cancer and Triple Negative Breast Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT05341492"
+            },
+            {
+              "nct_id": "NCT02380209",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "EARLY_PHASE1",
+              "title": "An Early Phase Clinical Trial to Evaluate the Feasibility of CEST MRI in Patients With Early Stage Breast Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT02380209"
+            },
+            {
+              "nct_id": "NCT02070393",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "EARLY_PHASE1",
+              "title": "Breast-Sparing Proton Therapy for Hodgkin's Disease",
+              "url": "https://clinicaltrials.gov/study/NCT02070393"
+            },
+            {
+              "nct_id": "NCT01823991",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "EARLY_PHASE1",
+              "title": "COGNUTRIN in Breast Cancer Survivors",
+              "url": "https://clinicaltrials.gov/study/NCT01823991"
+            }
+          ],
+          "phase": "Early Phase 1"
+        },
+        {
+          "trial_count": 2513,
+          "citations": [
+            {
+              "nct_id": "NCT01512199",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE1",
+              "title": "Phase 1b/2 Study of U3-1287 in Combination With Trastuzumab Plus Paclitaxel in Newly Diagnosed Metastatic Breast Cancer (MBC)",
+              "url": "https://clinicaltrials.gov/study/NCT01512199"
+            },
+            {
+              "nct_id": "NCT03054363",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE1",
+              "title": "Tucatinib, Palbociclib and Letrozole in Metastatic Hormone Receptor Positive and HER2-positive Breast Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT03054363"
+            },
+            {
+              "nct_id": "NCT00531271",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE1",
+              "title": "ABI-008 Trial in Patients With Metastatic Breast Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT00531271"
+            },
+            {
+              "nct_id": "NCT03052634",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE1",
+              "title": "A Study of RC48-ADC in Subjects With Advanced Breast Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT03052634"
+            },
+            {
+              "nct_id": "NCT00002616",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE1",
+              "title": "Biological Therapy Plus Peripheral Stem Cell Transplantation in Treating Patients With Advanced Breast Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT00002616"
+            }
+          ],
+          "phase": "Phase 1"
+        },
+        {
+          "trial_count": 4590,
+          "citations": [
+            {
+              "nct_id": "NCT01512199",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE2",
+              "title": "Phase 1b/2 Study of U3-1287 in Combination With Trastuzumab Plus Paclitaxel in Newly Diagnosed Metastatic Breast Cancer (MBC)",
+              "url": "https://clinicaltrials.gov/study/NCT01512199"
+            },
+            {
+              "nct_id": "NCT03054363",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE2",
+              "title": "Tucatinib, Palbociclib and Letrozole in Metastatic Hormone Receptor Positive and HER2-positive Breast Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT03054363"
+            },
+            {
+              "nct_id": "NCT00531271",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE2",
+              "title": "ABI-008 Trial in Patients With Metastatic Breast Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT00531271"
+            },
+            {
+              "nct_id": "NCT03052634",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE2",
+              "title": "A Study of RC48-ADC in Subjects With Advanced Breast Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT03052634"
+            },
+            {
+              "nct_id": "NCT00717951",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE2",
+              "title": "A Randomised,Multi-Center Study of Docetaxol Plus Capecitabine or Cisplatin in Anthracycline-Pretreated Patients With Advanced Breast Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT00717951"
+            }
+          ],
+          "phase": "Phase 2"
+        },
+        {
+          "trial_count": 1559,
+          "citations": [
+            {
+              "nct_id": "NCT03538171",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE3",
+              "title": "Ph3 Study of Exemestane With or Without Entinostat in Chinese Patients With Hormone Receptor-Positive, Locally Advanced or Metastatic Breast Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT03538171"
+            },
+            {
+              "nct_id": "NCT01519700",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE3",
+              "title": "Phase III Study Comparing the Efficacy and Safety of EP2006 and Filgrastim",
+              "url": "https://clinicaltrials.gov/study/NCT01519700"
+            },
+            {
+              "nct_id": "NCT07393321",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE3",
+              "title": "A Phase III Clinical Trial of NTQ1062 in Combination With Fulvestrant for the Treatment of Advanced or Metastatic HR+/HER2- Breast Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT07393321"
+            },
+            {
+              "nct_id": "NCT00630695",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE3",
+              "title": "Prevention of Lymphorrhea by Lanreotide in Axillary Dissection for Breast Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT00630695"
+            },
+            {
+              "nct_id": "NCT06790693",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE3",
+              "title": "A Study Evaluating the Efficacy and Safety of Inavolisib Plus CDK4/6 Inhibitor and Letrozole vs Placebo + CDK4/6i and Letrozole in Participants With Endocrine-Sensitive PIK3CA-Mutated, Hormone Receptor-Positive, HER2-Negative Advanced Breast Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT06790693"
+            }
+          ],
+          "phase": "Phase 3"
+        },
+        {
+          "trial_count": 345,
+          "citations": [
+            {
+              "nct_id": "NCT02696707",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE4",
+              "title": "An Integrated Consent Model Study to Compare Two Standard of Care Schedules for Monitoring Cardiac Function in Patients Receiving Trastuzumab for Early Stage Breast Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT02696707"
+            },
+            {
+              "nct_id": "NCT02502864",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE4",
+              "title": "Multicenter Study of Pharmacokinetic-Guided Docetaxel in Breast Cancer Patients Receiving Docetaxel and Cyclophosphamide",
+              "url": "https://clinicaltrials.gov/study/NCT02502864"
+            },
+            {
+              "nct_id": "NCT02819921",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE4",
+              "title": "Desvenlafaxine for Treatment of Hot Flashes in Women With Breast Cancer Taking Tamoxifen",
+              "url": "https://clinicaltrials.gov/study/NCT02819921"
+            },
+            {
+              "nct_id": "NCT01143974",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE4",
+              "title": "Trial of Pemetrexed in Combined With Cisplatin for the Treatment of Advanced Breast Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT01143974"
+            },
+            {
+              "nct_id": "NCT05376878",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "PHASE4",
+              "title": "An Investigational Scan (64Cu-DOTA-Trastuzumab PET/MRI) in Imaging Patients With HER2+ Breast Cancer With Brain Metastasis",
+              "url": "https://clinicaltrials.gov/study/NCT05376878"
+            }
+          ],
+          "phase": "Phase 4"
+        },
+        {
+          "trial_count": 4961,
+          "citations": [
+            {
+              "nct_id": "NCT01360177",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "NA",
+              "title": "Radioactive Iodide (131I) Treatment of 124I PET/CT Detected Breast Cancers",
+              "url": "https://clinicaltrials.gov/study/NCT01360177"
+            },
+            {
+              "nct_id": "NCT06954532",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "NA",
+              "title": "ADIE-BC - Aligning Dimensions of Interoceptive Experience in Breast Cancer Survivors",
+              "url": "https://clinicaltrials.gov/study/NCT06954532"
+            },
+            {
+              "nct_id": "NCT07698314",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "NA",
+              "title": "A Pilot Study Assessing Myokines During an EXErcise Regimen After Treatment for Breast Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT07698314"
+            },
+            {
+              "nct_id": "NCT05919212",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "NA",
+              "title": "Trastuzumab Deruxtecan (T-DXd): Tailoring Treatment and Companion Diagnostics (CDx) by Liquid Biopsy",
+              "url": "https://clinicaltrials.gov/study/NCT05919212"
+            },
+            {
+              "nct_id": "NCT06522971",
+              "field": "protocolSection.designModule.phases",
+              "excerpt": "NA",
+              "title": "Effects of Physical Exercise on Response to Treatement in Breast Cancer",
+              "url": "https://clinicaltrials.gov/study/NCT06522971"
+            }
+          ],
+          "phase": "Not applicable"
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "phase",
+          "type": "ordinal",
+          "title": "Phase",
+          "sort": [
+            "Early Phase 1",
+            "Phase 1",
+            "Phase 2",
+            "Phase 3",
+            "Phase 4",
+            "Not applicable"
+          ]
+        },
+        "y": {
+          "field": "trial_count",
+          "type": "quantitative",
+          "title": "Number of trials",
+          "unit": "trials"
+        },
+        "tooltip": []
+      },
+      "type": "bar_chart",
+      "orientation": "vertical"
+    },
+    "meta": {
+      "source": "clinicaltrials.gov",
+      "query": "How are breast cancer trials distributed across phases?",
+      "filters": {
+        "condition": "breast cancer"
+      },
+      "plan": {
+        "status": "ok",
+        "rationale": "The user asks for counts of breast cancer trials by trial phase, which is a categorical distribution.",
+        "analysis": "distribution",
+        "filters": {
+          "condition": "breast cancer"
+        },
+        "group_by": "phase",
+        "series": [],
+        "assumptions": []
+      },
+      "total_matching_trials": 16899,
+      "trials_analyzed": 16899,
+      "count_method": "exact",
+      "assumptions": [],
+      "notes": [
+        "A trial can list several phase values and is counted under each, so bars can sum to more than the number of trials."
+      ],
+      "api_requests": [
+        "https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&filter.advanced=AREA%5BPhase%5DPHASE3&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&filter.advanced=AREA%5BPhase%5DPHASE1&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&filter.advanced=AREA%5BPhase%5DPHASE2&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&filter.advanced=AREA%5BPhase%5DPHASE4&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&countTotal=true&pageSize=1&fields=NCTId",
+        "https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&filter.advanced=AREA%5BPhase%5DNA&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&filter.advanced=AREA%5BPhase%5DEARLY_PHASE1&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true"
+      ],
+      "timings_ms": {
+        "plan": 2736.6463341750205,
+        "validate": 0.06462493911385536,
+        "fetch": 233.71229087933898
+      },
+      "generated_at": "2026-10-10T20:06:34.482891Z"
+    }
+  }
+}

@@ -1,0 +1,703 @@
+{
+  "request": {
+    "query": "Which countries have the most recruiting trials for type 2 diabetes?"
+  },
+  "response": {
+    "status": "ok",
+    "visualization": {
+      "title": "Trials by country",
+      "subtitle": "Condition: type 2 diabetes \u00b7 Status: Recruiting",
+      "data": [
+        {
+          "trial_count": 312,
+          "citations": [
+            {
+              "nct_id": "NCT04791371",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "United States",
+              "title": "Role of Microvascular Insulin Resistance and Cardiorespiratory Fitness Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT04791371"
+            },
+            {
+              "nct_id": "NCT05305287",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "United States",
+              "title": "Quantifying Hepatic Mitochondrial Fluxes in Humans",
+              "url": "https://clinicaltrials.gov/study/NCT05305287"
+            },
+            {
+              "nct_id": "NCT07011147",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "United States",
+              "title": "Primary Care Pragmatic, Real World Experience for Automated Insulin Delivery",
+              "url": "https://clinicaltrials.gov/study/NCT07011147"
+            },
+            {
+              "nct_id": "NCT07392190",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "United States",
+              "title": "A Study of Eloralintide (LY3841136) in Participants With Persistent Obesity Who Are Treated With a Weekly Incretin",
+              "url": "https://clinicaltrials.gov/study/NCT07392190"
+            },
+            {
+              "nct_id": "NCT07296484",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "United States",
+              "title": "Trial Against INtractable Type 2 Diabetes (CAPTAIN-T2D)",
+              "url": "https://clinicaltrials.gov/study/NCT07296484"
+            }
+          ],
+          "country": "United States"
+        },
+        {
+          "trial_count": 122,
+          "citations": [
+            {
+              "nct_id": "NCT07392190",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "China",
+              "title": "A Study of Eloralintide (LY3841136) in Participants With Persistent Obesity Who Are Treated With a Weekly Incretin",
+              "url": "https://clinicaltrials.gov/study/NCT07392190"
+            },
+            {
+              "nct_id": "NCT07784725",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "China",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07784725"
+            },
+            {
+              "nct_id": "NCT07656805",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "China",
+              "title": "Anti-inflammatory Dietary Intervention in Patients With Type 2 Diabetes: A Randomized Controlled Trial",
+              "url": "https://clinicaltrials.gov/study/NCT07656805"
+            },
+            {
+              "nct_id": "NCT07836088",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "China",
+              "title": "A Clinical Study on Using Multimodal Ultrasound to Assess Muscle Mass in Metabolic Diseases",
+              "url": "https://clinicaltrials.gov/study/NCT07836088"
+            },
+            {
+              "nct_id": "NCT07019012",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "China",
+              "title": "Cofrogliptin Once Every 2 Weeks as Add-on Therapy to Metformin and Dapagliflozin Versus Daily Linagliptin in Patients With Type 2 Diabetes.",
+              "url": "https://clinicaltrials.gov/study/NCT07019012"
+            }
+          ],
+          "country": "China"
+        },
+        {
+          "trial_count": 69,
+          "citations": [
+            {
+              "nct_id": "NCT07784725",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Canada",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07784725"
+            },
+            {
+              "nct_id": "NCT07317115",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Canada",
+              "title": "Side-to-Side Duodeno-ileostomy Versus Semaglutide in Adults With Obesity and Type 2 Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT07317115"
+            },
+            {
+              "nct_id": "NCT07195994",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Canada",
+              "title": "A Clinical Trial to Examine the Efficacy and Safety of an Investigational Product With and Without Use of Semaglutide on Glycemic Response in Adults With Prediabetes or Type 2 Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT07195994"
+            },
+            {
+              "nct_id": "NCT07272460",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Canada",
+              "title": "Time Restricted-EAting for Type 2 Diabetes and MEtabolic Health: the TEA TIME Trial",
+              "url": "https://clinicaltrials.gov/study/NCT07272460"
+            },
+            {
+              "nct_id": "NCT05934409",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Canada",
+              "title": "Adipose Tissue Storage in the Rapid Remission of Hepatic and Cardiac Metabolic Dysfunction After Bariatric Surgery",
+              "url": "https://clinicaltrials.gov/study/NCT05934409"
+            }
+          ],
+          "country": "Canada"
+        },
+        {
+          "trial_count": 52,
+          "citations": [
+            {
+              "nct_id": "NCT07784725",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "South Korea",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07784725"
+            },
+            {
+              "nct_id": "NCT06989697",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "South Korea",
+              "title": "Cilostazol-Ginkgo for Cognitive Function in Elderly Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT06989697"
+            },
+            {
+              "nct_id": "NCT07719894",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "South Korea",
+              "title": "Cilostazol and Aspirin for Cardiovascular Event Prevention in Patients With Type 2 Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT07719894"
+            },
+            {
+              "nct_id": "NCT05824975",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "South Korea",
+              "title": "A Study to Evaluate the Safety and Therapeutic Activity of GI-102 As a Single Agent and in Combination with Conventional Anti-cancer Drugs, Pembrolizumab or Trastuzumab Deruxtecan(T-DXd) in Patients with Advanced Solid Tumors (KEYNOTE-G08)",
+              "url": "https://clinicaltrials.gov/study/NCT05824975"
+            },
+            {
+              "nct_id": "NCT06647745",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "South Korea",
+              "title": "A Randomized, Double-blind, Multi-center, Active-controlled, Phase 3 Clinical Trial to Evaluate the Efficacy and Safety of Combination Therapy of THP-00101, THP-00102, and THP-00103 in Subjects With T2DM and Essential Hypertension",
+              "url": "https://clinicaltrials.gov/study/NCT06647745"
+            }
+          ],
+          "country": "South Korea"
+        },
+        {
+          "trial_count": 49,
+          "citations": [
+            {
+              "nct_id": "NCT06652763",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "United Kingdom",
+              "title": "Manganese-enhanced Magnetic Resonance Imaging (MEMRI) in Heart Failure With Preserved Ejection Fraction",
+              "url": "https://clinicaltrials.gov/study/NCT06652763"
+            },
+            {
+              "nct_id": "NCT03132129",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "United Kingdom",
+              "title": "Prevalence and Determinants of Subclinical Cardiovascular Dysfunction in Adults With Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT03132129"
+            },
+            {
+              "nct_id": "NCT06774014",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "United Kingdom",
+              "title": "Heart Failure in Patients With Diabetes: Cells, Crosstalk and Consequences",
+              "url": "https://clinicaltrials.gov/study/NCT06774014"
+            },
+            {
+              "nct_id": "NCT02169518",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "United Kingdom",
+              "title": "Paraoxonase and HDL Qualities in Glycaemia and Inflammation",
+              "url": "https://clinicaltrials.gov/study/NCT02169518"
+            },
+            {
+              "nct_id": "NCT07776509",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "United Kingdom",
+              "title": "A Study to Evaluate Effect of AZD6234 as an Adjunct to Incretin-based Therapies in Adult Participants With Obesity or Overweight With Weight-related Comorbidity With or Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07776509"
+            }
+          ],
+          "country": "United Kingdom"
+        },
+        {
+          "trial_count": 44,
+          "citations": [
+            {
+              "nct_id": "NCT07784725",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Germany",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07784725"
+            },
+            {
+              "nct_id": "NCT06047262",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Germany",
+              "title": "Dapansutrile in Diabetes and Diabetes-Related Complications - Dapan-Dia",
+              "url": "https://clinicaltrials.gov/study/NCT06047262"
+            },
+            {
+              "nct_id": "NCT06278207",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Germany",
+              "title": "An Observational Study Called FINEROD to Learn More About the Use of the Treatment Finerenone Including How Safe it is and How Well it Works Under Real-world Conditions",
+              "url": "https://clinicaltrials.gov/study/NCT06278207"
+            },
+            {
+              "nct_id": "NCT05651724",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Germany",
+              "title": "Global Research Initiative for Patients Screening on MASH",
+              "url": "https://clinicaltrials.gov/study/NCT05651724"
+            },
+            {
+              "nct_id": "NCT07372820",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Germany",
+              "title": "METABolic Deterioration in HTX Determines Outcomes",
+              "url": "https://clinicaltrials.gov/study/NCT07372820"
+            }
+          ],
+          "country": "Germany"
+        },
+        {
+          "trial_count": 39,
+          "citations": [
+            {
+              "nct_id": "NCT07392190",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Spain",
+              "title": "A Study of Eloralintide (LY3841136) in Participants With Persistent Obesity Who Are Treated With a Weekly Incretin",
+              "url": "https://clinicaltrials.gov/study/NCT07392190"
+            },
+            {
+              "nct_id": "NCT07309094",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Spain",
+              "title": "Clinical, Morphometric and Biochemical Effects on Adiposopathy Associated With the Use of GLP-1RA in CKD",
+              "url": "https://clinicaltrials.gov/study/NCT07309094"
+            },
+            {
+              "nct_id": "NCT05651724",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Spain",
+              "title": "Global Research Initiative for Patients Screening on MASH",
+              "url": "https://clinicaltrials.gov/study/NCT05651724"
+            },
+            {
+              "nct_id": "NCT07828847",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Spain",
+              "title": "Involvement of Muscle Mitochondrial Dysfunction in Frailty in Older Adults. Role of Exercise",
+              "url": "https://clinicaltrials.gov/study/NCT07828847"
+            },
+            {
+              "nct_id": "NCT07658755",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Spain",
+              "title": "Automated Passive Case-Finding for Advanced Liver Fibrosis in MASLD: The LiverSeek Programme",
+              "url": "https://clinicaltrials.gov/study/NCT07658755"
+            }
+          ],
+          "country": "Spain"
+        },
+        {
+          "trial_count": 38,
+          "citations": [
+            {
+              "nct_id": "NCT07784725",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Italy",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07784725"
+            },
+            {
+              "nct_id": "NCT05759637",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Italy",
+              "title": "Type 2 Diabetes, Obesity and Cortisol Excess",
+              "url": "https://clinicaltrials.gov/study/NCT05759637"
+            },
+            {
+              "nct_id": "NCT06864546",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Italy",
+              "title": "A Participatory Approach to Support Glucose Tolerance Tracking in Real-Life of Patients With Type 2 Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT06864546"
+            },
+            {
+              "nct_id": "NCT06816303",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Italy",
+              "title": "Patients With Diabetes Mellitus on Drug Treatment on the List or Already Undergoing Orthotopic Liver Transplantation",
+              "url": "https://clinicaltrials.gov/study/NCT06816303"
+            },
+            {
+              "nct_id": "NCT05651724",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Italy",
+              "title": "Global Research Initiative for Patients Screening on MASH",
+              "url": "https://clinicaltrials.gov/study/NCT05651724"
+            }
+          ],
+          "country": "Italy"
+        },
+        {
+          "trial_count": 36,
+          "citations": [
+            {
+              "nct_id": "NCT04880005",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Denmark",
+              "title": "Digital Individualized and Collaborative Treatment of T2D in General Practice Based on Decision Aid",
+              "url": "https://clinicaltrials.gov/study/NCT04880005"
+            },
+            {
+              "nct_id": "NCT07776509",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Denmark",
+              "title": "A Study to Evaluate Effect of AZD6234 as an Adjunct to Incretin-based Therapies in Adult Participants With Obesity or Overweight With Weight-related Comorbidity With or Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07776509"
+            },
+            {
+              "nct_id": "NCT07246421",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Denmark",
+              "title": "Glucagon Resistance in Patients With MASLD and T2DM",
+              "url": "https://clinicaltrials.gov/study/NCT07246421"
+            },
+            {
+              "nct_id": "NCT06752018",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Denmark",
+              "title": "Inflammation's Impact on Heart Disease and Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT06752018"
+            },
+            {
+              "nct_id": "NCT06203860",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Denmark",
+              "title": "The Cardio-Metabolic Clinic",
+              "url": "https://clinicaltrials.gov/study/NCT06203860"
+            }
+          ],
+          "country": "Denmark"
+        },
+        {
+          "trial_count": 35,
+          "citations": [
+            {
+              "nct_id": "NCT07784725",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "France",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07784725"
+            },
+            {
+              "nct_id": "NCT06047262",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "France",
+              "title": "Dapansutrile in Diabetes and Diabetes-Related Complications - Dapan-Dia",
+              "url": "https://clinicaltrials.gov/study/NCT06047262"
+            },
+            {
+              "nct_id": "NCT05651724",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "France",
+              "title": "Global Research Initiative for Patients Screening on MASH",
+              "url": "https://clinicaltrials.gov/study/NCT05651724"
+            },
+            {
+              "nct_id": "NCT06738849",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "France",
+              "title": "EkiYou-Study-2 : A National Multicentric Trial of the EkiYou Application for Insulin Bolus Calculation",
+              "url": "https://clinicaltrials.gov/study/NCT06738849"
+            },
+            {
+              "nct_id": "NCT06614101",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "France",
+              "title": "Study Enabling the Collection of Clinical Data Necessary for the Second Phase of Development of the Glycemic Measurement Device by Analysis of Exhaled Air",
+              "url": "https://clinicaltrials.gov/study/NCT06614101"
+            }
+          ],
+          "country": "France"
+        },
+        {
+          "trial_count": 33,
+          "citations": [
+            {
+              "nct_id": "NCT07659925",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Turkey (T\u00fcrkiye)",
+              "title": "Periodization-Based Strength Exercise Training in \u0130ndividuals With Type 2 Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT07659925"
+            },
+            {
+              "nct_id": "NCT06704672",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Turkey (T\u00fcrkiye)",
+              "title": "Clinical Study to Evaluate the Impact of the Accu-Chek SmartGuide CGM Solution on the Mean Change in Time in Range Compared With Self-Monitoring of Blood Glucose in Participants With Type 1 and Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT06704672"
+            },
+            {
+              "nct_id": "NCT07703345",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Turkey (T\u00fcrkiye)",
+              "title": "Salivary Apelin, Chemerin, Ghrelin, and Lipocalin-2 Levels in Diabetic Patients With Periodontitis",
+              "url": "https://clinicaltrials.gov/study/NCT07703345"
+            },
+            {
+              "nct_id": "NCT07776509",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Turkey (T\u00fcrkiye)",
+              "title": "A Study to Evaluate Effect of AZD6234 as an Adjunct to Incretin-based Therapies in Adult Participants With Obesity or Overweight With Weight-related Comorbidity With or Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07776509"
+            },
+            {
+              "nct_id": "NCT07667803",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Turkey (T\u00fcrkiye)",
+              "title": "A Master Protocol to Investigate Efficacy and Safety of Elecoglipron in Participants With Obesity or Overweight With or Without T2DM",
+              "url": "https://clinicaltrials.gov/study/NCT07667803"
+            }
+          ],
+          "country": "Turkey (T\u00fcrkiye)"
+        },
+        {
+          "trial_count": 31,
+          "citations": [
+            {
+              "nct_id": "NCT07392190",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Brazil",
+              "title": "A Study of Eloralintide (LY3841136) in Participants With Persistent Obesity Who Are Treated With a Weekly Incretin",
+              "url": "https://clinicaltrials.gov/study/NCT07392190"
+            },
+            {
+              "nct_id": "NCT07784725",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Brazil",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07784725"
+            },
+            {
+              "nct_id": "NCT07487467",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Brazil",
+              "title": "Autologous SVF Therapy for Type 2 Diabetes",
+              "url": "https://clinicaltrials.gov/study/NCT07487467"
+            },
+            {
+              "nct_id": "NCT06764069",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Brazil",
+              "title": "Feasibility Study to Evaluate an Intravascular Blood Continuous Glucose Sensor",
+              "url": "https://clinicaltrials.gov/study/NCT06764069"
+            },
+            {
+              "nct_id": "NCT07776509",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Brazil",
+              "title": "A Study to Evaluate Effect of AZD6234 as an Adjunct to Incretin-based Therapies in Adult Participants With Obesity or Overweight With Weight-related Comorbidity With or Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07776509"
+            }
+          ],
+          "country": "Brazil"
+        },
+        {
+          "trial_count": 30,
+          "citations": [
+            {
+              "nct_id": "NCT07392190",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Australia",
+              "title": "A Study of Eloralintide (LY3841136) in Participants With Persistent Obesity Who Are Treated With a Weekly Incretin",
+              "url": "https://clinicaltrials.gov/study/NCT07392190"
+            },
+            {
+              "nct_id": "NCT07784725",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Australia",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07784725"
+            },
+            {
+              "nct_id": "NCT07667803",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Australia",
+              "title": "A Master Protocol to Investigate Efficacy and Safety of Elecoglipron in Participants With Obesity or Overweight With or Without T2DM",
+              "url": "https://clinicaltrials.gov/study/NCT07667803"
+            },
+            {
+              "nct_id": "NCT06829563",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Australia",
+              "title": "Evaluate the Safety, Tolerability, Pharmacokinetics and Pharmacodynamics of RZ-629 in Healthy Subjects and T2D",
+              "url": "https://clinicaltrials.gov/study/NCT06829563"
+            },
+            {
+              "nct_id": "NCT01793168",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Australia",
+              "title": "Rare Disease Patient Registry & Natural History Study - Coordination of Rare Diseases at Sanford",
+              "url": "https://clinicaltrials.gov/study/NCT01793168"
+            }
+          ],
+          "country": "Australia"
+        },
+        {
+          "trial_count": 25,
+          "citations": [
+            {
+              "nct_id": "NCT07392190",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "India",
+              "title": "A Study of Eloralintide (LY3841136) in Participants With Persistent Obesity Who Are Treated With a Weekly Incretin",
+              "url": "https://clinicaltrials.gov/study/NCT07392190"
+            },
+            {
+              "nct_id": "NCT07784725",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "India",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07784725"
+            },
+            {
+              "nct_id": "NCT07549373",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "India",
+              "title": "Effect of Diode Laser, Gudmar and Vinegar in Diabetic Patients During Root Canal Treatment",
+              "url": "https://clinicaltrials.gov/study/NCT07549373"
+            },
+            {
+              "nct_id": "NCT07495787",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "India",
+              "title": "Magnetic Compression Anastomosis Procedure for Partial Jejunoileal Anastomosis: Assessing the Viability of an Innovative Metabolic Approach",
+              "url": "https://clinicaltrials.gov/study/NCT07495787"
+            },
+            {
+              "nct_id": "NCT07667803",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "India",
+              "title": "A Master Protocol to Investigate Efficacy and Safety of Elecoglipron in Participants With Obesity or Overweight With or Without T2DM",
+              "url": "https://clinicaltrials.gov/study/NCT07667803"
+            }
+          ],
+          "country": "India"
+        },
+        {
+          "trial_count": 25,
+          "citations": [
+            {
+              "nct_id": "NCT07392190",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Japan",
+              "title": "A Study of Eloralintide (LY3841136) in Participants With Persistent Obesity Who Are Treated With a Weekly Incretin",
+              "url": "https://clinicaltrials.gov/study/NCT07392190"
+            },
+            {
+              "nct_id": "NCT07784725",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Japan",
+              "title": "A Study to Evaluate Effect of AZD6234 in Adult Participants With Obesity or Overweight With Weight-related Comorbidity Without Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07784725"
+            },
+            {
+              "nct_id": "NCT06694012",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Japan",
+              "title": "Osaka Cardiometabolic Epidemiological Study: Ohtori Study Part 2",
+              "url": "https://clinicaltrials.gov/study/NCT06694012"
+            },
+            {
+              "nct_id": "NCT06278207",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Japan",
+              "title": "An Observational Study Called FINEROD to Learn More About the Use of the Treatment Finerenone Including How Safe it is and How Well it Works Under Real-world Conditions",
+              "url": "https://clinicaltrials.gov/study/NCT06278207"
+            },
+            {
+              "nct_id": "NCT07619157",
+              "field": "protocolSection.contactsLocationsModule.locations.country",
+              "excerpt": "Japan",
+              "title": "A Study of ONO-3310 in Healthy Adult Male Subjects and Chronic Kidney Disease Patients With Type 2 Diabetes Mellitus",
+              "url": "https://clinicaltrials.gov/study/NCT07619157"
+            }
+          ],
+          "country": "Japan"
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "country",
+          "type": "nominal",
+          "title": "Country",
+          "sort": [
+            "United States",
+            "China",
+            "Canada",
+            "South Korea",
+            "United Kingdom",
+            "Germany",
+            "Spain",
+            "Italy",
+            "Denmark",
+            "France",
+            "Turkey (T\u00fcrkiye)",
+            "Brazil",
+            "Australia",
+            "India",
+            "Japan"
+          ]
+        },
+        "y": {
+          "field": "trial_count",
+          "type": "quantitative",
+          "title": "Number of trials",
+          "unit": "trials"
+        },
+        "tooltip": []
+      },
+      "type": "bar_chart",
+      "orientation": "horizontal"
+    },
+    "meta": {
+      "source": "clinicaltrials.gov",
+      "query": "Which countries have the most recruiting trials for type 2 diabetes?",
+      "filters": {
+        "condition": "type 2 diabetes",
+        "statuses": [
+          "RECRUITING"
+        ]
+      },
+      "plan": {
+        "status": "ok",
+        "rationale": "The user wants a ranking of countries by the number of trials, restricted to recruiting studies for type 2 diabetes. This is a categorical distribution grouped by country.",
+        "analysis": "distribution",
+        "filters": {
+          "condition": "type 2 diabetes",
+          "statuses": [
+            "RECRUITING"
+          ]
+        },
+        "group_by": "country",
+        "series": [],
+        "assumptions": []
+      },
+      "total_matching_trials": 870,
+      "trials_analyzed": 870,
+      "count_method": "exact",
+      "assumptions": [],
+      "notes": [
+        "Showing the top 15 of 83 country values.",
+        "A trial can list several country values and is counted under each, so bars can sum to more than the number of trials."
+      ],
+      "api_requests": [
+        "https://clinicaltrials.gov/api/v2/studies?query.cond=type+2+diabetes&filter.overallStatus=RECRUITING&fields=NCTId%2CBriefTitle%2CLocationCountry&pageSize=1000&countTotal=true"
+      ],
+      "timings_ms": {
+        "plan": 2610.1989997550845,
+        "validate": 0.03720913082361221,
+        "fetch": 731.5665418282151
+      },
+      "generated_at": "2026-10-10T20:06:37.848283Z"
+    }
+  }
+}
