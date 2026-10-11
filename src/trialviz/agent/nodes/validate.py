@@ -8,6 +8,7 @@ an explanatory status instead of a guessed chart.
 from datetime import date
 
 from trialviz.agent.state import AgentState
+from trialviz.ctgov.query import describe
 from trialviz.schemas.common import Dimension
 from trialviz.schemas.plan import AnalysisKind, PlanStatus, QueryPlan
 
@@ -30,6 +31,15 @@ def check_plan(plan: QueryPlan) -> list[str]:
         errs.append(f"{a} requires group_by")
     if a == AnalysisKind.COMPARISON and not 2 <= len(plan.series) <= MAX_SERIES:
         errs.append(f"comparison requires 2-{MAX_SERIES} series, got {len(plan.series)}")
+    if a == AnalysisKind.COMPARISON:
+        # Labels alone don't filter anything: every series would count the same trials.
+        series_filters = [describe(s.filters) for s in plan.series]
+        for s, sf in zip(plan.series, series_filters, strict=True):
+            if not sf:
+                errs.append(f"series '{s.label}' has no filters; put what distinguishes it "
+                            "(e.g. its intervention or condition) in its filters")
+        if any(sf and series_filters.count(sf) > 1 for sf in series_filters):
+            errs.append("comparison series must have different filters")
     if a != AnalysisKind.COMPARISON and plan.series:
         errs.append("series is only allowed for comparison")
     if a == AnalysisKind.HISTOGRAM and plan.x_numeric is None:

@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     openai_api_key: str | None = None
     openai_base_url: str | None = None
     planner_model: str = "gpt-5.4"
+    planner_timeout_s: float = 30.0
 
     ctgov_base_url: str = "https://clinicaltrials.gov/api/v2"
     ctgov_max_records: int = Field(3000, ge=100, le=20_000)

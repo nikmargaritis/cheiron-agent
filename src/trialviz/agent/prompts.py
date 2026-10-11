@@ -1,5 +1,7 @@
 """Prompt text. Kept separate from node logic so it can be iterated on (and diffed) alone."""
 
+from datetime import date
+
 PLANNER_SYSTEM = """\
 You are the query planner for a service that answers questions about clinical trials
 by charting data from the ClinicalTrials.gov registry.
@@ -28,8 +30,9 @@ and counts the real data. Do not use prior knowledge about how many trials exist
 
 ## Filters
 Extract only what the question states. Use the user's wording for names; do not expand
-to synonyms or brand names. Years are trial START years. Use `keywords` only for concepts
-no other filter covers. Leave everything else null.
+to synonyms or brand names. Years are trial START years; resolve relative periods ("last
+decade", "recent") against today's date, given in the message. Use `keywords` only for
+concepts no other filter covers. Leave everything else null.
 
 ## Status
 - ok                  : answerable as a chart of registry metadata.
@@ -47,7 +50,7 @@ Record any interpretation choices (e.g. "interpreted 'recent' as 2020 onward") i
 def planner_user_message(
     query: str, structured: dict[str, object], errors: list[str] | None = None
 ) -> str:
-    parts = [f"Question: {query}"]
+    parts = [f"Today's date: {date.today().isoformat()}", f"Question: {query}"]
     if structured:
         parts.append(
             "The caller also supplied these structured fields. They are authoritative; "
