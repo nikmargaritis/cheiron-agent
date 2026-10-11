@@ -10,8 +10,9 @@ data, with **citations on every data point** that link back to the exact trial r
 
 **At a glance**
 - **6 chart types:** bar, grouped bar, time series, histogram, scatter, network graph.
-- **One pipeline for all of them:** the LLM only *plans* the query, and code fetches, counts,
-  and builds the chart, so the model can't invent numbers.
+- **One planning call, not an agent loop:** the LLM only *plans* the query, and code fetches,
+  counts, and builds the chart, so the model can't invent numbers
+  ([why](#the-core-decision-one-planning-call-not-a-tool-using-agent-loop)).
 - **Deep citations:** every bar, point, node, and edge lists the trials behind it, with the exact field quoted.
 - **Graceful non-answers:** vague questions get a clarifying question, and out-of-scope ones
   (efficacy, survival, medical advice) get an explanation instead of a guessed chart.
@@ -266,41 +267,58 @@ its reading of "network of sponsors and drugs".
 
 ## Design decisions and tradeoffs
 
-1. **The LLM plans; code computes.** The only LLM call outputs a `QueryPlan` of enums and filter
-   strings. Counts, chart type, and citations are deterministic, so the model has no data values to
-   hallucinate.
-   *Tradeoff:* questions outside the plan's vocabulary get "unsupported" instead of an improvised answer.
-2. **Validate, then retry once with the errors.** Structured outputs guarantee the plan parses, not
-   that it makes sense. `validate` catches problems like a comparison with one series and sends
-   specific errors back to the planner.
-   *Tradeoff:* one extra LLM call when it happens. After a second failure the request ends with an explanation.
-3. **The chart type follows from the analysis kind**, so the same kind of question always gets the
-   same chart shape.
-   *Tradeoff:* users can't ask for a specific chart style (e.g. a pie chart).
-4. **Exact counts at any scale.** The API's stats endpoint can't be filtered, so for dimensions with a
+### The core decision: one planning call, not a tool-using agent loop
+
+A common design is an agent loop: the LLM calls tools (search, count, chart), reads each result,
+and decides the next step. This service deliberately doesn't do that. The LLM is called **once**
+to produce a `QueryPlan`, a strict structure of enums and filter strings, and fixed code runs the rest:
+
+```
+Agent loop:   LLM → tool → LLM reads data → tool → LLM reads data → … → LLM writes answer
+This service: LLM → QueryPlan → validate → fetch → count → chart   (code only after the plan)
+```
+
+| | Agent loop | One planning call |
+|---|---|---|
+| Can the LLM invent or misread numbers? | Yes, it reads and relays data | **No, it never sees data** |
+| Same question, same steps? | Varies run to run | **Always** |
+| Testable? | Hard: paths branch freely | **Each step is unit-tested, and the plan is scored by evals** |
+| Cost and latency | Several LLM calls | **One call, about 3 s** |
+| Handles unusual multi-step questions? | **Yes, it can improvise** | No, they get "unsupported" |
+
+The agent safeguards are kept where they matter: the plan is **validated** (e.g. a comparison needs
+two series with different filters), invalid plans are **retried once with the specific errors**,
+vague questions get a **clarifying question**, and out-of-scope ones get an **explanation**. The
+chart type follows from the plan's analysis kind, so the same kind of question always gets the
+same chart shape.
+
+*Tradeoff:* less flexibility. A question the plan format can't express is answered "unsupported"
+rather than improvised. For a tool whose output is numbers people might trust, I chose accuracy
+over flexibility.
+
+### Other decisions
+
+1. **Exact counts at any scale.** The API's stats endpoint can't be filtered, so for dimensions with a
    fixed set of values (phase, status, sponsor class, intervention type, study type, start year) the
    service sends one request per bucket with `countTotal=true`. Each response carries the exact count
    *and* the records to cite. A 16,899-trial phase chart takes 7 requests and about 250 ms.
    *Tradeoff:* one request per bucket, so a 30-year trend makes about 30 requests (run concurrently).
-5. **Capped download for everything else** (sponsors, countries, drugs, networks, histograms): up to
+2. **Capped download for everything else** (sponsors, countries, drugs, networks, histograms): up to
    `CTGOV_MAX_RECORDS` (3,000) with a minimal field list.
    *Tradeoff:* above the cap, results are a sample. The response says so (`count_method: "sample"`).
-6. **Citations come from the same code that counted the trial**, so a citation can't contradict its
+3. **Citations come from the same code that counted the trial**, so a citation can't contradict its
    count. `verify_citation` re-checks each one against the raw record.
-7. **Dimension registry** (`ctgov/fields.py`) is the only code that knows the API payload shape. Adding
+4. **Dimension registry** (`ctgov/fields.py`) is the only code that knows the API payload shape. Adding
    a dimension is one enum member and one registry entry.
-8. **Custom chart schema instead of Vega-Lite.** Vega-Lite has no network graph and a very large spec.
+5. **Custom chart schema instead of Vega-Lite.** Vega-Lite has no network graph and a very large spec.
    The encoding borrows its vocabulary (`field` + `nominal|ordinal|quantitative|temporal`), so mapping
    to Vega-Lite, Recharts, or Chart.js is mechanical.
    *Tradeoff:* frontends need a small adapter, like the one in the web UI.
-9. **`drug` separate from `intervention`.** The registry's interventions include devices, imaging, and
-   biospecimen collection, which dominated the first drug networks. `drug` keeps only drug and biological
-   types, and networks drop placebo and standard-of-care arms.
-10. **Name cleanup by rules, not MeSH.** The API's MeSH mappings looked useful but dropped drugs
-    (capecitabine was missing from a 4-drug regimen) and mis-mapped others. Names are cleaned instead
-    by stripping doses, schedules, and salt forms ("Gemcitabine Hydrochloride" → "gemcitabine").
-    *Tradeoff:* true synonyms ("5-FU" vs "Fluorouracil") stay separate.
-11. **Reproducible:** every API URL called is returned in `meta.api_requests`.
+6. **Cleaning real-world drug data.** Registry "interventions" include devices, imaging, and biospecimen
+   collection, so the `drug` dimension keeps only drug and biological types, and networks drop placebo
+   and standard-of-care arms. Names are cleaned by rules ("Gemcitabine Hydrochloride" → "gemcitabine")
+   rather than the API's MeSH mappings, which dropped and mis-mapped drugs.
+   *Tradeoff:* true synonyms ("5-FU" vs "Fluorouracil") stay separate.
 
 ---
 
