@@ -26,6 +26,7 @@ curl -s localhost:8000/v1/query -H 'content-type: application/json' \
 | `pytest -m live` | Checks against the real API: citations re-verified against independently fetched records, bucket-sum invariants, enum drift |
 | `python scripts/smoke_live.py [out_dir]` | Runs every chart type end to end on live data with scripted plans (no LLM tokens) |
 | `python scripts/run_examples.py` | Runs the example queries with the real planner and writes `examples/*.json` |
+| `python scripts/eval_planner.py [--repeat 3]` | Scores the planner on 32 eval questions and writes `evals/planner_results.json` (no ClinicalTrials.gov calls) |
 
 ## Web UI
 
@@ -75,6 +76,7 @@ src/trialviz/
   analysis/     counting, co-occurrence networks, histograms, citations, chart builders
   api/          FastAPI app (query endpoint, saved examples, serves the UI)
   web/          single-file web UI
+  evals/        planner eval cases and grading
 ```
 
 ### Query coverage
@@ -249,13 +251,13 @@ In #5 it chose the `drug` dimension over `intervention`, as the prompt directs.
 - Comparisons count a trial in every series it matches. Series totals are reported in `meta.notes`.
 - Start-year axes show at most 30 years unless `start_year` is given. Earlier and undated trials are
   counted in a note.
-- The planner has only been checked on the example questions above. Typos, non-English questions, and
-  brand vs. generic drug names haven't been evaluated systematically.
+- The planner evals are 32 questions I wrote myself, so they show the planner handles the intended
+  question types, not how it does on real users' wording. Typos and non-English questions aren't covered.
 - No caching: identical queries re-hit the API. The web UI loads its chart libraries from a CDN.
 
 ## Validation
 
-- **Offline (`pytest`, 91 tests):** schema contracts, OpenAI strict-mode compatibility of the plan schema,
+- **Offline (`pytest`, 102 tests):** schema contracts, OpenAI strict-mode compatibility of the plan schema,
   filter → query-param mapping, field extraction on real API records, aggregation and network pruning,
   HTTP routes, and the full graph against a mocked API that interprets the same filter syntax the code emits.
 - **Live (`pytest -m live`, 7 tests):** citations re-verified against records fetched separately.
@@ -265,6 +267,36 @@ In #5 it chose the `drug` dimension over `intervention`, as the prompt directs.
   in a browser on the saved network, comparison, and country examples, and on live histogram,
   drug-network, and clarification questions.
 
+### Planner evals
+
+The planner is the only step that can misread a question, so it has its own eval suite
+(`src/trialviz/evals/`). Each of the 32 cases is a question plus the parts of the plan that matter:
+status, analysis, group_by, filters, series, numeric fields, network dimensions. Filters must match
+exactly (case-insensitive, with listed alternatives such as "type 2 diabetes" / "type 2 diabetes
+mellitus"), and any filter the question didn't ask for counts as a failure. Comparison series are
+matched in any order. The runner only runs plan → validate, so a full pass costs no
+ClinicalTrials.gov calls and well under a dollar.
+
+Latest run (`gpt-5.4`, every case 3 times):
+
+| Tag | Passed | | Tag | Passed |
+|---|---|---|---|---|
+| distribution | 36/36 | | comparison | 9/9 |
+| trend | 15/15 | | network | 9/9 |
+| filters (tricky extraction) | 12/12 | | numeric (histogram, scatter) | 6/6 |
+| unsupported | 12/12 | | clarify | 9/9 |
+| caller fields | 6/6 | | **total** | **96/96** |
+
+About 1,800 input and 170 output tokens per question, median 2.6 s.
+
+The first runs failed, and both failures were real bugs:
+- **The planner didn't know today's date.** "Over the last decade" became 2016–2025 because the model
+  assumed it was 2025. The user message now includes today's date.
+- **Comparison series with only labels.** In 1 of 3 runs the model labeled the series "nivolumab" and
+  "ipilimumab" but left both series' filters empty, so both bars would have counted *every* trial. The
+  validator now rejects series without filters, or with identical filters, and the planner retries with
+  that error.
+
 Bugs found during development and fixed:
 - The status enum was missing 5 expanded-access values, which silently dropped 18 glioblastoma trials
   from exact counts. Caught by the bucket-sum invariant.
@@ -272,6 +304,8 @@ Bugs found during development and fixed:
 - Salt stripping turned "Sodium bicarbonate" into "bicarbonate". Now only trailing salt names are stripped.
 - Year bounds relied on where the API sorts undated trials. Now they're excluded explicitly.
 - `build` time was missing from `timings_ms`, because the response was assembled before the step finished.
+- An eval run that normally takes a minute stalled for over 7. The OpenAI client waits up to 10 minutes
+  per call by default, so planner calls now time out after `PLANNER_TIMEOUT_S` (30 s).
 
 ## How this was built (AI tool usage)
 

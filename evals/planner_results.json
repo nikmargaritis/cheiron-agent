@@ -1,0 +1,5833 @@
+{
+  "model": "gpt-5.4",
+  "generated_at": "2026-10-11T03:55:38+00:00",
+  "repeat": 3,
+  "summary": {
+    "passed": 96,
+    "total": 96,
+    "by_check": {
+      "status": "96/96",
+      "valid": "75/75",
+      "analysis": "75/75",
+      "group_by": "60/60",
+      "filters": "66/66",
+      "top_n": "3/3",
+      "series": "9/9",
+      "numeric": "6/6",
+      "network": "9/9"
+    },
+    "by_tag": {
+      "caller": "6/6",
+      "clarify": "9/9",
+      "comparison": "9/9",
+      "distribution": "36/36",
+      "filters": "12/12",
+      "network": "9/9",
+      "numeric": "6/6",
+      "trend": "15/15",
+      "unsupported": "12/12"
+    },
+    "retried_runs": 0,
+    "median_seconds": 2.56,
+    "usage": {
+      "calls": 96,
+      "input_tokens": 170649,
+      "cached_tokens": 0,
+      "output_tokens": 16669,
+      "reasoning_tokens": 0
+    },
+    "cost_usd": null
+  },
+  "cases": [
+    {
+      "id": "pembro_trend_since_2015",
+      "query": "How has the number of pembrolizumab trials changed since 2015?",
+      "tags": [
+        "trend"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got time_trend"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got start_year"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.7,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user asks for change over time in the number of trials involving pembrolizumab since 2015, which maps to a time trend of trials by start year with an intervention filter.",
+            "analysis": "time_trend",
+            "filters": {
+              "condition": null,
+              "intervention": "pembrolizumab",
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": 2015,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "start_year",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'since 2015' as trials with start year greater than or equal to 2015."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got time_trend"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got start_year"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 3.31,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user asks for how the count of trials involving pembrolizumab has changed over time since 2015, which is a time trend of trial starts by year.",
+            "analysis": "time_trend",
+            "filters": {
+              "condition": null,
+              "intervention": "pembrolizumab",
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": 2015,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "start_year",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'changed since 2015' as trials with start year 2015 or later.",
+              "Used the intervention filter with the user's exact term 'pembrolizumab'."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got time_trend"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got start_year"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 3.02,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user asks for how the count of trials has changed over time for a specific drug since 2015, which maps to a start-year trend filtered to pembrolizumab trials.",
+            "analysis": "time_trend",
+            "filters": {
+              "condition": null,
+              "intervention": "pembrolizumab",
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": 2015,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "start_year",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'pembrolizumab trials' as trials filtered by the intervention name pembrolizumab.",
+              "Interpreted 'since 2015' as trials with start year 2015 or later."
+            ],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "alzheimers_trend_range",
+      "query": "How many Alzheimer's disease trials started each year between 2010 and 2020?",
+      "tags": [
+        "trend"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got time_trend"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got start_year"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.66,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a yearly count of trials for a specific condition over a defined start-year range, which is a time trend.",
+            "analysis": "time_trend",
+            "filters": {
+              "condition": "Alzheimer's disease",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": 2010,
+              "start_year_max": 2020,
+              "keywords": null
+            },
+            "group_by": "start_year",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got time_trend"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got start_year"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.4,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user asks for the number of trials by start year for a specific condition over a defined year range, which is a time trend.",
+            "analysis": "time_trend",
+            "filters": {
+              "condition": "Alzheimer's disease",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": 2010,
+              "start_year_max": 2020,
+              "keywords": null
+            },
+            "group_by": "start_year",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got time_trend"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got start_year"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.39,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user asks for the yearly count of trials for a specific condition over a stated start-year range, which maps to a time trend by trial start year.",
+            "analysis": "time_trend",
+            "filters": {
+              "condition": "Alzheimer's disease",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": 2010,
+              "start_year_max": 2020,
+              "keywords": null
+            },
+            "group_by": "start_year",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "obesity_trend_last_decade",
+      "query": "How many obesity trials started each year over the last decade?",
+      "tags": [
+        "trend",
+        "filters"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got time_trend"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got start_year"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.93,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a yearly trend of clinical trials for obesity over a relative time window. This maps to a time trend of trials filtered by condition 'obesity' and grouped by start year.",
+            "analysis": "time_trend",
+            "filters": {
+              "condition": "obesity",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": 2016,
+              "start_year_max": 2025,
+              "keywords": null
+            },
+            "group_by": "start_year",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'over the last decade' relative to 2026-10-10 as start years 2016 through 2025, inclusive."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got time_trend"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got start_year"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.85,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a yearly count of trials for a specific condition over a recent time window, which is a time trend of trial starts by year.",
+            "analysis": "time_trend",
+            "filters": {
+              "condition": "obesity",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": 2017,
+              "start_year_max": 2026,
+              "keywords": null
+            },
+            "group_by": "start_year",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'over the last decade' relative to 2026-10-10 as start years 2017 through 2026 inclusive."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got time_trend"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got start_year"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.74,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a yearly trend of clinical trials for obesity over a relative time window. This maps to a time trend of trials filtered by condition, using start year over the last decade resolved from today's date.",
+            "analysis": "time_trend",
+            "filters": {
+              "condition": "obesity",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": 2017,
+              "start_year_max": 2026,
+              "keywords": null
+            },
+            "group_by": "start_year",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'over the last decade' relative to 2026-10-10 as start years 2017 through 2026 inclusive."
+            ],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "hiv_phases_before_2000",
+      "query": "What phases were HIV trials that started before 2000 in?",
+      "tags": [
+        "distribution",
+        "filters"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got phase"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.23,
+          "plan": {
+            "status": "ok",
+            "rationale": "Show the distribution of trial phases for HIV trials, restricted to studies with start years before 2000.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "HIV",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": 1999,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'started before 2000' as trials with start year <= 1999."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got phase"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.32,
+          "plan": {
+            "status": "ok",
+            "rationale": "Show the distribution of trial phases for HIV trials restricted to studies that started before 2000.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "HIV",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": 1999,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'started before 2000' as trials with start year up to 1999."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got phase"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.32,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants the distribution of trial phases among HIV trials, restricted to studies that started before 2000.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "HIV",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": 1999,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'started before 2000' as trials with start year up to 1999 inclusive."
+            ],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "breast_cancer_phases",
+      "query": "How are breast cancer trials distributed across phases?",
+      "tags": [
+        "distribution"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got phase"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 1.99,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a categorical breakdown of breast cancer trials by trial phase.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "breast cancer",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got phase"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 1.95,
+          "plan": {
+            "status": "ok",
+            "rationale": "Show the count of breast cancer trials grouped by trial phase.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "breast cancer",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got phase"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 1.86,
+          "plan": {
+            "status": "ok",
+            "rationale": "Show the number of breast cancer trials grouped by trial phase.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "breast cancer",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "t2d_recruiting_countries",
+      "query": "Which countries have the most recruiting trials for type 2 diabetes?",
+      "tags": [
+        "distribution"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got country"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.12,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a ranking of countries by number of trials, restricted to recruiting studies for type 2 diabetes.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "type 2 diabetes",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": [
+                "RECRUITING"
+              ],
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "country",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got country"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.55,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a ranking of countries by number of trials, restricted to recruiting studies for type 2 diabetes. This is a categorical distribution grouped by country.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "type 2 diabetes",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": [
+                "RECRUITING"
+              ],
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "country",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got country"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.2,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user asks for a ranking of countries by number of trials, restricted to recruiting studies for a specific condition. This is a categorical distribution grouped by country.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "type 2 diabetes",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": [
+                "RECRUITING"
+              ],
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "country",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "lung_cancer_top_sponsors",
+      "query": "Who are the top 10 sponsors of lung cancer trials?",
+      "tags": [
+        "distribution"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got sponsor"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "top_n",
+              "passed": true,
+              "detail": "got 10"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.41,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a ranking of sponsors within trials filtered to lung cancer. This is a categorical distribution grouped by sponsor, limited to the top 10 categories.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "lung cancer",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "sponsor",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": 10,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got sponsor"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "top_n",
+              "passed": true,
+              "detail": "got 10"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 1.96,
+          "plan": {
+            "status": "ok",
+            "rationale": "Show the distribution of lung cancer trials by sponsor and limit to the 10 largest sponsors.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "lung cancer",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "sponsor",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": 10,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got sponsor"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "top_n",
+              "passed": true,
+              "detail": "got 10"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.05,
+          "plan": {
+            "status": "ok",
+            "rationale": "Show the distribution of lung cancer trials by sponsor and limit the output to the 10 sponsors with the most trials.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "lung cancer",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "sponsor",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": 10,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "covid_sponsor_class",
+      "query": "What share of COVID-19 trials are funded by industry versus academia or government?",
+      "tags": [
+        "distribution"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got sponsor_class"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.54,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user asks for the breakdown of COVID-19 trials by funder type. This can be answered as a distribution of trials across sponsor classes, using COVID-19 as the condition filter.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "COVID-19",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "sponsor_class",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'funded by industry versus academia or government' as grouping trials by sponsor_class."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got sponsor_class"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.7,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user asks for the breakdown of COVID-19 trials by funding/sponsor type. This is a categorical distribution over sponsor class within trials filtered to the COVID-19 condition.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "COVID-19",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "sponsor_class",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'funded by industry versus academia or government' as grouping trials by sponsor class."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got sponsor_class"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.55,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants the breakdown of COVID-19 trials by sponsor type, which maps to a categorical distribution over sponsor class. 'Share' can be computed downstream from counts by category.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "COVID-19",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "sponsor_class",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'funded by industry versus academia or government' as grouping trials by sponsor class (lead sponsor category) in the registry."
+            ],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "melanoma_drugs",
+      "query": "What drugs are most commonly tested in melanoma trials?",
+      "tags": [
+        "distribution"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got drug"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.8,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants the most common drugs appearing in melanoma trials, which is a categorical count by drug within trials filtered to the condition melanoma.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "melanoma",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "drug",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": 10,
+            "assumptions": [
+              "Interpreted 'most commonly tested' as the drugs most frequently listed in melanoma trials.",
+              "Used the drug dimension rather than general intervention because the question specifically asks about drugs."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got drug"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.73,
+          "plan": {
+            "status": "ok",
+            "rationale": "Show the distribution of drugs appearing in melanoma trials to identify which drugs are most commonly tested.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "melanoma",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "drug",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": 10,
+            "assumptions": [
+              "Interpreted 'most commonly' as ranking drugs by the number of melanoma trials they appear in.",
+              "Used the condition filter 'melanoma' exactly as stated. The chart can surface the top drugs among matching trials."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got drug"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.41,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants the most commonly tested drugs within melanoma trials, which is a categorical count by drug. This maps to a distribution analysis grouped by drug, filtered to the condition melanoma.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "melanoma",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "drug",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'most commonly tested' as counting melanoma trials grouped by listed drug interventions."
+            ],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "alzheimers_phase3_status",
+      "query": "What is the status breakdown of phase 3 Alzheimer's trials?",
+      "tags": [
+        "distribution"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got status"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 1.93,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a categorical breakdown of trials by recruitment/overall status, restricted to Alzheimer's trials in phase 3.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "Alzheimer's",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": [
+                "PHASE3"
+              ],
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "status",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got status"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 1.98,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a categorical breakdown of trials by overall recruitment/status, restricted to Alzheimer's trials in phase 3.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "Alzheimer's",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": [
+                "PHASE3"
+              ],
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "status",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got status"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.33,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a categorical breakdown of trials by recruitment/overall status, restricted to Alzheimer's trials in phase 3.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "Alzheimer's",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": [
+                "PHASE3"
+              ],
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "status",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "depression_intervention_types",
+      "query": "What types of interventions are used in depression trials?",
+      "tags": [
+        "distribution"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got intervention_type"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.12,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user asks for the categories of interventions used within trials for a specific condition, which is a distribution over intervention types filtered to depression trials.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "depression",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "intervention_type",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got intervention_type"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.13,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user asks for the categories of interventions used within trials filtered to depression. This is a distribution of trials grouped by intervention type.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "depression",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "intervention_type",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'depression trials' as trials whose condition includes depression."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got intervention_type"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.12,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user asks for the categories of interventions used within trials for a specific condition. This is a distribution of trials grouped by intervention type, filtered to depression trials.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "depression",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "intervention_type",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "pfizer_conditions",
+      "query": "Which conditions does Pfizer run the most trials for?",
+      "tags": [
+        "distribution"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got condition"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.41,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a ranking of trial counts by condition, restricted to trials sponsored by Pfizer. This is a categorical distribution grouped by condition.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": "Pfizer",
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "condition",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'run' as trials filtered by sponsor name 'Pfizer'."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got condition"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 3.15,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a ranking of conditions within Pfizer-sponsored trials, which is a categorical distribution grouped by condition. This can be answered from registry metadata by filtering to sponsor = Pfizer and counting trials by condition.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": "Pfizer",
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "condition",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": 10,
+            "assumptions": [
+              "Interpreted 'run' as trials sponsored by Pfizer.",
+              "Interpreted 'the most' as a ranked chart of the top conditions by trial count."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got condition"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.56,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a ranked distribution of Pfizer trials by condition. This is a categorical count grouped by condition with a sponsor filter.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": "Pfizer",
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "condition",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": 10,
+            "assumptions": [
+              "Interpreted 'run' as trials sponsored by Pfizer.",
+              "Interpreted 'the most' as a ranked chart of the top conditions by trial count."
+            ],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "germany_recruiting_phases",
+      "query": "Phase breakdown of currently recruiting trials in Germany",
+      "tags": [
+        "distribution"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got phase"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.19,
+          "plan": {
+            "status": "ok",
+            "rationale": "Show the distribution of currently recruiting clinical trials in Germany by trial phase.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": "Germany",
+              "phases": null,
+              "statuses": [
+                "RECRUITING"
+              ],
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'currently recruiting' as overall status = RECRUITING."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got phase"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.04,
+          "plan": {
+            "status": "ok",
+            "rationale": "Show the distribution of currently recruiting trials in Germany grouped by trial phase.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": "Germany",
+              "phases": null,
+              "statuses": [
+                "RECRUITING"
+              ],
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'currently recruiting' as overall status RECRUITING."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got phase"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.07,
+          "plan": {
+            "status": "ok",
+            "rationale": "Show the distribution of currently recruiting trials in Germany across clinical trial phases.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": "Germany",
+              "phases": null,
+              "statuses": [
+                "RECRUITING"
+              ],
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'currently recruiting' as overall status RECRUITING."
+            ],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "countries_no_filters",
+      "query": "Which countries run the most clinical trials?",
+      "tags": [
+        "distribution",
+        "filters"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got country"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.55,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user asks for a ranking of countries by number of registered clinical trials. This is a distribution over the country dimension with no additional filters.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "country",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got country"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.14,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user is asking for a ranking of countries by number of clinical trials, which is a categorical distribution over the country dimension.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "country",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'run the most clinical trials' as counting trials grouped by countries with at least one study site."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got country"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.11,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user asks for a ranking of countries by number of clinical trials, which is a categorical distribution over the country dimension.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "country",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'run' as trials having at least one site in a country, consistent with registry country metadata."
+            ],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "nivolumab_vs_ipilimumab_phases",
+      "query": "Compare phases for trials involving nivolumab vs ipilimumab.",
+      "tags": [
+        "comparison"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got comparison"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got phase"
+            },
+            {
+              "name": "series",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 3.17,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a side-by-side comparison of trial phase distributions for two drugs. This is a comparison analysis with shared filters empty and one series per drug.",
+            "analysis": "comparison",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [
+              {
+                "label": "nivolumab",
+                "filters": {
+                  "condition": null,
+                  "intervention": "nivolumab",
+                  "sponsor": null,
+                  "country": null,
+                  "phases": null,
+                  "statuses": null,
+                  "start_year_min": null,
+                  "start_year_max": null,
+                  "keywords": null
+                }
+              },
+              {
+                "label": "ipilimumab",
+                "filters": {
+                  "condition": null,
+                  "intervention": "ipilimumab",
+                  "sponsor": null,
+                  "country": null,
+                  "phases": null,
+                  "statuses": null,
+                  "start_year_min": null,
+                  "start_year_max": null,
+                  "keywords": null
+                }
+              }
+            ],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'involving nivolumab vs ipilimumab' as two series defined by intervention/drug name matching those user-provided terms."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got comparison"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got phase"
+            },
+            {
+              "name": "series",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.93,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a side-by-side comparison of trial phase distributions for two drugs. This is a comparison analysis with shared filters empty and one series per drug.",
+            "analysis": "comparison",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [
+              {
+                "label": "nivolumab",
+                "filters": {
+                  "condition": null,
+                  "intervention": "nivolumab",
+                  "sponsor": null,
+                  "country": null,
+                  "phases": null,
+                  "statuses": null,
+                  "start_year_min": null,
+                  "start_year_max": null,
+                  "keywords": null
+                }
+              },
+              {
+                "label": "ipilimumab",
+                "filters": {
+                  "condition": null,
+                  "intervention": "ipilimumab",
+                  "sponsor": null,
+                  "country": null,
+                  "phases": null,
+                  "statuses": null,
+                  "start_year_min": null,
+                  "start_year_max": null,
+                  "keywords": null
+                }
+              }
+            ],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'involving nivolumab vs ipilimumab' as trials filtered separately by intervention name for each drug."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got comparison"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got phase"
+            },
+            {
+              "name": "series",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 3.49,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a side-by-side comparison of trial counts by phase for two drug-defined sets of trials: those involving nivolumab versus those involving ipilimumab.",
+            "analysis": "comparison",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [
+              {
+                "label": "nivolumab",
+                "filters": {
+                  "condition": null,
+                  "intervention": "nivolumab",
+                  "sponsor": null,
+                  "country": null,
+                  "phases": null,
+                  "statuses": null,
+                  "start_year_min": null,
+                  "start_year_max": null,
+                  "keywords": null
+                }
+              },
+              {
+                "label": "ipilimumab",
+                "filters": {
+                  "condition": null,
+                  "intervention": "ipilimumab",
+                  "sponsor": null,
+                  "country": null,
+                  "phases": null,
+                  "statuses": null,
+                  "start_year_min": null,
+                  "start_year_max": null,
+                  "keywords": null
+                }
+              }
+            ],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'involving nivolumab vs ipilimumab' as comparing trials that include each named drug as an intervention/drug filter.",
+              "A trial containing both drugs may appear in both series unless downstream logic makes the series mutually exclusive."
+            ],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "breast_vs_prostate_trend",
+      "query": "Compare how many breast cancer and prostate cancer trials started each year since 2010",
+      "tags": [
+        "comparison",
+        "trend"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got comparison"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got start_year"
+            },
+            {
+              "name": "series",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.93,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a year-by-year comparison of trial starts for two conditions, breast cancer and prostate cancer, beginning in 2010. This is a comparison analysis with start_year as the grouping axis and separate series for each condition.",
+            "analysis": "comparison",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": 2010,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "start_year",
+            "series": [
+              {
+                "label": "Breast cancer",
+                "filters": {
+                  "condition": "breast cancer",
+                  "intervention": null,
+                  "sponsor": null,
+                  "country": null,
+                  "phases": null,
+                  "statuses": null,
+                  "start_year_min": null,
+                  "start_year_max": null,
+                  "keywords": null
+                }
+              },
+              {
+                "label": "Prostate cancer",
+                "filters": {
+                  "condition": "prostate cancer",
+                  "intervention": null,
+                  "sponsor": null,
+                  "country": null,
+                  "phases": null,
+                  "statuses": null,
+                  "start_year_min": null,
+                  "start_year_max": null,
+                  "keywords": null
+                }
+              }
+            ],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'started each year since 2010' as trial start years from 2010 onward."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got comparison"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got start_year"
+            },
+            {
+              "name": "series",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 3.29,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a year-by-year comparison of trial starts for two conditions, breast cancer and prostate cancer, from 2010 onward.",
+            "analysis": "comparison",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": 2010,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "start_year",
+            "series": [
+              {
+                "label": "breast cancer",
+                "filters": {
+                  "condition": "breast cancer",
+                  "intervention": null,
+                  "sponsor": null,
+                  "country": null,
+                  "phases": null,
+                  "statuses": null,
+                  "start_year_min": null,
+                  "start_year_max": null,
+                  "keywords": null
+                }
+              },
+              {
+                "label": "prostate cancer",
+                "filters": {
+                  "condition": "prostate cancer",
+                  "intervention": null,
+                  "sponsor": null,
+                  "country": null,
+                  "phases": null,
+                  "statuses": null,
+                  "start_year_min": null,
+                  "start_year_max": null,
+                  "keywords": null
+                }
+              }
+            ],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'since 2010' as trials with start year greater than or equal to 2010."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got comparison"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got start_year"
+            },
+            {
+              "name": "series",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.95,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a year-by-year comparison of trial starts for two conditions, breast cancer and prostate cancer, from 2010 onward.",
+            "analysis": "comparison",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": 2010,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "start_year",
+            "series": [
+              {
+                "label": "breast cancer",
+                "filters": {
+                  "condition": "breast cancer",
+                  "intervention": null,
+                  "sponsor": null,
+                  "country": null,
+                  "phases": null,
+                  "statuses": null,
+                  "start_year_min": null,
+                  "start_year_max": null,
+                  "keywords": null
+                }
+              },
+              {
+                "label": "prostate cancer",
+                "filters": {
+                  "condition": "prostate cancer",
+                  "intervention": null,
+                  "sponsor": null,
+                  "country": null,
+                  "phases": null,
+                  "statuses": null,
+                  "start_year_min": null,
+                  "start_year_max": null,
+                  "keywords": null
+                }
+              }
+            ],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'started each year since 2010' as trials with start year greater than or equal to 2010."
+            ],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "lung_cancer_us_vs_china_status",
+      "query": "Compare trial statuses for lung cancer trials in the United States vs China",
+      "tags": [
+        "comparison"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got comparison"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got status"
+            },
+            {
+              "name": "series",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 3.06,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a comparison of trial status distributions for lung cancer trials between two countries. This is a comparison analysis with shared condition filters and one series per country.",
+            "analysis": "comparison",
+            "filters": {
+              "condition": "lung cancer",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "status",
+            "series": [
+              {
+                "label": "United States",
+                "filters": {
+                  "condition": null,
+                  "intervention": null,
+                  "sponsor": null,
+                  "country": "United States",
+                  "phases": null,
+                  "statuses": null,
+                  "start_year_min": null,
+                  "start_year_max": null,
+                  "keywords": null
+                }
+              },
+              {
+                "label": "China",
+                "filters": {
+                  "condition": null,
+                  "intervention": null,
+                  "sponsor": null,
+                  "country": "China",
+                  "phases": null,
+                  "statuses": null,
+                  "start_year_min": null,
+                  "start_year_max": null,
+                  "keywords": null
+                }
+              }
+            ],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got comparison"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got status"
+            },
+            {
+              "name": "series",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.73,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a comparison of trial counts by recruitment/status category for lung cancer trials, split into two country-based series: United States and China.",
+            "analysis": "comparison",
+            "filters": {
+              "condition": "lung cancer",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "status",
+            "series": [
+              {
+                "label": "United States",
+                "filters": {
+                  "condition": null,
+                  "intervention": null,
+                  "sponsor": null,
+                  "country": "United States",
+                  "phases": null,
+                  "statuses": null,
+                  "start_year_min": null,
+                  "start_year_max": null,
+                  "keywords": null
+                }
+              },
+              {
+                "label": "China",
+                "filters": {
+                  "condition": null,
+                  "intervention": null,
+                  "sponsor": null,
+                  "country": "China",
+                  "phases": null,
+                  "statuses": null,
+                  "start_year_min": null,
+                  "start_year_max": null,
+                  "keywords": null
+                }
+              }
+            ],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got comparison"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got status"
+            },
+            {
+              "name": "series",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 3.1,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a side-by-side comparison of trial status distributions for lung cancer trials across two countries. This is a comparison analysis with shared condition filters and one series per country.",
+            "analysis": "comparison",
+            "filters": {
+              "condition": "lung cancer",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "status",
+            "series": [
+              {
+                "label": "United States",
+                "filters": {
+                  "condition": null,
+                  "intervention": null,
+                  "sponsor": null,
+                  "country": "United States",
+                  "phases": null,
+                  "statuses": null,
+                  "start_year_min": null,
+                  "start_year_max": null,
+                  "keywords": null
+                }
+              },
+              {
+                "label": "China",
+                "filters": {
+                  "condition": null,
+                  "intervention": null,
+                  "sponsor": null,
+                  "country": "China",
+                  "phases": null,
+                  "statuses": null,
+                  "start_year_min": null,
+                  "start_year_max": null,
+                  "keywords": null
+                }
+              }
+            ],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "diabetes_phase3_enrollment_hist",
+      "query": "What is the distribution of enrollment sizes in phase 3 diabetes trials?",
+      "tags": [
+        "numeric"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got histogram"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "numeric",
+              "passed": true,
+              "detail": "got [<NumericField.ENROLLMENT: 'enrollment'>]"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.42,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a distribution of a numeric per-trial field: enrollment sizes, restricted to phase 3 trials about diabetes. That maps to a histogram of enrollment.",
+            "analysis": "histogram",
+            "filters": {
+              "condition": "diabetes",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": [
+                "PHASE3"
+              ],
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": null,
+            "series": [],
+            "x_numeric": "enrollment",
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got histogram"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "numeric",
+              "passed": true,
+              "detail": "got [<NumericField.ENROLLMENT: 'enrollment'>]"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.16,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user asks for the distribution of a numeric per-trial field (enrollment size) within a filtered set of trials, which maps to a histogram.",
+            "analysis": "histogram",
+            "filters": {
+              "condition": "diabetes",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": [
+                "PHASE3"
+              ],
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": null,
+            "series": [],
+            "x_numeric": "enrollment",
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got histogram"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "numeric",
+              "passed": true,
+              "detail": "got [<NumericField.ENROLLMENT: 'enrollment'>]"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.06,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a distribution of a numeric per-trial field: enrollment sizes, restricted to phase 3 trials for diabetes. That maps to a histogram of enrollment.",
+            "analysis": "histogram",
+            "filters": {
+              "condition": "diabetes",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": [
+                "PHASE3"
+              ],
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": null,
+            "series": [],
+            "x_numeric": "enrollment",
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "ms_enrollment_vs_year_scatter",
+      "query": "Plot enrollment against start year for multiple sclerosis trials",
+      "tags": [
+        "numeric"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got scatter"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "numeric",
+              "passed": true,
+              "detail": "got [<NumericField.ENROLLMENT: 'enrollment'>, <NumericField.START_YEAR: 'start_year'>]"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.77,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants one point per multiple sclerosis trial, with enrollment on one axis and start year on the other, so this is a scatter plot filtered to that condition.",
+            "analysis": "scatter",
+            "filters": {
+              "condition": "multiple sclerosis",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": null,
+            "series": [],
+            "x_numeric": "start_year",
+            "y_numeric": "enrollment",
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got scatter"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "numeric",
+              "passed": true,
+              "detail": "got [<NumericField.ENROLLMENT: 'enrollment'>, <NumericField.START_YEAR: 'start_year'>]"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.07,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants one point per multiple sclerosis trial with enrollment on one axis and trial start year on the other, which is a scatter plot.",
+            "analysis": "scatter",
+            "filters": {
+              "condition": "multiple sclerosis",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": null,
+            "series": [],
+            "x_numeric": "start_year",
+            "y_numeric": "enrollment",
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got scatter"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "numeric",
+              "passed": true,
+              "detail": "got [<NumericField.ENROLLMENT: 'enrollment'>, <NumericField.START_YEAR: 'start_year'>]"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 1.99,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants one point per multiple sclerosis trial with enrollment plotted against trial start year, which is a scatter plot of per-trial numeric fields.",
+            "analysis": "scatter",
+            "filters": {
+              "condition": "multiple sclerosis",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": null,
+            "series": [],
+            "x_numeric": "start_year",
+            "y_numeric": "enrollment",
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "glioblastoma_sponsor_drug_network",
+      "query": "Show a network of sponsors and drugs for glioblastoma trials.",
+      "tags": [
+        "network"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got network"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "network",
+              "passed": true,
+              "detail": "got [<Dimension.DRUG: 'drug'>, <Dimension.SPONSOR: 'sponsor'>]"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.51,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a co-occurrence view linking sponsor organizations to drugs within trials filtered to glioblastoma. A bipartite network between sponsor and drug matches this request.",
+            "analysis": "network",
+            "filters": {
+              "condition": "glioblastoma",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": null,
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": {
+              "source": "sponsor",
+              "target": "drug",
+              "min_edge_trials": 2,
+              "max_nodes": 40
+            },
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'network of sponsors and drugs' as a bipartite network connecting sponsor organizations to drugs that appear on the same glioblastoma trial."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got network"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "network",
+              "passed": true,
+              "detail": "got [<Dimension.DRUG: 'drug'>, <Dimension.SPONSOR: 'sponsor'>]"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.72,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a co-occurrence network connecting sponsors and drugs within trials filtered to glioblastoma. This is a bipartite network with sponsor as one node type and drug as the other.",
+            "analysis": "network",
+            "filters": {
+              "condition": "glioblastoma",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": null,
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": {
+              "source": "sponsor",
+              "target": "drug",
+              "min_edge_trials": 2,
+              "max_nodes": 40
+            },
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'network of sponsors and drugs' as a bipartite co-occurrence network linking sponsors to drugs that appear on the same glioblastoma trial.",
+              "Used the condition filter 'glioblastoma' exactly as stated by the user."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got network"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "network",
+              "passed": true,
+              "detail": "got [<Dimension.DRUG: 'drug'>, <Dimension.SPONSOR: 'sponsor'>]"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.66,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a co-occurrence network connecting sponsors and drugs within trials filtered to glioblastoma. This is a bipartite network with sponsor values linked to drug values when they appear on the same trial.",
+            "analysis": "network",
+            "filters": {
+              "condition": "glioblastoma",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": null,
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": {
+              "source": "sponsor",
+              "target": "drug",
+              "min_edge_trials": 2,
+              "max_nodes": 40
+            },
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'network of sponsors and drugs' as a bipartite co-occurrence network where an edge indicates a sponsor and drug appear on the same glioblastoma trial."
+            ],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "lung_cancer_drug_combinations",
+      "query": "Which drugs are tested together in lung cancer combination trials? Show it as a network.",
+      "tags": [
+        "network"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got network"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "network",
+              "passed": true,
+              "detail": "got [<Dimension.DRUG: 'drug'>]"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.85,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a network showing which drugs co-occur within the same lung cancer combination trials. A drug-to-drug co-occurrence network best matches this request.",
+            "analysis": "network",
+            "filters": {
+              "condition": "lung cancer",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": "combination"
+            },
+            "group_by": null,
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": {
+              "source": "drug",
+              "target": "drug",
+              "min_edge_trials": 2,
+              "max_nodes": 40
+            },
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'tested together' as drugs listed together on the same trial.",
+              "Used a drug co-occurrence network because the user explicitly asked for a network.",
+              "Used keywords='combination' to focus on combination trials, since there is no dedicated combination-trial filter."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got network"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "network",
+              "passed": true,
+              "detail": "got [<Dimension.DRUG: 'drug'>]"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.86,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a network of drugs that co-occur on the same lung cancer trials, specifically combination trials. A drug co-occurrence network captures which drugs are tested together.",
+            "analysis": "network",
+            "filters": {
+              "condition": "lung cancer",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": "combination"
+            },
+            "group_by": null,
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": {
+              "source": "drug",
+              "target": "drug",
+              "min_edge_trials": 2,
+              "max_nodes": 40
+            },
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'tested together' as drug co-occurrence within the same trial.",
+              "Used a co-occurrence network on the drug dimension.",
+              "Interpreted 'combination trials' via a free-text keyword filter of 'combination' because there is no dedicated combination-trial filter."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got network"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "network",
+              "passed": true,
+              "detail": "got [<Dimension.DRUG: 'drug'>]"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 3.05,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a co-occurrence network of drugs appearing together on the same lung cancer trials, restricted to combination studies. A drug-to-drug network captures which drugs are tested together.",
+            "analysis": "network",
+            "filters": {
+              "condition": "lung cancer",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": "combination"
+            },
+            "group_by": null,
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": {
+              "source": "drug",
+              "target": "drug",
+              "min_edge_trials": 2,
+              "max_nodes": 40
+            },
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'tested together' as drugs co-occurring within the same trial.",
+              "Used a drug-to-drug co-occurrence network.",
+              "Used a keyword filter for 'combination' because combination status is not a dedicated filter field."
+            ],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "malaria_sponsor_country_network",
+      "query": "Show how sponsors and countries are connected in malaria trials",
+      "tags": [
+        "network"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got network"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "network",
+              "passed": true,
+              "detail": "got [<Dimension.COUNTRY: 'country'>, <Dimension.SPONSOR: 'sponsor'>]"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 10.06,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants relationships between two categorical attributes within malaria trials, which is best represented as a bipartite network linking sponsors to countries when they co-occur on the same trial.",
+            "analysis": "network",
+            "filters": {
+              "condition": "malaria",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": null,
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": {
+              "source": "sponsor",
+              "target": "country",
+              "min_edge_trials": 2,
+              "max_nodes": 40
+            },
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'connected' as a bipartite co-occurrence network between sponsor and country based on appearing on the same trial.],",
+              "clarification_question\":null}```} \u0576\u056f\u0561\u057f\u0575\u0561\u056c assistant to=final  \u5fae\u4fe1\u516c\u4f17\u53f7\u5929\u5929\u4e2d\u5f69\u7968json  \u5f69\u795e\u4e89\u9738\u5feb\u4e09analysis to=final  \u5929\u5929\u4e2d\u5f69\u7968\u5982\u4f55json  \u5f69\u795e\u4e89\u9738\u5feb \u0d3f\u0d1a\u0d4d\u0d1a\u0d3f\u0d1f\u0d4d\u0d1f\u0d41\u0d23\u0d4d\u0d1f\u0d4d{",
+              "status",
+              "ok",
+              "rationale",
+              "The user asks for how two dimensions are connected within a set of trials, so a sponsor-to-country network for malaria trials is the appropriate chart.",
+              "analysis",
+              "network",
+              "filters",
+              "condition",
+              "malaria",
+              "group_by",
+              "null",
+              "series",
+              "[]",
+              "x_numeric",
+              "null",
+              "y_numeric",
+              "null",
+              "network",
+              "source",
+              "sponsor",
+              "target",
+              "country",
+              "min_edge_trials",
+              "2",
+              "max_nodes",
+              "40",
+              "top_n",
+              "null",
+              "assumptions",
+              "[",
+              "Interpreted 'connected' as sponsor-country co-occurrence on the same trial.",
+              "]",
+              "clarification_question",
+              "null",
+              "unsupported",
+              "false",
+              "needs_clarification",
+              "false",
+              "ok",
+              "true",
+              "filters_obj",
+              "condition",
+              "malaria",
+              "intervention",
+              "null",
+              "sponsor",
+              "null",
+              "country",
+              "null",
+              "phases",
+              "null",
+              "statuses",
+              "null",
+              "start_year_min",
+              "null",
+              "start_year_max",
+              "null",
+              "keywords",
+              "null",
+              "",
+              "}"
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got network"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "network",
+              "passed": true,
+              "detail": "got [<Dimension.COUNTRY: 'country'>, <Dimension.SPONSOR: 'sponsor'>]"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.77,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a connection view between sponsor organisations and countries within malaria trials, which is best represented as a bipartite network of co-occurring dimension values on the same trial.",
+            "analysis": "network",
+            "filters": {
+              "condition": "malaria",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": null,
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": {
+              "source": "sponsor",
+              "target": "country",
+              "min_edge_trials": 2,
+              "max_nodes": 40
+            },
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'connected' as a bipartite network linking sponsor organisations to countries when both appear on the same trial.",
+              "Used condition = 'malaria' as the trial filter. The country dimension refers to countries with at least one trial site."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got network"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "network",
+              "passed": true,
+              "detail": "got [<Dimension.COUNTRY: 'country'>, <Dimension.SPONSOR: 'sponsor'>]"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.97,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a connection view between sponsor organisations and countries within malaria trials, which is a bipartite network of co-occurring dimension values on the same trials.",
+            "analysis": "network",
+            "filters": {
+              "condition": "malaria",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": null,
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": {
+              "source": "sponsor",
+              "target": "country",
+              "min_edge_trials": 2,
+              "max_nodes": 40
+            },
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'connected' as a bipartite network linking sponsors to countries when they appear on the same trial. It is possible that a sponsor is linked to multiple countries for a multi-country trial."
+            ],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "caller_drug_trend",
+      "query": "How has the number of trials for this drug changed over time?",
+      "tags": [
+        "caller",
+        "trend"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got time_trend"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got start_year"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.61,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user asks for how trial counts have changed over time for a specific drug, which maps to a time trend of trials by start year. The authoritative structured field identifies the drug as Pembrolizumab.",
+            "analysis": "time_trend",
+            "filters": {
+              "condition": null,
+              "intervention": "Pembrolizumab",
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "start_year",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'this drug' using the authoritative structured field drug_name = Pembrolizumab.",
+              "Used the drug/intervention name exactly as supplied."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got time_trend"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got start_year"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.65,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user asks for how the number of trials changed over time for a specific drug, which is a time trend of trial counts by start year. The structured field provides the authoritative drug name to use as the intervention filter.",
+            "analysis": "time_trend",
+            "filters": {
+              "condition": null,
+              "intervention": "Pembrolizumab",
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "start_year",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'this drug' using the authoritative structured field drug_name = 'Pembrolizumab'.",
+              "Used trial start year as the time axis."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got time_trend"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got start_year"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.82,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user asks for how the count of trials has changed over time for a specific drug, which maps to a time trend of trials by start year. The structured field provides the authoritative drug name to use as the intervention filter.",
+            "analysis": "time_trend",
+            "filters": {
+              "condition": null,
+              "intervention": "Pembrolizumab",
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "start_year",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'this drug' using the authoritative structured field drug_name = 'Pembrolizumab'.",
+              "Used the drug name as the intervention filter for the time trend."
+            ],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "caller_condition_phase_sponsors",
+      "query": "Which sponsors run the most trials?",
+      "tags": [
+        "caller",
+        "distribution"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got sponsor"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 1.85,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a ranking of sponsors by number of trials. This is a categorical distribution grouped by sponsor, filtered to the supplied condition and phase.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "asthma",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": [
+                "PHASE2"
+              ],
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "sponsor",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got sponsor"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.62,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a ranking of sponsors by number of trials. This is a distribution of trials grouped by sponsor, constrained by the provided authoritative filters.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "asthma",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": [
+                "PHASE2"
+              ],
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "sponsor",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Applied the caller-supplied structured fields as authoritative filters.",
+              "Interpreted 'run the most trials' as ranking sponsors by trial count."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got sponsor"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.74,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a ranking of sponsors by number of trials. This is a categorical distribution grouped by sponsor, constrained by the supplied authoritative filters.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "asthma",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": [
+                "PHASE2"
+              ],
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "sponsor",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Applied the caller-supplied structured fields as authoritative filters.",
+              "Interpreted 'run' as sponsor listed on the trial record."
+            ],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "brand_name_kept_verbatim",
+      "query": "How are Keytruda trials distributed by phase?",
+      "tags": [
+        "filters"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got phase"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.56,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a categorical breakdown of trials for a specific drug by clinical phase. This is a distribution analysis grouped by phase with a drug filter for Keytruda.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": null,
+              "intervention": "Keytruda",
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'Keytruda trials' as trials identified by the intervention name 'Keytruda'."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got phase"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.18,
+          "plan": {
+            "status": "ok",
+            "rationale": "Show the number of registered trials matching the intervention name 'Keytruda', grouped by clinical phase.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": null,
+              "intervention": "Keytruda",
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'Keytruda trials' as trials filtered by intervention name 'Keytruda'."
+            ],
+            "clarification_question": null
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got ok"
+            },
+            {
+              "name": "valid",
+              "passed": true,
+              "detail": ""
+            },
+            {
+              "name": "analysis",
+              "passed": true,
+              "detail": "got distribution"
+            },
+            {
+              "name": "group_by",
+              "passed": true,
+              "detail": "got phase"
+            },
+            {
+              "name": "filters",
+              "passed": true,
+              "detail": ""
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.7,
+          "plan": {
+            "status": "ok",
+            "rationale": "The user wants a categorical breakdown of trials for a specific drug by trial phase.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": null,
+              "intervention": "Keytruda",
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'Keytruda' as the intervention/drug named exactly by the user, without expanding to synonyms or brand/generic equivalents."
+            ],
+            "clarification_question": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "clarify_this_drug",
+      "query": "How has the number of trials for this drug changed over time?",
+      "tags": [
+        "clarify"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got needs_clarification"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.06,
+          "plan": {
+            "status": "needs_clarification",
+            "rationale": "The request asks for a time trend in trial counts, but the drug is not specified. A drug name is required to define the trial set.",
+            "analysis": "time_trend",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "start_year",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": "Which drug do you want to analyze?"
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got needs_clarification"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.04,
+          "plan": {
+            "status": "needs_clarification",
+            "rationale": "The request is for a time trend of trials over start year, but the specific drug is not identified.",
+            "analysis": "time_trend",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "start_year",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": "Which drug do you want to analyze?"
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got needs_clarification"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.19,
+          "plan": {
+            "status": "needs_clarification",
+            "rationale": "The request asks for a time trend in trial counts, but the drug is not identified. A specific drug/intervention name is required to build the trend.",
+            "analysis": "time_trend",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "start_year",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": "Which drug do you want the time trend for?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "clarify_compare_them",
+      "query": "Compare them by phase",
+      "tags": [
+        "clarify"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got needs_clarification"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.32,
+          "plan": {
+            "status": "needs_clarification",
+            "rationale": "The request asks for a comparison by trial phase, but the items to compare ('them') are not specified.",
+            "analysis": "comparison",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": "Which specific items should I compare by phase?"
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got needs_clarification"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.21,
+          "plan": {
+            "status": "needs_clarification",
+            "rationale": "The request asks for a comparison by trial phase, but 'them' does not specify which two or more groups or entities to compare.",
+            "analysis": "comparison",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": "Which groups or entities should I compare by phase?"
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got needs_clarification"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.2,
+          "plan": {
+            "status": "needs_clarification",
+            "rationale": "The request asks for a comparison by phase, but 'them' does not identify which trials or groups should be compared.",
+            "analysis": "comparison",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": "Which two or more groups or trial sets should I compare by phase?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "clarify_which_disease",
+      "query": "Which sponsors are most active for that disease?",
+      "tags": [
+        "clarify"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got needs_clarification"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.05,
+          "plan": {
+            "status": "needs_clarification",
+            "rationale": "The requested chart is a sponsor distribution, but the disease is not specified in the current question.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "sponsor",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": 10,
+            "assumptions": [],
+            "clarification_question": "Which disease should I use?"
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got needs_clarification"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.07,
+          "plan": {
+            "status": "needs_clarification",
+            "rationale": "The question asks for a sponsor distribution, but 'that disease' is not specified in this message, so the trial set cannot be determined.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "sponsor",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": 10,
+            "assumptions": [],
+            "clarification_question": "Which disease or condition do you want to analyze?"
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got needs_clarification"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.64,
+          "plan": {
+            "status": "needs_clarification",
+            "rationale": "The question asks for the most active sponsors, which would be a distribution by sponsor, but the referenced disease is not specified in this message.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "sponsor",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": 10,
+            "assumptions": [],
+            "clarification_question": "Which disease or condition do you want to analyze?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "unsupported_efficacy",
+      "query": "Does Keytruda work better than chemotherapy?",
+      "tags": [
+        "unsupported"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got unsupported"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.8,
+          "plan": {
+            "status": "unsupported",
+            "rationale": "The question asks about comparative efficacy ('work better'), which is not answerable from ClinicalTrials.gov registry metadata alone. The registry can support charts about how trials are distributed or compared by intervention, condition, phase, status, or over time.",
+            "analysis": "comparison",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "start_year",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": "I can\u2019t determine whether Keytruda works better than chemotherapy from registry metadata. I can instead compare Keytruda vs chemotherapy trials by phase, status, condition, country, sponsor, or start-year trend\u2014what comparison would you like?"
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got unsupported"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 3.16,
+          "plan": {
+            "status": "unsupported",
+            "rationale": "The question asks about comparative treatment efficacy ('work better'), which is not directly answerable from ClinicalTrials.gov registry metadata alone. The registry can support charts about how trials comparing Keytruda and chemotherapy are distributed over time, phase, status, or condition.",
+            "analysis": "comparison",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": "ClinicalTrials.gov metadata cannot determine whether Keytruda works better than chemotherapy. I can instead compare Keytruda-related vs chemotherapy-related trials by phase, status, condition, or start-year trend\u2014would you like one of those?"
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got unsupported"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 3.08,
+          "plan": {
+            "status": "unsupported",
+            "rationale": "The question asks about comparative treatment effectiveness ('work better'), which is not answerable from registry metadata alone. This service can instead compare the registered trial landscape for Keytruda and chemotherapy, such as counts by phase, status, year, condition, or sponsors.",
+            "analysis": "comparison",
+            "filters": {
+              "condition": null,
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": "I can\u2019t determine whether Keytruda works better than chemotherapy from registry metadata. If you want, I can compare Keytruda vs chemotherapy trials by phase, status, start year, condition, or sponsor instead."
+          }
+        }
+      ]
+    },
+    {
+      "id": "unsupported_survival",
+      "query": "What is the 5-year survival rate in pancreatic cancer trials?",
+      "tags": [
+        "unsupported"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got unsupported"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.89,
+          "plan": {
+            "status": "unsupported",
+            "rationale": "The question asks for a clinical outcome measure (5-year survival rate), which is not answerable as a registry metadata chart from ClinicalTrials.gov alone. The service can instead chart pancreatic cancer trials by counts, timing, phase, status, sponsors, interventions, or related registry fields.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "pancreatic cancer",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": "ClinicalTrials.gov registry metadata cannot provide a 5-year survival rate. Would you like a chart of pancreatic cancer trials instead, such as by phase, status, start year, sponsor, or intervention?"
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got unsupported"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 3.0,
+          "plan": {
+            "status": "unsupported",
+            "rationale": "The user asks for a clinical outcome measure (5-year survival rate), which is not a registry-metadata chartable field in this system. The service can instead chart the landscape of pancreatic cancer trials by time, phase, status, sponsor, interventions, and related metadata.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "pancreatic cancer",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": "I can\u2019t answer 5-year survival rates from registry metadata. I can instead show pancreatic cancer trials by phase, status, start year, sponsor, country, or intervention\u2014which would you like?"
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got unsupported"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.82,
+          "plan": {
+            "status": "unsupported",
+            "rationale": "The user asks for a clinical outcome (5-year survival rate), which is not answerable as a chart of registry metadata from ClinicalTrials.gov. The service can instead chart pancreatic cancer trials by counts and attributes such as phase, status, sponsor, country, or start year.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "pancreatic cancer",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "phase",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": "I can\u2019t answer 5-year survival rates from registry metadata. Would you like a chart of pancreatic cancer trials by phase, status, sponsor, country, or start year instead?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "unsupported_medical_advice",
+      "query": "Should I join a clinical trial for my diabetes?",
+      "tags": [
+        "unsupported"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got unsupported"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.64,
+          "plan": {
+            "status": "unsupported",
+            "rationale": "The question asks for personal medical advice about whether to join a trial, which cannot be answered from registry metadata alone. I can instead chart diabetes trials by phase, status, location, sponsor, or time trend.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "diabetes",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "status",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": "I can\u2019t advise whether you should join a trial. If helpful, I can show diabetes trials by recruiting status, phase, location, sponsor, or how they\u2019ve changed over time."
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got unsupported"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 3.37,
+          "plan": {
+            "status": "unsupported",
+            "rationale": "The question asks for personal medical advice about whether to join a trial, which is not answerable from registry metadata alone. The service can instead chart diabetes trials by status, phase, country, sponsor, or trends over time.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "diabetes",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "status",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": "I can\u2019t advise whether you should join a clinical trial, but I can show the landscape of diabetes trials (for example by status, phase, country, or recent trends). What would you like to explore?"
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got unsupported"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 2.44,
+          "plan": {
+            "status": "unsupported",
+            "rationale": "The user is asking for personal medical advice about whether to join a trial, which cannot be answered from registry metadata alone.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "diabetes",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": null,
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "status",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [],
+            "clarification_question": "I can\u2019t advise whether you should join a clinical trial. I can help compare diabetes trials in the registry by phase, status, country, sponsor, or recent trends if you want."
+          }
+        }
+      ]
+    },
+    {
+      "id": "unsupported_cost",
+      "query": "How much does it cost to run a phase 3 oncology trial?",
+      "tags": [
+        "unsupported"
+      ],
+      "runs": [
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got unsupported"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 3.18,
+          "plan": {
+            "status": "unsupported",
+            "rationale": "The user asks about trial cost, which is not standard registry metadata available for charting from ClinicalTrials.gov. The service can answer related registry-based questions such as counts, trends, phases, sponsors, countries, or enrollment distributions for phase 3 oncology trials.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "oncology",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": [
+                "PHASE3"
+              ],
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "sponsor",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'oncology' as the condition filter term supplied by the user."
+            ],
+            "clarification_question": "ClinicalTrials.gov registry metadata does not provide trial cost. I can instead chart phase 3 oncology trials by sponsor, country, status, start year, or enrollment\u2014would you like one of those?"
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got unsupported"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 3.16,
+          "plan": {
+            "status": "unsupported",
+            "rationale": "The user is asking about trial cost, which is not a registry metadata field available for charting from ClinicalTrials.gov. The service can instead chart phase 3 oncology trials by counts, sponsors, countries, statuses, or start-year trends.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "oncology",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": [
+                "PHASE3"
+              ],
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "sponsor",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'oncology' as a condition filter using the user's wording."
+            ],
+            "clarification_question": "ClinicalTrials.gov does not provide trial cost data. If you want, I can instead compare or summarize phase 3 oncology trials by sponsor, country, status, or start-year trend."
+          }
+        },
+        {
+          "passed": true,
+          "checks": [
+            {
+              "name": "status",
+              "passed": true,
+              "detail": "got unsupported"
+            }
+          ],
+          "attempts": 1,
+          "seconds": 3.42,
+          "plan": {
+            "status": "unsupported",
+            "rationale": "The question asks about trial cost, which is not a registry metadata field available for charting from ClinicalTrials.gov. The service can instead analyze counts and distributions of oncology phase 3 trials by year, sponsor, country, status, or related metadata.",
+            "analysis": "distribution",
+            "filters": {
+              "condition": "oncology",
+              "intervention": null,
+              "sponsor": null,
+              "country": null,
+              "phases": [
+                "PHASE3"
+              ],
+              "statuses": null,
+              "start_year_min": null,
+              "start_year_max": null,
+              "keywords": null
+            },
+            "group_by": "sponsor",
+            "series": [],
+            "x_numeric": null,
+            "y_numeric": null,
+            "network": null,
+            "top_n": null,
+            "assumptions": [
+              "Interpreted 'oncology' as the user's condition term for filtering.",
+              "Trial cost is not supported by the registry metadata available to this service."
+            ],
+            "clarification_question": "ClinicalTrials.gov does not provide trial cost data for charting. I can instead show phase 3 oncology trials by year, sponsor, country, or status\u2014which would you like?"
+          }
+        }
+      ]
+    }
+  ]
+}
