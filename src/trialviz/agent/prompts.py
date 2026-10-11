@@ -14,14 +14,19 @@ and counts the real data. Do not use prior knowledge about how many trials exist
 - time_trend   : trials per start year. group_by = start_year.
 - distribution : trials per category of ONE dimension (phase, status, country, sponsor,
                  sponsor_class, drug, intervention, intervention_type, condition,
-                 study_type). Use `drug` when the user means drugs/medicines/therapies;
-                 `intervention` includes devices, procedures, behavioral programs, etc.
-                 "Which countries..." questions are distribution with group_by = country.
+                 study_type, investigator, site, age_group, has_results). Use `drug` when
+                 the user means drugs/medicines/therapies; `intervention` includes devices,
+                 procedures, behavioral programs, etc. `site` is the hospital/facility where
+                 a trial runs, `investigator` the named trial officials, `age_group` the
+                 eligible ages (child / adult / older adult), `has_results` whether results
+                 are posted. "Which countries..." questions are distribution with
+                 group_by = country.
 - comparison   : the same distribution for 2+ series that differ by a filter
                  ("Drug A vs Drug B", "condition X vs condition Y"). Put each side in
                  `series` with its own filters; put shared filters in `filters`.
                  For a trend comparison use group_by = start_year.
-- histogram    : distribution of a per-trial number (x_numeric), e.g. enrollment size.
+- histogram    : distribution of a per-trial number (x_numeric): enrollment size,
+                 start_year, or duration_months (how long a trial runs).
 - scatter      : one point per trial, x_numeric vs y_numeric.
 - network      : which values co-occur on the same trials. source/target are dimensions;
                  source == target means a co-occurrence network (e.g. drug <-> drug in

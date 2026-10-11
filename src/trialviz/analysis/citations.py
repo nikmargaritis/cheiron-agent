@@ -55,5 +55,10 @@ def _walk(node: Any, path: list[str]) -> list[Any]:
 def verify_citation(study: dict[str, Any], c: Citation) -> bool:
     """True iff ``c.excerpt`` is literally the value at ``c.field`` in ``study``."""
     return nct_id(study) == c.nct_id and c.excerpt in {
-        str(v) for v in _walk(study, c.field.split("."))
+        _text(v) for v in _walk(study, c.field.split("."))
     }
+
+
+def _text(v: Any) -> str:
+    """Values as they appear in the API's JSON (``true``, not Python's ``True``)."""
+    return ("true" if v else "false") if isinstance(v, bool) else str(v)

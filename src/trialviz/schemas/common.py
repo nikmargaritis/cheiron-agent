@@ -53,6 +53,10 @@ class Dimension(StrEnum):
     INTERVENTION_TYPE = "intervention_type"
     CONDITION = "condition"
     STUDY_TYPE = "study_type"
+    INVESTIGATOR = "investigator"  # named trial officials (principal investigator, chair, ...)
+    SITE = "site"  # facility where the trial runs
+    AGE_GROUP = "age_group"
+    HAS_RESULTS = "has_results"  # whether results are posted on ClinicalTrials.gov
 
 
 class NumericField(StrEnum):
@@ -60,3 +64,4 @@ class NumericField(StrEnum):
 
     ENROLLMENT = "enrollment"
     START_YEAR = "start_year"
+    DURATION_MONTHS = "duration_months"  # start date to (planned) completion date

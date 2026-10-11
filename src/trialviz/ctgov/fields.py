@@ -64,7 +64,8 @@ class DimensionSpec:
 
 MULTI_VALUED = {
     Dimension.PHASE, Dimension.COUNTRY, Dimension.INTERVENTION, Dimension.DRUG,
-    Dimension.INTERVENTION_TYPE, Dimension.CONDITION,
+    Dimension.INTERVENTION_TYPE, Dimension.CONDITION, Dimension.INVESTIGATOR, Dimension.SITE,
+    Dimension.AGE_GROUP,
 }
 
 
@@ -179,6 +180,76 @@ def _drugs(study: Study) -> list[FieldValue]:
     return list(seen.values())
 
 
+# Industry trials often list a department, call center or generic title instead of a person
+# ("Pfizer CT.gov Call Center", "Global Clinical Registry (GCR, 1452)", "Study Director").
+_NOT_A_PERSON = re.compile(
+    r"\d|\b(?:clinical|trials?|study|director|medical|monitor|call|registry|transparency|"
+    r"pharma\w*|inc|llc|ltd|gmbh|corp\w*|company|operations|sciences|research|development|"
+    r"dept|department|center|centre|institute|university|hospital|group|team|sponsor)\b",
+    re.IGNORECASE,
+)
+_TITLES = re.compile(r"^(?:dr|prof|professor)\.?\s+", re.IGNORECASE)
+_DEGREES = re.compile(
+    r"(?:[\s,]+(?:md|m\.d\.|phd|ph\.d\.|mph|msc|ms|mbbs|do|frcp\w*|rn|pharmd|scm|ma|mba|bsc))+\.?$",
+    re.IGNORECASE,
+)
+
+
+def normalize_person(raw: str) -> str:
+    """'Gregory J. Czarnota, Ph.D. M.D.' -> 'gregory j czarnota'. Degrees and titles are
+    dropped; returns '' for names that don't look like a person (see _NOT_A_PERSON).
+    """
+    name = _TITLES.sub("", raw.split(",")[0].strip())
+    name = _DEGREES.sub("", name).replace(".", " ")
+    if _NOT_A_PERSON.search(name) or len(name.split()) < 2:
+        return ""
+    return normalize_name(name)
+
+
+def _investigators(study: Study) -> list[FieldValue]:
+    """Named officials, minus placeholders and officials named after an industry sponsor
+    ('Boehringer Ingelheim'). Individuals can sponsor their own trials, so only industry
+    sponsor names are dropped.
+    """
+    lead = _get(_ps(study), "sponsorCollaboratorsModule", "leadSponsor") or {}
+    company = normalize_name(lead.get("name") or "") if lead.get("class") == "INDUSTRY" else None
+    officials = _get(_ps(study), "contactsLocationsModule", "overallOfficials") or []
+    seen: dict[str, FieldValue] = {}
+    for o in officials:
+        raw = o.get("name")
+        key = normalize_person(raw) if raw else ""
+        if key and key != company:
+            seen.setdefault(key, FieldValue(
+                key, "protocolSection.contactsLocationsModule.overallOfficials.name", raw
+            ))
+    return list(seen.values())
+
+
+# Sponsors often list anonymous sites ("Research Site", "Novo Nordisk Investigational Site")
+# or contact instructions instead of a facility name.
+_NOT_A_SITE = re.compile(
+    r"\b(?:investigational|investigative|research|study|clinical|trial) sites?\b|"
+    r"^research site|^local institution|^site\b|\bcall\b|\d{3}[-\s]\d{3,4}|"
+    r"additional information",
+    re.IGNORECASE,
+)
+
+
+def normalize_site(raw: str) -> str:
+    """'Dana-Farber Cancer Institute' and 'Dana Farber Cancer Institute' share a bucket."""
+    if _NOT_A_SITE.search(raw):
+        return ""
+    return re.sub(r"(?<=[a-z])-(?=[a-z])", " ", normalize_name(raw))
+
+
+def _has_results(study: Study) -> list[FieldValue]:
+    v = study.get("hasResults")
+    if not isinstance(v, bool):
+        return []
+    text = "true" if v else "false"
+    return [FieldValue(text, "hasResults", text)]
+
+
 def _start_year(study: Study) -> list[FieldValue]:
     raw = _get(_ps(study), "statusModule", "startDateStruct", "date")
     if not raw:
@@ -207,6 +278,9 @@ _INTERVENTION_TYPES = (
     "DIETARY_SUPPLEMENT", "COMBINATION_PRODUCT", "DIAGNOSTIC_TEST", "OTHER",
 )
 _STUDY_TYPES = ("INTERVENTIONAL", "OBSERVATIONAL", "EXPANDED_ACCESS")
+_AGE_GROUP_LABELS = {
+    "CHILD": "Child (under 18)", "ADULT": "Adult (18–64)", "OLDER_ADULT": "Older adult (65+)",
+}
 
 DIMENSIONS: dict[Dimension, DimensionSpec] = {
     spec.key: spec
@@ -282,6 +356,28 @@ DIMENSIONS: dict[Dimension, DimensionSpec] = {
                 normalize=normalize_name,
             ),
         ),
+        DimensionSpec(
+            Dimension.INVESTIGATOR, "Investigator",
+            ("OverallOfficialName", "LeadSponsorName", "LeadSponsorClass"), _investigators,
+        ),
+        DimensionSpec(
+            Dimension.SITE, "Site", ("LocationFacility",),
+            _list(
+                "protocolSection.contactsLocationsModule.locations.facility",
+                ("contactsLocationsModule", "locations"), "facility", normalize=normalize_site,
+            ),
+        ),
+        DimensionSpec(
+            Dimension.AGE_GROUP, "Age group", ("StdAge",),
+            _list("protocolSection.eligibilityModule.stdAges", ("eligibilityModule", "stdAges")),
+            field_type="ordinal", enum_values=tuple(_AGE_GROUP_LABELS), area="StdAge",
+            labels=_AGE_GROUP_LABELS,
+        ),
+        DimensionSpec(
+            Dimension.HAS_RESULTS, "Results posted", ("HasResults",), _has_results,
+            enum_values=("true", "false"), area="HasResults",
+            labels={"true": "Results posted", "false": "No results posted"},
+        ),
     ]
 }
 
@@ -319,6 +415,30 @@ def _start_year_num(study: Study) -> tuple[float, FieldValue] | None:
     return (float(vals[0].value), vals[0]) if vals else None
 
 
+def _months(date: str) -> int | None:
+    """'2021-06-03' or '2021-06' -> months since year 0."""
+    try:
+        return int(date[:4]) * 12 + int(date[5:7]) - 1
+    except (ValueError, IndexError):
+        return None
+
+
+def _duration_months(study: Study) -> tuple[float, FieldValue] | None:
+    """Start to completion date. Cited by the completion date, which is planned (not
+    actual) for trials still running."""
+    status = _get(_ps(study), "statusModule") or {}
+    start = _get(status, "startDateStruct", "date")
+    end = _get(status, "completionDateStruct", "date")
+    if not start or not end:
+        return None
+    a, b = _months(start), _months(end)
+    if a is None or b is None or b < a:
+        return None
+    return float(b - a), FieldValue(
+        str(b - a), "protocolSection.statusModule.completionDateStruct.date", end
+    )
+
+
 NUMERIC_FIELDS: dict[NumericField, NumericSpec] = {
     NumericField.ENROLLMENT: NumericSpec(
         NumericField.ENROLLMENT, "Enrollment", "participants", ("EnrollmentCount",), _enrollment,
@@ -326,7 +446,13 @@ NUMERIC_FIELDS: dict[NumericField, NumericSpec] = {
     NumericField.START_YEAR: NumericSpec(
         NumericField.START_YEAR, "Start year", "year", ("StartDate",), _start_year_num,
     ),
+    NumericField.DURATION_MONTHS: NumericSpec(
+        NumericField.DURATION_MONTHS, "Duration", "months", ("StartDate", "CompletionDate"),
+        _duration_months,
+    ),
 }
+
+assert set(NUMERIC_FIELDS) == set(NumericField), "every NumericField needs a registry entry"
 
 
 def pieces_for(

@@ -72,6 +72,7 @@ class Graph:
     nodes: list[GraphNode]
     edges: list[GraphEdge]
     candidate_nodes: int  # before pruning, for notes
+    unpaired_trials: int = 0  # trials too large to pair up (see MAX_PAIRED_VALUES)
 
 
 def _label_for(dim: Dimension, key: str, excerpts: Counter[str]) -> str:
@@ -196,6 +197,9 @@ def histogram_bins(
     return bins + ([overflow] if overflow else [])
 
 
+MAX_PAIRED_VALUES = 50
+
+
 def cooccurrence_graph(
     studies: list[Study], source: Dimension, target: Dimension,
     min_edge_trials: int, max_nodes: int,
@@ -207,6 +211,7 @@ def cooccurrence_graph(
     highest weighted degree, then drop edges/nodes left dangling.
     """
     same = source == target
+    unpaired = 0
     node_ev: dict[tuple[Dimension, str], Evidence] = defaultdict(list)
     spellings: dict[tuple[Dimension, str], Counter[str]] = defaultdict(Counter)
     edge_ev: dict[tuple[tuple[Dimension, str], tuple[Dimension, str]], list] = defaultdict(list)
@@ -222,6 +227,9 @@ def cooccurrence_graph(
             for fv in vals:
                 node_ev[(dim, fv.value)].append((s, fv))
                 spellings[(dim, fv.value)][fv.excerpt] += 1
+        if same and len(src_vals) > MAX_PAIRED_VALUES:
+            unpaired += 1  # e.g. a trial with 1,000 sites would add ~500,000 site pairs
+            continue
         if same:
             pairs = combinations(sorted(src_vals, key=lambda fv: fv.value), 2)
         else:
@@ -252,4 +260,4 @@ def cooccurrence_graph(
         for n in sorted(keep, key=lambda n: (-degree[n], n[0].value, n[1]))
         if node_id(n) in used
     ]
-    return Graph(nodes, kept_edges, candidate_nodes=len(node_ev))
+    return Graph(nodes, kept_edges, candidate_nodes=len(node_ev), unpaired_trials=unpaired)

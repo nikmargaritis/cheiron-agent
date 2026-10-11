@@ -16,8 +16,8 @@ data, with **citations on every data point** that link back to the exact trial r
 - **Deep citations:** every bar, point, node, and edge lists the trials behind it, with the exact field quoted.
 - **Graceful non-answers:** vague questions get a clarifying question, and out-of-scope ones
   (efficacy, survival, medical advice) get an explanation instead of a guessed chart.
-- **Web UI** with interactive network graphs, **102 offline + 7 live tests**, and a **planner eval
-  suite** (96/96).
+- **Web UI** with interactive network graphs, **130 offline + 12 live tests**, and a **planner eval
+  suite** (120/120).
 
 ### Where to find each requirement
 
@@ -64,7 +64,7 @@ Other commands:
 |---|---|
 | `pytest` | Offline test suite (no network) |
 | `pytest -m live` | Checks against the real ClinicalTrials.gov API |
-| `python scripts/eval_planner.py [--repeat 3]` | Scores the planner on 32 eval questions (no ClinicalTrials.gov calls) |
+| `python scripts/eval_planner.py [--repeat 3]` | Scores the planner on 40 eval questions (no ClinicalTrials.gov calls) |
 | `python scripts/run_examples.py` | Regenerates `examples/*.json` with the real planner |
 | `python scripts/smoke_live.py [out_dir]` | Runs all six chart types on live data with scripted plans (no LLM tokens) |
 
@@ -97,13 +97,14 @@ don't need new code paths:
 | `time_trend` | `time_series` | "How many trials started each year for breast cancer?" |
 | `distribution` | `bar_chart` | "Which countries have the most recruiting type 2 diabetes trials?" |
 | `comparison` | `grouped_bar_chart` (or multi-series `time_series`) | "Compare phases for nivolumab vs ipilimumab" |
-| `histogram` | `histogram` | "What's the typical enrollment size for melanoma trials?" |
-| `scatter` | `scatter_plot` | "Enrollment vs. start year for glioblastoma trials" |
-| `network` | `network_graph` | "Sponsors and drugs for glioblastoma" / "Which drugs are combined in pancreatic cancer trials?" |
+| `histogram` | `histogram` | "How long do phase 3 lung cancer trials usually run?" |
+| `scatter` | `scatter_plot` | "Enrollment vs. trial duration for multiple sclerosis trials" |
+| `network` | `network_graph` | "Sponsors and drugs for glioblastoma" / "Which hospitals run glioblastoma trials with which sponsors?" / "Which drugs are combined in pancreatic cancer trials?" |
 
 **Dimensions** (group by, or network nodes): `phase, status, start_year, country, sponsor,
-sponsor_class, drug, intervention, intervention_type, condition, study_type`.
-**Numeric fields** (histogram, scatter): `enrollment, start_year`.
+sponsor_class, drug, intervention, intervention_type, condition, study_type, investigator, site,
+age_group, has_results`.
+**Numeric fields** (histogram, scatter): `enrollment, start_year, duration_months`.
 
 ```
 src/trialviz/
@@ -299,12 +300,12 @@ over flexibility.
 ### Other decisions
 
 1. **Exact counts at any scale.** The API's stats endpoint can't be filtered, so for dimensions with a
-   fixed set of values (phase, status, sponsor class, intervention type, study type, start year) the
-   service sends one request per bucket with `countTotal=true`. Each response carries the exact count
-   *and* the records to cite. A 16,899-trial phase chart takes 7 requests and about 250 ms.
+   fixed set of values (phase, status, sponsor class, intervention type, study type, age group,
+   results posted, start year) the service sends one request per bucket with `countTotal=true`. Each
+   response carries the exact count *and* the records to cite. A 16,899-trial phase chart takes 7 requests and about 250 ms.
    *Tradeoff:* one request per bucket, so a 30-year trend makes about 30 requests (run concurrently).
-2. **Capped download for everything else** (sponsors, countries, drugs, networks, histograms): up to
-   `CTGOV_MAX_RECORDS` (3,000) with a minimal field list.
+2. **Capped download for everything else** (sponsors, countries, sites, investigators, drugs,
+   networks, histograms): up to `CTGOV_MAX_RECORDS` (3,000) with a minimal field list.
    *Tradeoff:* above the cap, results are a sample. The response says so (`count_method: "sample"`).
 3. **Citations come from the same code that counted the trial**, so a citation can't contradict its
    count. `verify_citation` re-checks each one against the raw record.
@@ -314,10 +315,12 @@ over flexibility.
    The encoding borrows its vocabulary (`field` + `nominal|ordinal|quantitative|temporal`), so mapping
    to Vega-Lite, Recharts, or Chart.js is mechanical.
    *Tradeoff:* frontends need a small adapter, like the one in the web UI.
-6. **Cleaning real-world drug data.** Registry "interventions" include devices, imaging, and biospecimen
+6. **Cleaning real-world names.** Registry "interventions" include devices, imaging, and biospecimen
    collection, so the `drug` dimension keeps only drug and biological types, and networks drop placebo
-   and standard-of-care arms. Names are cleaned by rules ("Gemcitabine Hydrochloride" → "gemcitabine")
-   rather than the API's MeSH mappings, which dropped and mis-mapped drugs.
+   and standard-of-care arms. Drug names are cleaned by rules ("Gemcitabine Hydrochloride" →
+   "gemcitabine") rather than the API's MeSH mappings, which dropped and mis-mapped drugs. Sponsors
+   often list placeholders instead of people and places ("Pfizer CT.gov Call Center", "Novo Nordisk
+   Investigational Site"), so those are filtered out of `investigator` and `site`.
    *Tradeoff:* true synonyms ("5-FU" vs "Fluorouracil") stay separate.
 
 ---
@@ -329,10 +332,13 @@ over flexibility.
   search returned a fecal-transplant trial that mentions it).
 - **Sampled rankings:** sponsors, countries, drugs, and networks use at most 3,000 trials, so
   "top sponsors for all cancer" is approximate (marked `sample`).
-- **One chart per question.** The only numeric fields are enrollment and start year. Trial duration
-  and outcome data aren't modeled.
+- **One chart per question,** and outcome data (efficacy, adverse events) isn't modeled.
+- **Duration** uses the planned completion date for trials still running.
 - **Comparisons** count a trial in every series it matches (series totals are in `meta.notes`).
-- **Network entities:** drugs, sponsors, conditions, and countries, but not investigators or individual sites.
+- **Site and investigator names aren't merged:** "MD Anderson Cancer Center" and "University of Texas MD
+  Anderson Cancer Center" are separate sites. About 1 in 5 trials names no investigator.
+- **No sex dimension:** the API's `Sex=ALL` filter matches every trial (breast cancer: 16,899 "ALL" vs
+  10,517 female-only), so exact counts by sex would be wrong.
 - **Evals are my own questions:** they show the planner handles the intended question types, not real
   users' wording. Typos and non-English questions aren't covered.
 - **No caching:** identical questions re-hit the API.
@@ -340,28 +346,28 @@ over flexibility.
 ## With more time
 
 1. **Synonym merging** with an RxNorm lookup (cached), so drug nodes merge correctly.
-2. **Investigator and site dimensions** for networks like "which sites run trials with which sponsors".
-3. **Caching** of API responses and plans, for speed and to cut repeat LLM costs.
-4. **Zero-result recovery:** when filters match nothing, suggest a broader query instead of only "no results".
-5. **Evals from real usage:** add logged real questions (typos, vague wording) to the eval suite.
-6. **Deployment** with a rate limit, so a public URL can't run up LLM costs.
+2. **Caching** of API responses and plans, for speed and to cut repeat LLM costs.
+3. **Zero-result recovery:** when filters match nothing, suggest a broader query instead of only "no results".
+4. **Evals from real usage:** add logged real questions (typos, vague wording) to the eval suite.
+5. **Deployment** with a rate limit, so a public URL can't run up LLM costs.
 
 ---
 
 ## Testing and evaluation
 
-- **Offline (`pytest`, 102 tests):** schemas, OpenAI strict-mode compatibility, filter → query-param
+- **Offline (`pytest`, 130 tests):** schemas, OpenAI strict-mode compatibility, filter → query-param
   mapping, field extraction on real API records, aggregation and networks, HTTP routes, and the full
   pipeline against a mocked API.
-- **Live (`pytest -m live`, 7 tests):** citations re-checked against separately fetched records, bucket
-  counts must add up to the API's total, and status enums are compared with the API to catch drift.
+- **Live (`pytest -m live`, 12 tests):** citations re-checked against separately fetched records,
+  single-valued bucket counts must add up to the API's total, and enum values are compared with the
+  API to catch drift.
 - **End to end:** `scripts/smoke_live.py` runs all six chart types on live data, and the web UI was tested
   in a browser.
 
 ### Planner evals
 
 The planner is the only step that can misread a question, so it has its own eval suite
-(`src/trialviz/evals/`): 32 questions, each with the parts of the plan that matter (status, analysis,
+(`src/trialviz/evals/`): 40 questions, each with the parts of the plan that matter (status, analysis,
 group by, filters, series, numeric fields, network dimensions). Filters must match exactly
 (case-insensitive, with listed alternatives), and any filter the question didn't ask for counts as a
 failure. Only plan → validate runs, so a full pass makes no ClinicalTrials.gov calls and costs well
@@ -371,13 +377,15 @@ Latest run (`gpt-5.4`, every case 3 times):
 
 | Tag | Passed | | Tag | Passed |
 |---|---|---|---|---|
-| distribution | 36/36 | | comparison | 9/9 |
-| trend | 15/15 | | network | 9/9 |
-| filters (tricky extraction) | 12/12 | | numeric (histogram, scatter) | 6/6 |
-| unsupported | 12/12 | | clarify | 9/9 |
-| caller fields | 6/6 | | **total** | **96/96** |
+| distribution | 48/48 | | comparison | 9/9 |
+| trend | 15/15 | | network | 15/15 |
+| sites, investigators, age, results, duration | 24/24 | | numeric (histogram, scatter) | 12/12 |
+| filters (tricky extraction) | 12/12 | | clarify | 9/9 |
+| unsupported | 12/12 | | caller fields | 6/6 |
+| | | | **total** | **120/120** |
 
-About 1,800 input and 170 output tokens per question, median 2.6 s.
+Tags overlap (a network question about sites counts under both). About 1,900 input and 170 output
+tokens per question, median 3.3 s.
 
 ### Bugs found and fixed
 
@@ -386,6 +394,11 @@ About 1,800 input and 170 output tokens per question, median 2.6 s.
   bars would have counted every trial. The validator now rejects that.
 - **Found by the live bucket-sum check:** 5 expanded-access status values were missing, which silently
   dropped 18 glioblastoma trials from exact counts.
+- **Found by checking the API before relying on it:** the `Sex=ALL` filter matches every trial, so sex
+  was left out. Exact counts for age group and results posted were cross-checked against counting the
+  downloaded records (identical on all 2,273 glioblastoma trials).
+- **Found while testing:** the rule that drops officials named after the sponsor also dropped real people
+  who sponsor their own trials. It now applies only to industry sponsors.
 - **Found by reading real output:** drug networks were dominated by non-drug interventions (which led to
   the `drug` dimension), and salt stripping turned "Sodium bicarbonate" into "bicarbonate".
 - **Other:** year bounds relied on where the API sorts undated trials, `build` time was missing from

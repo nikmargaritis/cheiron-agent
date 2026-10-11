@@ -45,6 +45,7 @@ def make_plan(**kw) -> QueryPlan:
 
 def make_study(
     nct: int, *, phases=(), drugs=(), sponsor=None, countries=(), start=None, enrollment=None,
+    sites=(),
 ) -> dict:
     """Synthetic study in the exact v2 payload shape. ``drugs``: names or (name, type)."""
     interventions = [
@@ -55,7 +56,9 @@ def make_study(
         "identificationModule": {"nctId": f"NCT{nct:08d}", "briefTitle": f"Study {nct}"},
         "designModule": {"phases": list(phases)},
         "armsInterventionsModule": {"interventions": interventions},
-        "contactsLocationsModule": {"locations": [{"country": c} for c in countries]},
+        "contactsLocationsModule": {
+            "locations": [{"country": c} for c in countries] + [{"facility": f} for f in sites]
+        },
         "statusModule": {"startDateStruct": {"date": start}} if start else {},
     }
     if sponsor:

@@ -29,17 +29,19 @@ async def _run(settings, plan):
         return await run_query(QueryRequest(query="live test"), deps)
 
 
-async def test_single_valued_buckets_sum_to_total(settings):
-    """Status is single-valued, so exact bucket counts must add up to totalCount —
-    proves the enum list is complete and the bucket filters don't overlap."""
-    resp = await _run(settings, make_plan(group_by=Dimension.STATUS,
+@pytest.mark.parametrize("dim", [Dimension.STATUS, Dimension.HAS_RESULTS])
+async def test_single_valued_buckets_sum_to_total(settings, dim):
+    """Single-valued, so exact bucket counts must add up to totalCount — proves the enum
+    list is complete and the bucket filters don't overlap."""
+    resp = await _run(settings, make_plan(group_by=dim,
                                           filters=empty_filters(condition="glioblastoma")))
     assert resp.status == ResponseStatus.OK
     assert sum(r.trial_count for r in resp.visualization.data) == resp.meta.total_matching_trials
 
 
-async def test_citations_match_independently_fetched_records(settings):
-    resp = await _run(settings, make_plan(group_by=Dimension.PHASE,
+@pytest.mark.parametrize("dim", [Dimension.PHASE, Dimension.AGE_GROUP, Dimension.HAS_RESULTS])
+async def test_citations_match_independently_fetched_records(settings, dim):
+    resp = await _run(settings, make_plan(group_by=dim,
                                           filters=empty_filters(condition="glioblastoma")))
     citations = [c for row in resp.visualization.data for c in row.citations]
     assert citations
@@ -55,4 +57,8 @@ async def test_enum_values_match_registry(settings, dim):
     spec = DIMENSIONS[dim]
     async with CTGovClient(settings) as ctgov:
         (stats,) = await ctgov._get("/stats/field/values", {"fields": spec.area})
-    assert {v["value"] for v in stats["topValues"]} <= set(spec.enum_values)
+    if stats["type"] == "BOOLEAN":  # reported as trueCount / falseCount, not topValues
+        api_values = {"true", "false"}
+    else:
+        api_values = {v["value"] for v in stats["topValues"]}
+    assert api_values <= set(spec.enum_values)

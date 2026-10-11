@@ -8,6 +8,7 @@ No LLM involvement: every number in the output is computed here from API data.
 from trialviz.agent.nodes.respond import build_meta
 from trialviz.agent.state import AgentState, Deps, FetchResult
 from trialviz.analysis.aggregate import (
+    MAX_PAIRED_VALUES,
     Bucket,
     apply_exact_counts,
     cooccurrence_graph,
@@ -24,7 +25,7 @@ from trialviz.analysis.specs import (
     build_scatter,
 )
 from trialviz.ctgov.fields import DIMENSIONS
-from trialviz.schemas.common import Dimension
+from trialviz.schemas.common import Dimension, NumericField
 from trialviz.schemas.plan import AnalysisKind, QueryPlan
 from trialviz.schemas.response import QueryResponse, ResponseStatus
 
@@ -80,11 +81,30 @@ def _empty(state: AgentState, deps: Deps, notes: list[str], message: str) -> Age
                                       meta=meta)}
 
 
+def _field_notes(plan: QueryPlan) -> list[str]:
+    """Caveats that come with particular fields, whatever the chart."""
+    dims = {plan.group_by}
+    if plan.analysis == AnalysisKind.NETWORK and plan.network:
+        dims |= {plan.network.source, plan.network.target}
+    notes = []
+    if {Dimension.INVESTIGATOR, Dimension.SITE} & dims:
+        notes.append(
+            "Placeholder names (e.g. 'Research Site', 'Study Director', call centers) are excluded."
+        )
+    if NumericField.DURATION_MONTHS in (plan.x_numeric, plan.y_numeric):
+        notes.append(
+            "Duration runs from start date to completion date; for trials still running, "
+            "that is the planned completion date."
+        )
+    return notes
+
+
 def build_node(state: AgentState, deps: Deps) -> AgentState:
     plan, fetch = state["plan"], state["fetch"]
     notes = list(state.get("notes", []))
     limit = deps.settings.max_citations_per_datum
     studies = [s for series in fetch.series for s in series.studies]
+    notes.extend(_field_notes(plan))
 
     match plan.analysis:
         case AnalysisKind.TIME_TREND | AnalysisKind.DISTRIBUTION | AnalysisKind.COMPARISON:
@@ -133,6 +153,12 @@ def build_node(state: AgentState, deps: Deps) -> AgentState:
             )
             if {Dimension.INTERVENTION, Dimension.DRUG} & {net.source, net.target}:
                 notes.append("Placebo / standard-of-care arms are excluded from the network.")
+            if graph.unpaired_trials:
+                notes.append(
+                    f"{graph.unpaired_trials:,} trials with more than {MAX_PAIRED_VALUES} "
+                    f"{net.source.value.replace('_', ' ')} values count toward node sizes "
+                    "but add no connections."
+                )
             viz = build_network(plan, graph, limit)
 
     meta = build_meta(

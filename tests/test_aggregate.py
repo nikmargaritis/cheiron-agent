@@ -2,6 +2,7 @@ import pytest
 
 from tests.conftest import make_study
 from trialviz.analysis.aggregate import (
+    MAX_PAIRED_VALUES,
     Bucket,
     apply_exact_counts,
     cooccurrence_graph,
@@ -125,3 +126,18 @@ def test_bipartite_network_namespaces_and_prunes():
                            max_nodes=2)
     assert [n.id for n in g.nodes] == ["drug:pembrolizumab", "sponsor:merck"]
     assert len(g.edges) == 1 and len(g.edges[0].evidence) == 3
+
+
+def test_site_network_skips_pairs_for_huge_trials():
+    huge = [f"Hospital {chr(65 + i // 26)}{chr(65 + i % 26)}" for i in range(MAX_PAIRED_VALUES + 1)]
+    studies = [
+        make_study(1, sites=["Mayo Clinic", "Dana-Farber Cancer Institute"]),
+        make_study(2, sites=["Mayo Clinic", "Dana Farber Cancer Institute", "Research Site"]),
+        make_study(3, sites=huge),
+    ]
+    g = cooccurrence_graph(studies, Dimension.SITE, Dimension.SITE, min_edge_trials=2,
+                           max_nodes=10)
+    assert [(e.source, e.target) for e in g.edges] == [
+        ("site:dana farber cancer institute", "site:mayo clinic")
+    ]
+    assert g.unpaired_trials == 1

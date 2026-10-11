@@ -193,7 +193,8 @@ const STATUSES = [["RECRUITING", "Recruiting"], ["NOT_YET_RECRUITING", "Not yet 
   ["ACTIVE_NOT_RECRUITING", "Active, not recruiting"], ["COMPLETED", "Completed"], ["TERMINATED", "Terminated"]];
 const PALETTE = ["#3056d3", "#e8743b", "#19a979", "#945ecf", "#ed4a7b", "#13a4b4", "#f2b134", "#6c8893"];
 const GROUP_COLORS = { sponsor: "#e8743b", drug: "#3056d3", intervention: "#3056d3", condition: "#19a979",
-  country: "#945ecf", phase: "#ed4a7b", status: "#13a4b4", sponsor_class: "#f2b134", intervention_type: "#6c8893" };
+  country: "#945ecf", phase: "#ed4a7b", status: "#13a4b4", sponsor_class: "#f2b134", intervention_type: "#6c8893",
+  site: "#c0392b", investigator: "#8d6e63" };
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
