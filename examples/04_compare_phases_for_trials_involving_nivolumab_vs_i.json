@@ -552,7 +552,7 @@
       "filters": {},
       "plan": {
         "status": "ok",
-        "rationale": "The user wants a side-by-side comparison of trial phase distributions for two drugs. This is a comparison analysis grouped by phase, with one series for nivolumab and one for ipilimumab.",
+        "rationale": "The user wants a side-by-side comparison of trial phase distributions for two drugs. This is a comparison analysis grouped by phase, with shared filters left empty and one series per drug.",
         "analysis": "comparison",
         "filters": {},
         "group_by": "phase",
@@ -571,41 +571,42 @@
           }
         ],
         "assumptions": [
-          "Interpreted 'involving' as trials filtered by the named intervention/drug."
+          "Interpreted 'involving nivolumab vs ipilimumab' as comparing trials that list each named drug as an intervention/drug."
         ]
       },
       "total_matching_trials": 3008,
       "trials_analyzed": 3008,
       "count_method": "exact",
       "assumptions": [
-        "Interpreted 'involving' as trials filtered by the named intervention/drug."
+        "Interpreted 'involving nivolumab vs ipilimumab' as comparing trials that list each named drug as an intervention/drug."
       ],
       "notes": [
         "Trials per series: nivolumab = 2,030, ipilimumab = 978. A trial matching several series is counted in each.",
         "A trial can list several phase values and is counted under each, so bars can sum to more than the number of trials."
       ],
       "api_requests": [
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=nivolumab&filter.advanced=AREA%5BPhase%5DNA&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=ipilimumab&countTotal=true&pageSize=1&fields=NCTId",
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=nivolumab&filter.advanced=AREA%5BPhase%5DPHASE3&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
         "https://clinicaltrials.gov/api/v2/studies?query.intr=nivolumab&filter.advanced=AREA%5BPhase%5DEARLY_PHASE1&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=ipilimumab&countTotal=true&pageSize=1&fields=NCTId",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=nivolumab&countTotal=true&pageSize=1&fields=NCTId",
         "https://clinicaltrials.gov/api/v2/studies?query.intr=nivolumab&filter.advanced=AREA%5BPhase%5DPHASE1&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=nivolumab&filter.advanced=AREA%5BPhase%5DNA&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=nivolumab&filter.advanced=AREA%5BPhase%5DPHASE3&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
         "https://clinicaltrials.gov/api/v2/studies?query.intr=nivolumab&filter.advanced=AREA%5BPhase%5DPHASE2&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
         "https://clinicaltrials.gov/api/v2/studies?query.intr=nivolumab&filter.advanced=AREA%5BPhase%5DPHASE4&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
         "https://clinicaltrials.gov/api/v2/studies?query.intr=ipilimumab&filter.advanced=AREA%5BPhase%5DEARLY_PHASE1&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=ipilimumab&filter.advanced=AREA%5BPhase%5DPHASE1&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
         "https://clinicaltrials.gov/api/v2/studies?query.intr=ipilimumab&filter.advanced=AREA%5BPhase%5DPHASE2&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=ipilimumab&filter.advanced=AREA%5BPhase%5DNA&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=ipilimumab&filter.advanced=AREA%5BPhase%5DPHASE3&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=ipilimumab&filter.advanced=AREA%5BPhase%5DPHASE1&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
         "https://clinicaltrials.gov/api/v2/studies?query.intr=ipilimumab&filter.advanced=AREA%5BPhase%5DPHASE4&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=nivolumab&countTotal=true&pageSize=1&fields=NCTId"
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=ipilimumab&filter.advanced=AREA%5BPhase%5DNA&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=ipilimumab&filter.advanced=AREA%5BPhase%5DPHASE3&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true"
       ],
       "timings_ms": {
-        "plan": 4060.0085826590657,
-        "validate": 0.04120776429772377,
-        "fetch": 1207.738250028342
+        "plan": 4759.296166710556,
+        "validate": 0.09125005453824997,
+        "fetch": 293.2112920098007,
+        "build": 0.8878749795258045
       },
-      "generated_at": "2026-10-10T20:06:43.128663Z"
+      "generated_at": "2026-10-11T16:25:16.496443Z"
     }
   }
 }

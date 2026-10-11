@@ -189,8 +189,8 @@ distributed across phases?"):
     "assumptions": [],                   // planner's interpretation choices
     "notes": ["A trial can list several phase values and is counted under each, so bars can sum to more than the number of trials."],
     "api_requests": ["https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&filter.advanced=AREA%5BPhase%5DPHASE3&…", "…"],
-    "timings_ms": {"plan": 2736.6, "validate": 0.1, "fetch": 233.7, "build": "…"},
-    "generated_at": "2026-10-10T20:06:34Z"
+    "timings_ms": {"plan": 2986.0, "validate": 0.0, "fetch": 231.0, "build": 0.6},
+    "generated_at": "2026-10-11T16:25:07Z"
   }
 }
 ```

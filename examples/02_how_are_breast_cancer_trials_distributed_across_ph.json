@@ -288,7 +288,7 @@
       },
       "plan": {
         "status": "ok",
-        "rationale": "The user asks for counts of breast cancer trials by trial phase, which is a categorical distribution.",
+        "rationale": "Show the number of clinical trials matching breast cancer, grouped by trial phase.",
         "analysis": "distribution",
         "filters": {
           "condition": "breast cancer"
@@ -305,20 +305,21 @@
         "A trial can list several phase values and is counted under each, so bars can sum to more than the number of trials."
       ],
       "api_requests": [
-        "https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&filter.advanced=AREA%5BPhase%5DPHASE3&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&filter.advanced=AREA%5BPhase%5DPHASE1&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&filter.advanced=AREA%5BPhase%5DPHASE2&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&filter.advanced=AREA%5BPhase%5DPHASE4&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
         "https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&countTotal=true&pageSize=1&fields=NCTId",
+        "https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&filter.advanced=AREA%5BPhase%5DEARLY_PHASE1&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&filter.advanced=AREA%5BPhase%5DPHASE3&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&filter.advanced=AREA%5BPhase%5DPHASE4&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
         "https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&filter.advanced=AREA%5BPhase%5DNA&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&filter.advanced=AREA%5BPhase%5DEARLY_PHASE1&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true"
+        "https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&filter.advanced=AREA%5BPhase%5DPHASE1&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.cond=breast+cancer&filter.advanced=AREA%5BPhase%5DPHASE2&fields=NCTId%2CBriefTitle%2CPhase&pageSize=5&countTotal=true"
       ],
       "timings_ms": {
-        "plan": 2736.6463341750205,
-        "validate": 0.06462493911385536,
-        "fetch": 233.71229087933898
+        "plan": 2985.972832888365,
+        "validate": 0.042957719415426254,
+        "fetch": 231.03016708046198,
+        "build": 0.6119157187640667
       },
-      "generated_at": "2026-10-10T20:06:34.482891Z"
+      "generated_at": "2026-10-11T16:25:07.600457Z"
     }
   }
 }

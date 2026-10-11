@@ -729,7 +729,7 @@
       },
       "plan": {
         "status": "ok",
-        "rationale": "The user asks for how the number of trials for a specific drug has changed over time, which maps to a time trend of trial counts by start year filtered to that drug.",
+        "rationale": "The user asks for how trials for a specific drug have changed over time, which maps to a time trend of trial counts by start year. The supplied structured drug field is authoritative, so the filter should use Pembrolizumab.",
         "analysis": "time_trend",
         "filters": {
           "intervention": "Pembrolizumab"
@@ -737,8 +737,8 @@
         "group_by": "start_year",
         "series": [],
         "assumptions": [
-          "Used the authoritative structured field drug_name='Pembrolizumab' to identify 'this drug'.",
-          "Mapped the drug filter to the intervention field for filtering, with the time trend grouped by trial start year."
+          "Used the authoritative structured field drug_name='Pembrolizumab' to identify the drug filter.",
+          "Mapped the drug request to the intervention filter because filters support intervention names, while the trend is over start year."
         ]
       },
       "total_matching_trials": 2974,
@@ -746,45 +746,46 @@
       "count_method": "exact",
       "time_granularity": "year",
       "assumptions": [
-        "Used the authoritative structured field drug_name='Pembrolizumab' to identify 'this drug'.",
-        "Mapped the drug filter to the intervention field for filtering, with the time trend grouped by trial start year."
+        "Used the authoritative structured field drug_name='Pembrolizumab' to identify the drug filter.",
+        "Mapped the drug request to the intervention filter because filters support intervention names, while the trend is over start year."
       ],
       "notes": [
         "Years after 2026 are anticipated start dates.",
         "5 trials have no start date and are not shown."
       ],
       "api_requests": [
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5BMIN%2CMAX%5D&fields=NCTId%2CStartDate&pageSize=1&countTotal=true&sort=StartDate%3Adesc",
         "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5BMIN%2CMAX%5D&fields=NCTId%2CStartDate&pageSize=1&countTotal=true&sort=StartDate%3Aasc",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5BMIN%2CMAX%5D&fields=NCTId%2CStartDate&pageSize=1&countTotal=true&sort=StartDate%3Adesc",
         "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DMISSING&countTotal=true&pageSize=1&fields=NCTId",
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&countTotal=true&pageSize=1&fields=NCTId",
         "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2008-01-01%2C2008-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2015-01-01%2C2015-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&countTotal=true&pageSize=1&fields=NCTId",
         "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2016-01-01%2C2016-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2012-01-01%2C2012-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2017-01-01%2C2017-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2015-01-01%2C2015-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
         "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2009-01-01%2C2009-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2011-01-01%2C2011-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2017-01-01%2C2017-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2013-01-01%2C2013-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2010-01-01%2C2010-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2012-01-01%2C2012-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
         "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2018-01-01%2C2018-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
         "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2014-01-01%2C2014-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2010-01-01%2C2010-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2013-01-01%2C2013-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2011-01-01%2C2011-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2019-01-01%2C2019-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2022-01-01%2C2022-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2020-01-01%2C2020-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2026-01-01%2C2026-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2024-01-01%2C2024-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
-        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2025-01-01%2C2025-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
         "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2021-01-01%2C2021-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2020-01-01%2C2020-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2019-01-01%2C2019-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2025-01-01%2C2025-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2022-01-01%2C2022-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
         "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2023-01-01%2C2023-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2024-01-01%2C2024-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
+        "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2026-01-01%2C2026-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true",
         "https://clinicaltrials.gov/api/v2/studies?query.intr=Pembrolizumab&filter.advanced=AREA%5BStartDate%5DRANGE%5B2027-01-01%2C2027-12-31%5D&fields=NCTId%2CBriefTitle%2CStartDate&pageSize=5&countTotal=true"
       ],
       "timings_ms": {
-        "plan": 5359.644250012934,
-        "validate": 0.021750107407569885,
-        "fetch": 612.3392921872437
+        "plan": 4459.542583208531,
+        "validate": 0.024041160941123962,
+        "fetch": 641.971499659121,
+        "build": 1.9904589280486107
       },
-      "generated_at": "2026-10-10T20:06:31.487521Z"
+      "generated_at": "2026-10-11T16:25:04.362565Z"
     }
   }
 }

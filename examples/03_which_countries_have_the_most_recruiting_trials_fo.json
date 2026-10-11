@@ -669,7 +669,7 @@
       },
       "plan": {
         "status": "ok",
-        "rationale": "The user wants a ranking of countries by the number of trials, restricted to recruiting studies for type 2 diabetes. This is a categorical distribution grouped by country.",
+        "rationale": "The user wants a ranking of countries by the number of trials, restricted to recruiting studies for type 2 diabetes.",
         "analysis": "distribution",
         "filters": {
           "condition": "type 2 diabetes",
@@ -693,11 +693,12 @@
         "https://clinicaltrials.gov/api/v2/studies?query.cond=type+2+diabetes&filter.overallStatus=RECRUITING&fields=NCTId%2CBriefTitle%2CLocationCountry&pageSize=1000&countTotal=true"
       ],
       "timings_ms": {
-        "plan": 2610.1989997550845,
-        "validate": 0.03720913082361221,
-        "fetch": 731.5665418282151
+        "plan": 3027.891749981791,
+        "validate": 0.02320762723684311,
+        "fetch": 783.6464159190655,
+        "build": 4.0288339368999
       },
-      "generated_at": "2026-10-10T20:06:37.848283Z"
+      "generated_at": "2026-10-11T16:25:11.430823Z"
     }
   }
 }

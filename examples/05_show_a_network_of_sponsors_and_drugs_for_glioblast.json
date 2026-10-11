@@ -4694,7 +4694,7 @@
       },
       "plan": {
         "status": "ok",
-        "rationale": "The user wants a co-occurrence view linking sponsor organizations and drugs within trials filtered to glioblastoma. This is a bipartite network with sponsors as one node set and drugs as the other.",
+        "rationale": "The user wants a co-occurrence view linking sponsor organizations and drugs within trials filtered to glioblastoma. This is a bipartite network with sponsors as one node type and drugs as the other.",
         "analysis": "network",
         "filters": {
           "condition": "glioblastoma"
@@ -4707,16 +4707,14 @@
           "max_nodes": 40
         },
         "assumptions": [
-          "Interpreted 'network of sponsors and drugs' as a bipartite co-occurrence network where an edge connects a sponsor and a drug appearing on the same trial.",
-          "Used the condition filter 'glioblastoma' exactly as stated. No phase, status, country, or year restrictions were added."
+          "Interpreted 'network of sponsors and drugs' as a bipartite network connecting sponsors to drugs that appear in the same glioblastoma trial."
         ]
       },
       "total_matching_trials": 2273,
       "trials_analyzed": 2273,
       "count_method": "exact",
       "assumptions": [
-        "Interpreted 'network of sponsors and drugs' as a bipartite co-occurrence network where an edge connects a sponsor and a drug appearing on the same trial.",
-        "Used the condition filter 'glioblastoma' exactly as stated. No phase, status, country, or year restrictions were added."
+        "Interpreted 'network of sponsors and drugs' as a bipartite network connecting sponsors to drugs that appear in the same glioblastoma trial."
       ],
       "notes": [
         "Showing 36 of 2,192 entities: edges need \u2265 2 shared trials, then the most-connected nodes are kept.",
@@ -4728,11 +4726,12 @@
         "https://clinicaltrials.gov/api/v2/studies?query.cond=glioblastoma&fields=NCTId%2CBriefTitle%2CLeadSponsorName%2CInterventionName%2CInterventionType&pageSize=1000&countTotal=true&pageToken=ZVNj7o2Elu8o3lpzDMiio-numpOQJJxsY_Om2_wYkA"
       ],
       "timings_ms": {
-        "plan": 4041.7637922801077,
-        "validate": 0.04491675645112991,
-        "fetch": 2638.012375216931
+        "plan": 4655.838999897242,
+        "validate": 0.03754207864403725,
+        "fetch": 1927.1342093124986,
+        "build": 45.77554203569889
       },
-      "generated_at": "2026-10-10T20:06:49.871317Z"
+      "generated_at": "2026-10-11T16:25:23.139490Z"
     }
   }
 }
