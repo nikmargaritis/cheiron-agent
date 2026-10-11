@@ -4,6 +4,10 @@ Ask a question about clinical trials in plain English and get back a **validated
 visualization spec** built from live [ClinicalTrials.gov v2 API](https://clinicaltrials.gov/data-api/api)
 data, with **citations on every data point** that link back to the exact trial records.
 
+![Sponsor and drug network for glioblastoma trials in the web UI](docs/network.png)
+*"Show a network of sponsors and drugs for glioblastoma trials." Clicking Mayo Clinic lists its
+24 trials, each linked to ClinicalTrials.gov with the field it was matched on.*
+
 **At a glance**
 - **6 chart types:** bar, grouped bar, time series, histogram, scatter, network graph.
 - **One pipeline for all of them:** the LLM only *plans* the query, and code fetches, counts,
@@ -23,7 +27,7 @@ data, with **citations on every data point** that link back to the exact trial r
 | Key design decisions and tradeoffs | [Design decisions and tradeoffs](#design-decisions-and-tradeoffs) |
 | Limitations and improvements | [Limitations](#limitations), [With more time](#with-more-time) |
 | 3–5 example runs with actual JSON | [Example runs](#example-runs) and [`examples/`](examples/) |
-| Demo (UI) | [Web UI](#web-ui) |
+| Demo (UI and screenshots) | [Web UI](#web-ui) |
 | AI tool usage | [How this was built](#how-this-was-built-ai-tool-usage) |
 
 ---
@@ -239,6 +243,24 @@ build step).
 
 The UI has no per-question logic and draws everything from the response's `encoding`, which shows
 the schema is enough to build a frontend from.
+
+**Bar chart with citations.** Clicking the Phase 2 bar lists the trials behind its 4,590 count.
+
+![Breast cancer trials by phase, with the Phase 2 bar's trials listed](docs/bar-chart.png)
+
+**Comparison.** Nivolumab vs ipilimumab by phase. Clicking a bar shows the trials for that phase and drug.
+
+![Grouped bar chart comparing nivolumab and ipilimumab trials by phase](docs/comparison.png)
+
+**Notes and interpretation.** Each answer says what was left out and how the question was read.
+Here the network kept 36 of 2,192 entities and dropped placebo arms, and the planner explains
+its reading of "network of sponsors and drugs".
+
+![Notes and assumptions tab for the glioblastoma network](docs/notes.png)
+
+**Clarification.** "This drug" with no drug given gets a question back instead of a guessed chart.
+
+![Clarifying question asking which drug to analyze](docs/clarification.png)
 
 ---
 
